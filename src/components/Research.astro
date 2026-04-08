@@ -20,6 +20,17 @@ const items = [
     linkHref: 'https://link.springer.com/article/10.1186/s12962-026-00733-0',
   },
   {
+    type: 'Essay',
+    title:
+      'Negotiating Losses in the Age of Digital Transformation: The Case for Augmented Human Intelligence',
+    meta: 'LinkedIn · 2025',
+    description:
+      'Explores what societies quietly surrender in the pursuit of digital progress \u2014 from algorithmic curation of memory to the hidden costs of cognitive augmentation \u2014 and argues for reclaiming human editorial agency over technology.',
+    linkText: 'Download PDF \u2192',
+    linkHref: '/papers/negotiating-losses.pdf',
+    externalHref: 'https://www.linkedin.com/feed/update/urn:li:activity:7403818257067180032/',
+  },
+  {
     type: 'MPhil thesis',
     title:
       'Cost-effectiveness analysis of digital health interventions for NCD management in Ghana',
@@ -47,7 +58,18 @@ const items = [
           <span class="research-item-meta">{item.meta}</span>
           <p class="research-item-desc">{item.description}</p>
         </div>
-        <a class="research-item-link" href={item.linkHref}>{item.linkText}</a>
+        <div class="research-item-links">
+          <a
+            class="research-item-link"
+            href={item.linkHref}
+            {...(item.linkHref.endsWith('.pdf') ? { download: '' } : {})}
+          >{item.linkText}</a>
+          {item.externalHref && (
+            <a class="research-item-link research-item-link--ext" href={item.externalHref} target="_blank" rel="noopener noreferrer">
+              LinkedIn post &nearr;
+            </a>
+          )}
+        </div>
       </article>
     ))}
   </div>
@@ -157,19 +179,31 @@ const items = [
     max-width: 560px;
   }
 
-  /* ── Link column ── */
+  /* ── Links column ── */
+  .research-item-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    padding-top: 4px;
+  }
+
   .research-item-link {
     font-family: 'JetBrains Mono Variable', monospace;
     font-size: 11px;
     color: var(--ink-2);
     letter-spacing: 0.03em;
-    padding-top: 4px;
     text-align: right;
     transition: color 180ms;
   }
 
   .research-item-link:hover {
     color: var(--ink);
+  }
+
+  .research-item-link--ext {
+    font-size: 10px;
+    color: var(--ink-mute);
   }
 
   /* ── Responsive ── */
@@ -199,6 +233,10 @@ const items = [
       grid-template-columns: 1fr;
       gap: 12px;
       padding: 24px 0;
+    }
+
+    .research-item-links {
+      align-items: flex-start;
     }
 
     .research-item-link {
