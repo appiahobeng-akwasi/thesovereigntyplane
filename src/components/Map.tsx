@@ -202,8 +202,10 @@ export default function AfricaMap({ countries }: Props) {
   const isInteractive = phase === 'africa';
   const hasSelection = selected.length > 0;
   const badgeColors = ['#0f0f0f', '#5a564b', '#8a8680', '#b5b0a5'];
-  const featuresToRender = isGlobePhase ? allFeatures : africaFeatures;
-  const globeOpacity = phase === 'transitioning' ? 1 - transitionProgress : 1;
+  // During transition, fade out non-Africa countries; in Africa phase show only Africa
+  const featuresToRender = phase === 'globe' ? allFeatures
+    : phase === 'transitioning' ? allFeatures
+    : africaFeatures;
 
   return (
     <div
@@ -230,9 +232,9 @@ export default function AfricaMap({ countries }: Props) {
           {isInteractive ? 'Africa, by quadrant' : 'Explore the map'}
         </text>
 
-        {/* Globe outline and graticule (globe/transitioning only) */}
-        {isGlobePhase && (
-          <g opacity={globeOpacity}>
+        {/* Globe outline and graticule (globe phase only — removed during transition to avoid bleed) */}
+        {phase === 'globe' && (
+          <g>
             <circle
               cx={W / 2}
               cy={H / 2 + 20}
@@ -298,10 +300,12 @@ export default function AfricaMap({ countries }: Props) {
                 strokeW = 0.6;
                 opacity = 0.85;
               } else {
+                // Non-Africa countries on globe — fade out during transition
+                const fadeOut = phase === 'transitioning' ? Math.max(0, 1 - transitionProgress * 2.5) : 1;
                 fillColor = 'rgba(230, 226, 218, 0.15)';
                 strokeColor = '#d8d3c3';
                 strokeW = 0.3;
-                opacity = 0.5;
+                opacity = 0.5 * fadeOut;
               }
             }
 
