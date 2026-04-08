@@ -270,15 +270,21 @@ export default function AfricaMap({ countries }: Props) {
             let opacity: number;
 
             if (isInteractive) {
-              // Final Africa view — same as before
-              fillColor = scored
-                ? isHovered || isSelected
+              // Final Africa view
+              if (scored) {
+                fillColor = isHovered || isSelected
                   ? quadrantColorSoft(scored.quadrant).replace(/[\d.]+\)$/, '0.45)')
-                  : quadrantColorSoft(scored.quadrant)
-                : 'rgba(216, 211, 195, 0.2)';
-              strokeColor = scored ? quadrantColor(scored.quadrant) : '#d8d3c3';
-              strokeW = scored ? (isHovered || isSelected ? 2.5 : 1.2) : 0.5;
-              opacity = scored ? (dimmed ? 0.4 : 1) : 0.3;
+                  : quadrantColorSoft(scored.quadrant);
+                strokeColor = quadrantColor(scored.quadrant);
+                strokeW = isHovered || isSelected ? 2.5 : 1.2;
+                opacity = dimmed ? 0.4 : 1;
+              } else {
+                // Unscored African countries — warm sand, clearly visible
+                fillColor = '#e4dfd4';
+                strokeColor = '#c4bfb2';
+                strokeW = 0.8;
+                opacity = 0.75;
+              }
             } else {
               // Globe phase — Africa highlighted
               if (scored) {
@@ -287,10 +293,10 @@ export default function AfricaMap({ countries }: Props) {
                 strokeW = 1;
                 opacity = 1;
               } else if (isAfrica) {
-                fillColor = 'rgba(216, 211, 195, 0.35)';
-                strokeColor = '#c8c3b3';
-                strokeW = 0.5;
-                opacity = 0.7;
+                fillColor = '#ddd8cc';
+                strokeColor = '#b8b3a5';
+                strokeW = 0.6;
+                opacity = 0.85;
               } else {
                 fillColor = 'rgba(230, 226, 218, 0.15)';
                 strokeColor = '#d8d3c3';
