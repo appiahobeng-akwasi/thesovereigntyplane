@@ -6,9 +6,19 @@ import type { Country } from '../data/types';
 const MAX_SELECTED = 4;
 const badgeColors = ['#0f0f0f', '#5a564b', '#8a8680', '#b5b0a5'];
 
-/** Convert a 2-letter ISO code (e.g. "GH") to its flag emoji (e.g. 🇬🇭) */
+/** Map ISO 3166-1 alpha-3 → alpha-2 for the countries in our dataset */
+const alpha3to2: Record<string, string> = {
+  SEN: 'SN', EGY: 'EG', MAR: 'MA', RWA: 'RW', NGA: 'NG',
+  KEN: 'KE', GHA: 'GH', BWA: 'BW', ETH: 'ET', CMR: 'CM',
+  GAB: 'GA', MWI: 'MW', SLE: 'SL', ZAF: 'ZA', TUN: 'TN',
+  FRA: 'FR', JPN: 'JP', ARE: 'AE', BRA: 'BR',
+};
+
+/** Convert an ISO alpha-3 code to its flag emoji */
 function isoToFlag(iso: string): string {
-  return [...iso.toUpperCase()].map(
+  const a2 = alpha3to2[iso.toUpperCase()];
+  if (!a2) return '';
+  return [...a2].map(
     (c) => String.fromCodePoint(0x1f1e6 + c.charCodeAt(0) - 65)
   ).join('');
 }
