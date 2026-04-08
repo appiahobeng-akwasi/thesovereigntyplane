@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useState, useEffect, useRef } from 'react';
-import { geoOrthographic, geoEqualEarth, geoPath, geoGraticule, type GeoProjection } from 'd3-geo';
+import { geoOrthographic, geoEqualEarth, geoPath, type GeoProjection } from 'd3-geo';
 import { interpolate } from 'd3-interpolate';
 import { feature } from 'topojson-client';
 import type { Topology, GeometryCollection } from 'topojson-specification';
@@ -171,7 +171,7 @@ export default function AfricaMap({ countries }: Props) {
 
   const pathGen = useMemo(() => geoPath(currentProjection), [currentProjection]);
 
-  const graticule = useMemo(() => geoGraticule().step([20, 20])(), []);
+  // Graticule removed — caused visible horizontal band artifacts on orthographic projection
 
   // Helper to get selection index
   const getSelectionIndex = useCallback(
@@ -232,24 +232,16 @@ export default function AfricaMap({ countries }: Props) {
           {isInteractive ? 'Africa, by quadrant' : 'Explore the map'}
         </text>
 
-        {/* Globe outline and graticule (globe phase only — removed during transition to avoid bleed) */}
+        {/* Globe outline (globe phase only) */}
         {phase === 'globe' && (
-          <g>
-            <circle
-              cx={W / 2}
-              cy={H / 2 + 20}
-              r={currentProjection.scale?.() || GLOBE_SCALE}
-              fill="none"
-              stroke="#d8d3c3"
-              strokeWidth={0.5}
-            />
-            <path
-              d={pathGen(graticule) || ''}
-              fill="none"
-              stroke="#e8e4da"
-              strokeWidth={0.3}
-            />
-          </g>
+          <circle
+            cx={W / 2}
+            cy={H / 2 + 20}
+            r={currentProjection.scale?.() || GLOBE_SCALE}
+            fill="none"
+            stroke="#d8d3c3"
+            strokeWidth={0.5}
+          />
         )}
 
         {/* Country paths */}
