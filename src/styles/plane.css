@@ -319,6 +319,21 @@ svg.plot, svg.map {
   line-height: 0.96;
   letter-spacing: -0.02em;
   margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.detail-flag {
+  font-size: 0.55em;
+  line-height: 1;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.detail-card--compact .detail-flag {
+  font-size: 0.6em;
 }
 
 .detail-region {

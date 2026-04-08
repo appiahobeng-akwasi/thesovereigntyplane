@@ -6,6 +6,13 @@ import type { Country } from '../data/types';
 const MAX_SELECTED = 4;
 const badgeColors = ['#0f0f0f', '#5a564b', '#8a8680', '#b5b0a5'];
 
+/** Convert a 2-letter ISO code (e.g. "GH") to its flag emoji (e.g. 🇬🇭) */
+function isoToFlag(iso: string): string {
+  return [...iso.toUpperCase()].map(
+    (c) => String.fromCodePoint(0x1f1e6 + c.charCodeAt(0) - 65)
+  ).join('');
+}
+
 function CountryCard({ country, index, total }: { country: Country; index: number; total: number }) {
   const sign = country.gap >= 0 ? '+' : '';
   const gapClass = country.gap >= 0 ? 'pos' : 'neg';
@@ -26,6 +33,7 @@ function CountryCard({ country, index, total }: { country: Country; index: numbe
       )}
 
       <div className="detail-name" style={isCompare ? { fontSize: '28px' } : undefined}>
+        <span className="detail-flag" aria-hidden="true">{isoToFlag(country.iso_code)}</span>
         {country.name}
       </div>
       <div className="detail-region">
