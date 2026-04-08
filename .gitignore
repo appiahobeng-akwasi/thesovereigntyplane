@@ -26,3 +26,4 @@ supabase/.temp/
 # Debug
 npm-debug.log*
 pnpm-debug.log*
+.vercel
