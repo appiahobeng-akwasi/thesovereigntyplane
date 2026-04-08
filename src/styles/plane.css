@@ -302,6 +302,129 @@ svg.plot, svg.map {
   font-size: 16px;
   line-height: 1.55;
   color: var(--ink-2);
+  margin-bottom: 24px;
+}
+
+/* ═══════════════ SCORING METHODOLOGY ═══════════════ */
+.detail-methodology {
+  margin-bottom: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.detail-methodology-label {
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 10px;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.detail-methodology-text {
+  font-family: 'Inter Variable', sans-serif;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  line-height: 1.55;
+  letter-spacing: -0.003em;
+}
+
+/* ═══════════════ COHERENCE RECOMMENDATIONS ═══════════════ */
+.detail-coherence {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.detail-coherence-label {
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 10px;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+
+.detail-coherence-direction {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--ink);
+  margin-bottom: 16px;
+  letter-spacing: -0.005em;
+}
+
+.detail-coherence-actions {
+  list-style: none;
+  counter-reset: actions;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-coherence-actions li {
+  counter-increment: actions;
+  font-family: 'Inter Variable', sans-serif;
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  padding-left: 28px;
+  position: relative;
+  letter-spacing: -0.003em;
+}
+
+.detail-coherence-actions li::before {
+  content: counter(actions);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 10px;
+  color: var(--ink-mute);
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ═══════════════ QUADRANT TOOLTIP ═══════════════ */
+.quadrant-tooltip {
+  position: absolute;
+  z-index: 50;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  box-shadow: 0 4px 24px rgba(15, 15, 15, 0.08);
+  padding: 20px 24px;
+  max-width: 300px;
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+.quadrant-tooltip-name {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 20px;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.quadrant-tooltip-desc {
+  font-family: 'Inter Variable', sans-serif;
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.55;
+  letter-spacing: -0.003em;
+}
+
+/* ═══════════════ SELECTED LABEL STYLE ═══════════════ */
+.country-label.selected {
+  fill: var(--ink);
+  font-weight: 600;
 }
 
 /* ═══════════════ RESPONSIVE ═══════════════ */

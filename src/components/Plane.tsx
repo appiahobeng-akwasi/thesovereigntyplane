@@ -1,21 +1,38 @@
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, useState } from 'react';
 import { usePlaneStore } from '../stores/plane';
 import { filterByScope } from '../lib/countries';
 import {
   PLANE as P,
   quadrantColor,
   quadrantWashColor,
+  quadrantName,
 } from '../lib/plane-geometry';
-import type { Country } from '../data/types';
+import { getQuadrantDescription } from '../lib/coherence';
+import type { Country, Quadrant } from '../data/types';
 
 interface Props {
   countries: Country[];
 }
 
+interface TooltipState {
+  visible: boolean;
+  x: number;
+  y: number;
+  quadrant: Quadrant | null;
+}
+
 export default function Plane({ countries }: Props) {
   const scope = usePlaneStore((s) => s.scope);
   const view = usePlaneStore((s) => s.view);
+  const selected = usePlaneStore((s) => s.selected);
   const setSelected = usePlaneStore((s) => s.setSelected);
+
+  const [tooltip, setTooltip] = useState<TooltipState>({
+    visible: false,
+    x: 0,
+    y: 0,
+    quadrant: null,
+  });
 
   const data = useMemo(() => filterByScope(countries, scope), [countries, scope]);
 
@@ -35,8 +52,15 @@ export default function Plane({ countries }: Props) {
   const t = P.mt;
   const b = P.mt + P.ih;
 
+  const quadrants: { key: Quadrant; x: number; y: number; w: number; h: number }[] = [
+    { key: 'theatre', x: l, y: t, w: mid - l, h: midY - t },
+    { key: 'interdep', x: mid, y: t, w: r - mid, h: midY - t },
+    { key: 'adhoc', x: mid, y: midY, w: r - mid, h: b - midY },
+    { key: 'depend', x: l, y: midY, w: mid - l, h: b - midY },
+  ];
+
   return (
-    <div className="viz-plane active">
+    <div className="viz-plane active" style={{ position: 'relative' }}>
       <svg
         className="plot"
         viewBox={`0 0 ${P.W} ${P.H}`}
@@ -44,12 +68,35 @@ export default function Plane({ countries }: Props) {
         role="img"
         aria-label="The Sovereignty Plane scatter plot showing formal versus substantive sovereignty scores for African states"
       >
-        {/* Quadrant washes */}
+        {/* Quadrant wash rects — interactive hover zones */}
         <g>
-          <rect x={l} y={t} width={mid - l} height={midY - t} fill={quadrantWashColor('theatre')} />
-          <rect x={mid} y={t} width={r - mid} height={midY - t} fill={quadrantWashColor('interdep')} />
-          <rect x={mid} y={midY} width={r - mid} height={b - midY} fill={quadrantWashColor('adhoc')} />
-          <rect x={l} y={midY} width={mid - l} height={b - midY} fill={quadrantWashColor('depend')} />
+          {quadrants.map((q) => (
+            <rect
+              key={q.key}
+              x={q.x}
+              y={q.y}
+              width={q.w}
+              height={q.h}
+              fill={quadrantWashColor(q.key)}
+              onMouseEnter={(e) => {
+                const svg = (e.target as SVGRectElement).ownerSVGElement;
+                if (!svg) return;
+                const rect = svg.getBoundingClientRect();
+                const scaleX = rect.width / P.W;
+                const scaleY = rect.height / P.H;
+                setTooltip({
+                  visible: true,
+                  x: (q.x + q.w / 2) * scaleX,
+                  y: (q.y + q.h / 2) * scaleY,
+                  quadrant: q.key,
+                });
+              }}
+              onMouseLeave={() => {
+                setTooltip({ visible: false, x: 0, y: 0, quadrant: null });
+              }}
+              style={{ cursor: 'default' }}
+            />
+          ))}
         </g>
 
         {/* Axes frame */}
@@ -91,7 +138,7 @@ export default function Plane({ countries }: Props) {
         </g>
 
         {/* Quadrant names */}
-        <g>
+        <g style={{ pointerEvents: 'none' }}>
           {[
             { x: 22, y: 96, text: 'Sovereignty Theatre', color: '#8a3a2a' },
             { x: 78, y: 96, text: 'Negotiated Interdependence', color: '#2d5a3a' },
@@ -113,7 +160,7 @@ export default function Plane({ countries }: Props) {
         </g>
 
         {/* Reference lines */}
-        <g>
+        <g style={{ pointerEvents: 'none' }}>
           <line x1={mid} y1={t} x2={mid} y2={b} stroke="#8a8680" strokeWidth={0.5} strokeDasharray="1 3" />
           <line x1={l} y1={midY} x2={r} y2={midY} stroke="#8a8680" strokeWidth={0.5} strokeDasharray="1 3" />
           <line
@@ -140,14 +187,28 @@ export default function Plane({ countries }: Props) {
             const cy = P.y(c.formal_score);
             const color = quadrantColor(c.quadrant);
             const isRef = c.is_reference;
+            const isSelected = selected?.iso_code === c.iso_code;
             const baseR = isRef ? 5.5 : 6.5;
+            const displayR = isSelected ? baseR + 3 : baseR;
 
             return (
               <g key={c.iso_code}>
+                {isSelected && (
+                  <circle
+                    cx={cx}
+                    cy={cy}
+                    r={baseR + 6}
+                    fill="none"
+                    stroke={color}
+                    strokeWidth={1}
+                    opacity={0.35}
+                    style={{ pointerEvents: 'none' }}
+                  />
+                )}
                 <circle
                   cx={cx}
                   cy={cy}
-                  r={baseR}
+                  r={displayR}
                   fill={isRef ? '#fafaf9' : color}
                   stroke={color}
                   strokeWidth={isRef ? 1.5 : 1}
@@ -155,10 +216,15 @@ export default function Plane({ countries }: Props) {
                   data-country={c.name}
                   onClick={() => handleClick(c)}
                   onMouseEnter={(e) => {
-                    (e.target as SVGCircleElement).setAttribute('r', String(baseR + 2));
+                    if (!isSelected) {
+                      (e.target as SVGCircleElement).setAttribute('r', String(baseR + 2));
+                    }
+                    setTooltip({ visible: false, x: 0, y: 0, quadrant: null });
                   }}
                   onMouseLeave={(e) => {
-                    (e.target as SVGCircleElement).setAttribute('r', String(baseR));
+                    if (!isSelected) {
+                      (e.target as SVGCircleElement).setAttribute('r', String(baseR));
+                    }
                   }}
                   tabIndex={0}
                   role="button"
@@ -174,7 +240,8 @@ export default function Plane({ countries }: Props) {
                   x={cx + c.label_dx}
                   y={cy + c.label_dy}
                   textAnchor={c.label_anchor}
-                  className={`country-label${isRef ? ' ref' : ''}`}
+                  className={`country-label${isRef ? ' ref' : ''}${isSelected ? ' selected' : ''}`}
+                  style={{ pointerEvents: 'none', fontWeight: isSelected ? 600 : undefined }}
                 >
                   {c.short_name}
                 </text>
@@ -183,6 +250,28 @@ export default function Plane({ countries }: Props) {
           })}
         </g>
       </svg>
+
+      {/* Floating quadrant tooltip */}
+      {tooltip.visible && tooltip.quadrant && (
+        <div
+          className="quadrant-tooltip"
+          style={{
+            left: tooltip.x,
+            top: tooltip.y,
+            transform: 'translate(-50%, -50%)',
+          }}
+        >
+          <div
+            className="quadrant-tooltip-name"
+            style={{ color: quadrantColor(tooltip.quadrant) }}
+          >
+            {quadrantName(tooltip.quadrant)}
+          </div>
+          <div className="quadrant-tooltip-desc">
+            {getQuadrantDescription(tooltip.quadrant)}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
