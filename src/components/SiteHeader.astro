@@ -3,7 +3,13 @@
 
 <header class="site-header" id="site-header">
   <div class="site-header-inner">
-    <a href="#top" class="site-id">The Sovereignty <em>Plane</em></a>
+    <a href="#top" class="site-id">
+      <span class="site-id-mark" aria-hidden="true">
+        <span class="mark-v"></span>
+        <span class="mark-h"></span>
+      </span>
+      <span class="site-id-text">The Sovereignty <em>Plane</em></span>
+    </a>
     <nav class="site-nav" aria-label="Main navigation">
       <a href="#plane">The Plane</a>
       <a href="#research">Research</a>
@@ -49,6 +55,9 @@
   }
 
   .site-id {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     font-family: 'Instrument Serif', serif;
     font-size: 22px;
     line-height: 1;
@@ -59,6 +68,39 @@
   .site-id em {
     font-style: italic;
     font-weight: 400;
+  }
+
+  /* ═══════════════ CROSS MARK ═══════════════ */
+  .site-id-mark {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 26px;
+    flex-shrink: 0;
+  }
+
+  /* Vertical line — full height, positioned left of center (in front of the S) */
+  .mark-v {
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--ink);
+    border-radius: 1px;
+  }
+
+  /* Horizontal line — full width, positioned lower (underline) */
+  .mark-h {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 18px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 1px;
   }
 
   .site-nav {
@@ -97,5 +139,9 @@
   @media (max-width: 680px) {
     .site-nav { gap: 20px; }
     .site-nav a:not(:last-child) { display: none; }
+    .site-id { font-size: 18px; gap: 8px; }
+    .site-id-mark { width: 18px; height: 22px; }
+    .mark-v { left: 6px; }
+    .mark-h { top: 15px; }
   }
 </style>
