@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Hero from '../components/Hero.astro';
+import HeroImage from '../components/HeroImage.astro';
+import PlaneSection from '../components/PlaneSection.astro';
+import QuadrantLegend from '../components/QuadrantLegend.astro';
+import Work from '../components/Work.astro';
+import Research from '../components/Research.astro';
+import Bio from '../components/Bio.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { getCountries } from '../data/queries';
+
+const countries = await getCountries();
+---
+
+<Base>
+  <SiteHeader />
+  <Hero />
+  <HeroImage />
+
+  <div class="section-rule">
+    <div class="section-rule-line"></div>
+  </div>
+
+  <PlaneSection countries={countries} />
+
+  <QuadrantLegend />
+  <Work />
+
+  <div class="section-rule">
+    <div class="section-rule-line"></div>
+  </div>
+
+  <Research />
+
+  <div class="section-rule">
+    <div class="section-rule-line"></div>
+  </div>
+
+  <Bio />
+
+  <div class="section-rule">
+    <div class="section-rule-line"></div>
+  </div>
+
+  <Contact />
+  <Footer />
+</Base>
+
+<style>
+  .section-rule {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 56px;
+  }
+
+  .section-rule-line {
+    height: 1px;
+    background: var(--rule);
+  }
+
+  @media (max-width: 1100px) {
+    .section-rule { padding-left: 32px; padding-right: 32px; }
+  }
+</style>

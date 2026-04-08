@@ -1,0 +1,97 @@
+---
+---
+
+<section class="bio" id="bio">
+  <div class="bio-header">
+    <span class="bio-section-label">&sect;05 &middot; About</span>
+  </div>
+
+  <div class="bio-body">
+    <p class="bio-dropcap">I&rsquo;m a digital policy advisor and governance researcher based between Freetown and Accra. For the last ten years I have worked inside the machinery of African digital transformation&thinsp;&mdash;&thinsp;running multi-country digital health programmes, managing innovation funds, drafting national strategies, advising ministries. I&rsquo;ve seen what it looks like when a state signs an AI strategy and what it looks like when it actually has to enforce one. Those are not the same thing.</p>
+
+    <p>The Sovereignty Plane is a theoretical framework I wrote because the practitioner experience made the gap impossible to unsee. The Global AI Majority research community has converged on what needs to be built&thinsp;&mdash;&thinsp;sovereign AI safety capacity, inclusive participation, Africa-centric evaluations. It has not yet agreed on how to measure whether it is being built. The Plane is my contribution to that measurement problem.</p>
+
+    <p>I hold an MPhil in Health Systems Research and Management from KNUST, am PMP-certified and HL7 FHIR-certified, and serve on the steering committee of Health Technology Assessment International&rsquo;s Developing Countries Interest Group. I&rsquo;m an Acumen Academy Fellow. I&rsquo;m interested in hearing from researchers working on Global AI Majority participation, Africa-centric safety evaluation, and the measurement of sovereign capacity in frontier AI governance.</p>
+  </div>
+</section>
+
+<style>
+  /* ── Section ── */
+  .bio {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 56px;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 56px;
+  }
+
+  /* ── Section label ── */
+  .bio-header {
+    padding-top: 6px;
+  }
+
+  .bio-section-label {
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── Body ── */
+  .bio-body {
+    max-width: 640px;
+  }
+
+  .bio-body p {
+    font-family: 'Inter Variable', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-2);
+    line-height: 1.7;
+    letter-spacing: -0.003em;
+    margin-bottom: 24px;
+  }
+
+  .bio-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ── Drop cap ── */
+  .bio-dropcap::first-letter {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 3.6em;
+    float: left;
+    line-height: 0.8;
+    margin-right: 8px;
+    margin-top: 6px;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1100px) {
+    .bio {
+      padding-left: 32px;
+      padding-right: 32px;
+      padding-top: 80px;
+      padding-bottom: 80px;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .bio-header {
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .bio-body p {
+      font-size: 14px;
+    }
+  }
+</style>

@@ -1,0 +1,44 @@
+{
+  "name": "thesovereigntyplane",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "seed": "tsx scripts/seed-db.ts",
+    "generate-types": "tsx scripts/generate-types.ts"
+  },
+  "dependencies": {
+    "@astrojs/react": "5.0.3",
+    "@astrojs/sitemap": "3.7.2",
+    "@astrojs/vercel": "9.0.5",
+    "@fontsource-variable/inter": "5.2.8",
+    "@fontsource-variable/jetbrains-mono": "5.2.8",
+    "@fontsource/instrument-serif": "5.2.8",
+    "@supabase/supabase-js": "2.102.1",
+    "astro": "5.18.1",
+    "d3-geo": "3.1.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "topojson-client": "3.1.0",
+    "world-atlas": "2.0.2",
+    "zustand": "5.0.12"
+  },
+  "devDependencies": {
+    "@types/d3-geo": "3.1.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@types/topojson-client": "3.1.5",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  }
+}

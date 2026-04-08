@@ -1,0 +1,50 @@
+---
+---
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <span class="footer-copy">&copy; 2026 AKWASI APPIAH OBENG</span>
+    <span class="footer-location">FREETOWN &middot; ACCRA</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 56px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .site-footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 0;
+  }
+
+  .footer-copy,
+  .footer-location {
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1100px) {
+    .site-footer {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .site-footer-inner {
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,229 @@
+---
+const quadrants = [
+  {
+    id: 'theatre',
+    marker: 'Above the diagonal',
+    name: 'Sovereignty Theatre',
+    description:
+      'Strategies, laws, and institutions accumulate faster than the capacity to enforce, evaluate, or renegotiate. Twelve of fifteen African states sit here.',
+    color: 'var(--theatre)',
+    colorSoft: 'var(--theatre-soft)',
+  },
+  {
+    id: 'interdep',
+    marker: 'At or near diagonal, upper',
+    name: 'Negotiated Interdependence',
+    description:
+      'Formal architecture matched by operational capacity. The state can enforce against major providers and bargain credibly. Only South Africa among the African sample.',
+    color: 'var(--interdep)',
+    colorSoft: 'var(--interdep-soft)',
+  },
+  {
+    id: 'adhoc',
+    marker: 'Below the diagonal',
+    name: 'Ad-Hoc Capability',
+    description:
+      'Capacity outruns formal architecture. Ecosystems, private investment, or diaspora networks generate capability without state-led planning. Tunisia is the only African case.',
+    color: 'var(--adhoc)',
+    colorSoft: 'var(--adhoc-soft)',
+  },
+  {
+    id: 'depend',
+    marker: 'Lower-left',
+    name: 'Dependency by Default',
+    description:
+      'Limited formal architecture and limited substantive capacity. The state is a passive recipient of AI systems built, governed, and operated elsewhere.',
+    color: 'var(--depend)',
+    colorSoft: 'var(--depend-soft)',
+  },
+];
+---
+
+<section class="legend" id="quadrants">
+  <div class="legend-header">
+    <span class="legend-section-label">&sect;02 &middot; Reading it / Four quadrants</span>
+    <h2 class="legend-title">Four <em>quadrants,</em> one coherence line.</h2>
+    <p class="legend-lede">
+      The plane is a diagnostic, not a verdict. What matters is not where a state currently sits but
+      the direction of its movement&thinsp;&mdash;&thinsp;toward the diagonal where declaration and
+      capacity coincide, or away from it.
+    </p>
+  </div>
+
+  <div class="quadrant-grid">
+    {
+      quadrants.map((q) => (
+        <article class={`quad-card quad-card--${q.id}`} style={`--card-color: ${q.color}; --card-soft: ${q.colorSoft};`}>
+          <div class="quad-card-marker">
+            <span class="quad-card-dot" />
+            <span class="quad-card-marker-text">{q.marker}</span>
+          </div>
+          <h3 class="quad-card-name">{q.name}</h3>
+          <p class="quad-card-desc">{q.description}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  /* ── Legend section ── */
+  .legend {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 56px;
+    padding-top: 120px;
+    padding-bottom: 120px;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ── Header block ── */
+  .legend-header {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 56px;
+    margin-bottom: 72px;
+  }
+
+  .legend-section-label {
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-top: 10px;
+  }
+
+  .legend-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(36px, 4.4vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .legend-title em {
+    font-style: italic;
+  }
+
+  .legend-lede {
+    font-family: 'Inter Variable', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-2);
+    line-height: 1.6;
+    max-width: 600px;
+    letter-spacing: -0.003em;
+  }
+
+  /* ── Quadrant grid ── */
+  .quadrant-grid {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 0;
+  }
+
+  /*
+    The label rail is empty visually for the grid —
+    cards sit in a 2-column sub-grid inside the content column.
+    We achieve this by spanning the grid and using inner columns.
+  */
+  .quadrant-grid {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: calc(240px + 56px);
+    gap: 20px;
+  }
+
+  /* ── Card ── */
+  .quad-card {
+    background: var(--card-soft);
+    border: 1px solid var(--rule-soft);
+    padding: 32px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: border-color 200ms;
+  }
+
+  .quad-card:hover {
+    border-color: var(--rule);
+  }
+
+  /* ── Marker row ── */
+  .quad-card-marker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .quad-card-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--card-color);
+    flex-shrink: 0;
+  }
+
+  .quad-card-marker-text {
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── Name ── */
+  .quad-card-name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  /* ── Description ── */
+  .quad-card-desc {
+    font-family: 'Inter Variable', sans-serif;
+    font-size: 13.5px;
+    font-weight: 400;
+    color: var(--ink-2);
+    line-height: 1.55;
+    letter-spacing: -0.003em;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1100px) {
+    .legend {
+      padding-left: 32px;
+      padding-right: 32px;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+
+    .legend-header {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .legend-section-label {
+      padding-top: 0;
+    }
+
+    .quadrant-grid {
+      grid-template-columns: 1fr;
+      margin-left: 0;
+      gap: 16px;
+    }
+
+    .quad-card-name {
+      font-size: 22px;
+    }
+  }
+</style>

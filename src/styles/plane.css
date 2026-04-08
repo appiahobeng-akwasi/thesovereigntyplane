@@ -1,0 +1,320 @@
+/* ═══════════════ VIEW TOGGLE ═══════════════ */
+.view-toggle {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 56px;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.view-toggle-label {
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 11px;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-top: 10px;
+}
+
+.view-toggle-buttons {
+  display: flex;
+  gap: 40px;
+  align-items: baseline;
+}
+
+.view-toggle-buttons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Instrument Serif', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--ink-mute);
+  padding: 0 0 8px;
+  border-bottom: 1px solid transparent;
+  transition: color 220ms, border-color 220ms;
+  letter-spacing: -0.01em;
+}
+
+.view-toggle-buttons button .it { font-style: italic; }
+
+.view-toggle-buttons button:hover { color: var(--ink-2); }
+
+.view-toggle-buttons button.active {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+/* ═══════════════ SCOPE TOGGLE ═══════════════ */
+.scope-toggle {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 56px;
+  margin-bottom: 48px;
+}
+
+.scope-toggle-label {
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 11px;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-top: 4px;
+}
+
+.scope-toggle-buttons {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.scope-toggle-buttons button {
+  background: none;
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  font-family: 'Inter Variable', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-3);
+  padding: 8px 16px;
+  border-radius: 100px;
+  transition: all 200ms;
+  letter-spacing: 0.005em;
+}
+
+.scope-toggle-buttons button .count {
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 11px;
+  margin-left: 6px;
+  opacity: 0.6;
+}
+
+.scope-toggle-buttons button:hover {
+  color: var(--ink);
+  border-color: var(--ink-mute);
+}
+
+.scope-toggle-buttons button.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+/* ═══════════════ VIZ AREA ═══════════════ */
+.viz-area {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 56px;
+  align-items: start;
+}
+
+.viz-canvas {
+  position: relative;
+  min-height: 560px;
+}
+
+.viz-plane, .viz-map {
+  width: 100%;
+}
+
+svg.plot, svg.map {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.viz-caption {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule-soft);
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-3);
+  max-width: 640px;
+}
+
+.viz-caption b {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ═══════════════ SVG STYLES ═══════════════ */
+.axis-title {
+  font-family: 'Inter Variable', sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  fill: var(--ink);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.axis-sub {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 12px;
+  fill: var(--ink-3);
+}
+
+.tick-text {
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 10px;
+  fill: var(--ink-mute);
+}
+
+.quad-name {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+}
+
+.country-dot, .country-region {
+  cursor: pointer;
+  transition: r 200ms, opacity 200ms, fill 200ms;
+}
+
+.country-label {
+  font-family: 'Inter Variable', sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  fill: var(--ink);
+  pointer-events: none;
+  letter-spacing: -0.005em;
+}
+
+.country-label.ref {
+  font-style: italic;
+  fill: var(--ink-3);
+  font-weight: 400;
+}
+
+/* ═══════════════ DETAIL PANEL ═══════════════ */
+.detail-panel {
+  padding: 24px 0 0 36px;
+  border-left: 1px solid var(--rule);
+  position: sticky;
+  top: 100px;
+}
+
+.detail-empty {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink-mute);
+  max-width: 300px;
+}
+
+.detail-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 52px;
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.detail-region {
+  font-family: 'Inter Variable', sans-serif;
+  font-size: 12px;
+  color: var(--ink-mute);
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+}
+
+.detail-region em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+}
+
+.quad-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter Variable', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 6px 13px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.quad-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.quad-pill.theatre { color: var(--theatre); background: var(--theatre-soft); }
+.quad-pill.interdep { color: var(--interdep); background: var(--interdep-soft); }
+.quad-pill.adhoc { color: var(--adhoc); background: var(--adhoc-soft); }
+.quad-pill.depend { color: var(--depend); background: var(--depend-soft); }
+
+.detail-scores {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  margin-bottom: 24px;
+  padding: 20px 0;
+  border-top: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.score-cell {
+  padding-right: 12px;
+  border-right: 1px solid var(--rule-soft);
+}
+
+.score-cell:nth-child(2) { padding-left: 14px; }
+.score-cell:last-child { border-right: none; padding-left: 14px; }
+
+.score-name {
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 10px;
+  color: var(--ink-mute);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.score-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.score-num.pos { color: var(--theatre); }
+.score-num.neg { color: var(--interdep); }
+
+.detail-note {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media (max-width: 1100px) {
+  .view-toggle, .scope-toggle {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .viz-area { grid-template-columns: 1fr; }
+  .detail-panel {
+    position: static;
+    border-left: none;
+    border-top: 1px solid var(--rule);
+    padding: 32px 0 0;
+  }
+}
