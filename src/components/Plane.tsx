@@ -45,6 +45,8 @@ export default function Plane({ countries }: Props) {
   const handleClick = useCallback(
     (c: Country) => {
       toggleSelected(c);
+      // Dismiss quadrant tooltip when selecting a country
+      setTooltip({ visible: false, x: 0, y: 0, quadrant: null });
     },
     [toggleSelected]
   );
@@ -78,7 +80,7 @@ export default function Plane({ countries }: Props) {
         role="img"
         aria-label="The Sovereignty Plane scatter plot showing formal versus substantive sovereignty scores for African states"
       >
-        {/* Quadrant wash rects — interactive hover zones */}
+        {/* Quadrant wash rects — click to show description */}
         <g>
           {quadrants.map((q) => (
             <rect
@@ -88,23 +90,25 @@ export default function Plane({ countries }: Props) {
               width={q.w}
               height={q.h}
               fill={quadrantWashColor(q.key)}
-              onMouseEnter={(e) => {
+              onClick={(e) => {
                 const svg = (e.target as SVGRectElement).ownerSVGElement;
                 if (!svg) return;
                 const rect = svg.getBoundingClientRect();
                 const scaleX = rect.width / P.W;
                 const scaleY = rect.height / P.H;
-                setTooltip({
-                  visible: true,
-                  x: (q.x + q.w / 2) * scaleX,
-                  y: (q.y + q.h / 2) * scaleY,
-                  quadrant: q.key,
-                });
+                // Toggle: click same quadrant to dismiss, or switch to new one
+                if (tooltip.visible && tooltip.quadrant === q.key) {
+                  setTooltip({ visible: false, x: 0, y: 0, quadrant: null });
+                } else {
+                  setTooltip({
+                    visible: true,
+                    x: (q.x + q.w / 2) * scaleX,
+                    y: (q.y + q.h / 2) * scaleY,
+                    quadrant: q.key,
+                  });
+                }
               }}
-              onMouseLeave={() => {
-                setTooltip({ visible: false, x: 0, y: 0, quadrant: null });
-              }}
-              style={{ cursor: 'default' }}
+              style={{ cursor: 'pointer' }}
             />
           ))}
         </g>
@@ -234,7 +238,6 @@ export default function Plane({ countries }: Props) {
                     if (!isSelected) {
                       (e.target as SVGCircleElement).setAttribute('r', String(baseR + 2));
                     }
-                    setTooltip({ visible: false, x: 0, y: 0, quadrant: null });
                   }}
                   onMouseLeave={(e) => {
                     if (!isSelected) {
@@ -292,7 +295,7 @@ export default function Plane({ countries }: Props) {
         </g>
       </svg>
 
-      {/* Floating quadrant tooltip */}
+      {/* Floating quadrant tooltip — click-to-show, pointer-events none so it never blocks dots */}
       {tooltip.visible && tooltip.quadrant && (
         <div
           className="quadrant-tooltip"
@@ -300,6 +303,7 @@ export default function Plane({ countries }: Props) {
             left: tooltip.x,
             top: tooltip.y,
             transform: 'translate(-50%, -50%)',
+            pointerEvents: 'none',
           }}
         >
           <div
