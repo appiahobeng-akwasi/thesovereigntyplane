@@ -21,10 +21,10 @@ export default function PlaneIsland({ countries }: Props) {
   const caption =
     view === 'plane'
       ? scope === 'africa'
-        ? '<b>Figure 1.</b> Fifteen African states and four reference countries plotted by formal sovereignty (vertical axis) and substantive sovereignty (horizontal axis). The dashed diagonal marks the line where what a state declares matches what it can do. Click any country for the detail.'
+        ? '<b>Figure 1.</b> Fifteen African states and four reference countries plotted by formal sovereignty (vertical axis) and substantive sovereignty (horizontal axis). The dashed diagonal marks the line where what a state declares matches what it can do. Click up to four countries to compare.'
         : '<b>Figure 2.</b> Seven of the ten proposed frontier anchor states, plotted using existing scores. Three states — India, Singapore, Indonesia — are currently unscored and would be assessed during the proposed Astra fellowship.'
       : scope === 'africa'
-        ? '<b>Map view.</b> Geographic index into the Sovereignty Plane. Fifteen African states shaded by quadrant assignment. Reference countries (France, Japan, UAE, Brazil) are omitted from the map view. Click any country to see its scoring detail.'
+        ? '<b>Map view.</b> Geographic index into the Sovereignty Plane. Fifteen African states shaded by quadrant assignment. Reference countries (France, Japan, UAE, Brazil) are omitted from the map view. Click up to four countries to compare.'
         : '<b>Map view · frontier scope.</b> Anchor states for the proposed frontier extension. The map shows African anchors only; UAE and Brazil appear in the plane view as external reference points.';
 
   return (

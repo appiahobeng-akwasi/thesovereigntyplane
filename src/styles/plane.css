@@ -208,6 +208,110 @@ svg.plot, svg.map {
   max-width: 300px;
 }
 
+/* ═══════════════ SELECTION HEADER ═══════════════ */
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.detail-counter {
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-mute);
+}
+
+.detail-counter-num {
+  font-family: 'Instrument Serif', serif;
+  font-size: 20px;
+  color: var(--ink);
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.detail-counter-of {
+  color: var(--ink-mute);
+}
+
+.detail-clear {
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-family: 'Inter Variable', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: all 180ms;
+  letter-spacing: 0.01em;
+}
+
+.detail-clear:hover {
+  color: var(--ink);
+  border-color: var(--ink-mute);
+}
+
+.detail-compare-hint {
+  font-family: 'Inter Variable', sans-serif;
+  font-size: 12px;
+  color: var(--ink-mute);
+  font-style: italic;
+  margin-bottom: 20px;
+  padding: 10px 14px;
+  background: rgba(138, 134, 128, 0.05);
+  border-radius: 4px;
+  letter-spacing: -0.003em;
+}
+
+/* ═══════════════ COMPARISON CARDS GRID ═══════════════ */
+.detail-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detail-cards--2,
+.detail-cards--3,
+.detail-cards--4 {
+  gap: 20px;
+}
+
+.detail-card {
+  position: relative;
+}
+
+.detail-card--compact {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.detail-card--compact:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.detail-card-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fafaf9;
+}
+
 .detail-name {
   font-family: 'Instrument Serif', serif;
   font-size: 52px;
@@ -223,6 +327,10 @@ svg.plot, svg.map {
   color: var(--ink-mute);
   margin-bottom: 28px;
   letter-spacing: 0.01em;
+}
+
+.detail-card--compact .detail-region {
+  margin-bottom: 16px;
 }
 
 .detail-region em {
@@ -256,6 +364,22 @@ svg.plot, svg.map {
 .quad-pill.interdep { color: var(--interdep); background: var(--interdep-soft); }
 .quad-pill.adhoc { color: var(--adhoc); background: var(--adhoc-soft); }
 .quad-pill.depend { color: var(--depend); background: var(--depend-soft); }
+
+.detail-card--compact .quad-pill {
+  margin-bottom: 16px;
+  font-size: 10px;
+  padding: 4px 10px;
+}
+
+.detail-card--compact .detail-scores {
+  margin-bottom: 16px;
+  padding: 14px 0;
+}
+
+.detail-card--compact .detail-coherence {
+  margin-top: 12px;
+  padding-top: 12px;
+}
 
 .detail-scores {
   display: grid;
@@ -440,4 +564,16 @@ svg.plot, svg.map {
     border-top: 1px solid var(--rule);
     padding: 32px 0 0;
   }
+  .detail-cards--2,
+  .detail-cards--3,
+  .detail-cards--4 {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .detail-name { font-size: 36px; }
+  .score-num { font-size: 28px; }
+  .detail-card--compact .detail-name { font-size: 24px !important; }
+  .detail-card--compact .score-num { font-size: 22px !important; }
 }

@@ -25,7 +25,7 @@ export default function Plane({ countries }: Props) {
   const scope = usePlaneStore((s) => s.scope);
   const view = usePlaneStore((s) => s.view);
   const selected = usePlaneStore((s) => s.selected);
-  const setSelected = usePlaneStore((s) => s.setSelected);
+  const toggleSelected = usePlaneStore((s) => s.toggleSelected);
 
   const [tooltip, setTooltip] = useState<TooltipState>({
     visible: false,
@@ -36,11 +36,17 @@ export default function Plane({ countries }: Props) {
 
   const data = useMemo(() => filterByScope(countries, scope), [countries, scope]);
 
+  // Helper to check if a country is in the selection and get its index
+  const getSelectionIndex = useCallback(
+    (c: Country) => selected.findIndex((s) => s.iso_code === c.iso_code),
+    [selected]
+  );
+
   const handleClick = useCallback(
     (c: Country) => {
-      setSelected(c);
+      toggleSelected(c);
     },
-    [setSelected]
+    [toggleSelected]
   );
 
   if (view !== 'plane') return null;
@@ -51,6 +57,7 @@ export default function Plane({ countries }: Props) {
   const r = P.ml + P.iw;
   const t = P.mt;
   const b = P.mt + P.ih;
+  const hasSelection = selected.length > 0;
 
   const quadrants: { key: Quadrant; x: number; y: number; w: number; h: number }[] = [
     { key: 'theatre', x: l, y: t, w: mid - l, h: midY - t },
@@ -58,6 +65,9 @@ export default function Plane({ countries }: Props) {
     { key: 'adhoc', x: mid, y: midY, w: r - mid, h: b - midY },
     { key: 'depend', x: l, y: midY, w: mid - l, h: b - midY },
   ];
+
+  // Selection badge colours (numbered 1-4)
+  const badgeColors = ['#0f0f0f', '#5a564b', '#8a8680', '#b5b0a5'];
 
   return (
     <div className="viz-plane active" style={{ position: 'relative' }}>
@@ -187,24 +197,29 @@ export default function Plane({ countries }: Props) {
             const cy = P.y(c.formal_score);
             const color = quadrantColor(c.quadrant);
             const isRef = c.is_reference;
-            const isSelected = selected?.iso_code === c.iso_code;
+            const selIdx = getSelectionIndex(c);
+            const isSelected = selIdx >= 0;
             const baseR = isRef ? 5.5 : 6.5;
-            const displayR = isSelected ? baseR + 3 : baseR;
+            const displayR = isSelected ? baseR + 2 : baseR;
+            // Dim unselected dots when there IS a selection
+            const dotOpacity = hasSelection && !isSelected ? 0.35 : 1;
 
             return (
-              <g key={c.iso_code}>
+              <g key={c.iso_code} opacity={dotOpacity}>
+                {/* Selection ring */}
                 {isSelected && (
                   <circle
                     cx={cx}
                     cy={cy}
-                    r={baseR + 6}
+                    r={baseR + 8}
                     fill="none"
                     stroke={color}
-                    strokeWidth={1}
-                    opacity={0.35}
+                    strokeWidth={1.5}
+                    opacity={0.45}
                     style={{ pointerEvents: 'none' }}
                   />
                 )}
+                {/* Main dot */}
                 <circle
                   cx={cx}
                   cy={cy}
@@ -228,7 +243,7 @@ export default function Plane({ countries }: Props) {
                   }}
                   tabIndex={0}
                   role="button"
-                  aria-label={`${c.name}: formal ${c.formal_score}, substantive ${c.substantive_score}`}
+                  aria-label={`${c.name}: formal ${c.formal_score}, substantive ${c.substantive_score}${isSelected ? ` (selected ${selIdx + 1} of ${selected.length})` : ''}`}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
@@ -236,6 +251,32 @@ export default function Plane({ countries }: Props) {
                     }
                   }}
                 />
+                {/* Numbered badge for selected countries */}
+                {isSelected && (
+                  <>
+                    <circle
+                      cx={cx + baseR + 6}
+                      cy={cy - baseR - 4}
+                      r={7}
+                      fill={badgeColors[selIdx] || badgeColors[0]}
+                      style={{ pointerEvents: 'none' }}
+                    />
+                    <text
+                      x={cx + baseR + 6}
+                      y={cy - baseR - 4}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fontFamily="'JetBrains Mono Variable', monospace"
+                      fontSize="8.5"
+                      fontWeight="600"
+                      fill="#fafaf9"
+                      style={{ pointerEvents: 'none' }}
+                    >
+                      {selIdx + 1}
+                    </text>
+                  </>
+                )}
+                {/* Label */}
                 <text
                   x={cx + c.label_dx}
                   y={cy + c.label_dy}

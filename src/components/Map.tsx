@@ -36,7 +36,7 @@ export default function AfricaMap({ countries }: Props) {
   const scope = usePlaneStore((s) => s.scope);
   const view = usePlaneStore((s) => s.view);
   const selected = usePlaneStore((s) => s.selected);
-  const setSelected = usePlaneStore((s) => s.setSelected);
+  const toggleSelected = usePlaneStore((s) => s.toggleSelected);
 
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
@@ -71,14 +71,23 @@ export default function AfricaMap({ countries }: Props) {
     return { africaFeatures: africa, pathGenerator: path };
   }, []);
 
+  // Helper to get selection index
+  const getSelectionIndex = useCallback(
+    (c: Country) => selected.findIndex((s) => s.iso_code === c.iso_code),
+    [selected]
+  );
+
   const handleClick = useCallback(
     (c: Country) => {
-      setSelected(c);
+      toggleSelected(c);
     },
-    [setSelected]
+    [toggleSelected]
   );
 
   if (view !== 'map') return null;
+
+  const hasSelection = selected.length > 0;
+  const badgeColors = ['#0f0f0f', '#5a564b', '#8a8680', '#b5b0a5'];
 
   return (
     <div className="viz-map active">
@@ -108,7 +117,10 @@ export default function AfricaMap({ countries }: Props) {
             const scored = countryLookup.get(id);
             const d = pathGenerator(f) || '';
             const isHovered = hoveredId === id;
-            const isSelected = scored && selected?.iso_code === scored.iso_code;
+            const selIdx = scored ? getSelectionIndex(scored) : -1;
+            const isSelected = selIdx >= 0;
+            // Dim unscored or unselected-when-selection-exists
+            const dimmed = hasSelection && scored && !isSelected;
 
             const fillColor = scored
               ? isHovered || isSelected
@@ -127,7 +139,7 @@ export default function AfricaMap({ countries }: Props) {
                 fill={fillColor}
                 stroke={strokeColor}
                 strokeWidth={scored ? (isHovered || isSelected ? 2.5 : 1.2) : 0.5}
-                opacity={scored ? 1 : 0.3}
+                opacity={scored ? (dimmed ? 0.4 : 1) : 0.3}
                 cursor={scored ? 'pointer' : 'default'}
                 onClick={scored ? () => handleClick(scored) : undefined}
                 onMouseEnter={scored ? () => setHoveredId(id) : undefined}
@@ -153,7 +165,7 @@ export default function AfricaMap({ countries }: Props) {
             );
           })}
 
-          {/* Country labels for scored countries */}
+          {/* Country labels + numbered badges for scored countries */}
           {africaFeatures.map((f: Feature<Geometry>) => {
             const id = String(f.id);
             const scored = countryLookup.get(id);
@@ -161,21 +173,51 @@ export default function AfricaMap({ countries }: Props) {
             const centroid = pathGenerator.centroid(f);
             if (!centroid || isNaN(centroid[0])) return null;
 
+            const selIdx = getSelectionIndex(scored);
+            const isSelected = selIdx >= 0;
+            const dimmed = hasSelection && !isSelected;
+
             return (
-              <text
-                key={`label-${id}`}
-                x={centroid[0]}
-                y={centroid[1]}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontFamily="'Inter Variable', sans-serif"
-                fontSize="9"
-                fontWeight="600"
-                fill={quadrantColor(scored.quadrant)}
-                style={{ pointerEvents: 'none', textShadow: '0 0 3px #fafaf9, 0 0 6px #fafaf9' }}
-              >
-                {scored.short_name}
-              </text>
+              <g key={`label-${id}`} opacity={dimmed ? 0.4 : 1}>
+                <text
+                  x={centroid[0]}
+                  y={centroid[1]}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fontFamily="'Inter Variable', sans-serif"
+                  fontSize="9"
+                  fontWeight={isSelected ? '700' : '600'}
+                  fill={quadrantColor(scored.quadrant)}
+                  style={{ pointerEvents: 'none', textShadow: '0 0 3px #fafaf9, 0 0 6px #fafaf9' }}
+                >
+                  {scored.short_name}
+                </text>
+                {/* Numbered badge */}
+                {isSelected && (
+                  <>
+                    <circle
+                      cx={centroid[0] + 20}
+                      cy={centroid[1] - 10}
+                      r={7}
+                      fill={badgeColors[selIdx] || badgeColors[0]}
+                      style={{ pointerEvents: 'none' }}
+                    />
+                    <text
+                      x={centroid[0] + 20}
+                      y={centroid[1] - 10}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      fontFamily="'JetBrains Mono Variable', monospace"
+                      fontSize="8.5"
+                      fontWeight="600"
+                      fill="#fafaf9"
+                      style={{ pointerEvents: 'none' }}
+                    >
+                      {selIdx + 1}
+                    </text>
+                  </>
+                )}
+              </g>
             );
           })}
         </g>
