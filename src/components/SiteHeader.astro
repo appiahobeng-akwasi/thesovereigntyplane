@@ -55,6 +55,7 @@
   }
 
   .site-id {
+    position: relative;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -92,12 +93,17 @@
     border-radius: 1px;
   }
 
-  /* Horizontal line — full width, positioned lower (underline) */
+  /* Horizontal line — spans the full .site-id as an underline via pseudo-element */
   .mark-h {
+    display: none; /* replaced by .site-id::after */
+  }
+
+  .site-id::after {
+    content: '';
     position: absolute;
-    left: 0;
+    left: 7px;
     right: 0;
-    top: 18px;
+    bottom: -2px;
     height: 2px;
     background: var(--ink);
     border-radius: 1px;
@@ -142,6 +148,6 @@
     .site-id { font-size: 18px; gap: 8px; }
     .site-id-mark { width: 18px; height: 22px; }
     .mark-v { left: 6px; }
-    .mark-h { top: 15px; }
+    .site-id::after { left: 6px; }
   }
 </style>
