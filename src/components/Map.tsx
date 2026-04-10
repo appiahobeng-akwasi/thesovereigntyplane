@@ -30,7 +30,7 @@ const AFRICA_IDS = new Set([
 ]);
 
 const W = 760;
-const H = 741;
+const H = 720;
 // Africa centroid for the globe (lon, lat)
 const AFRICA_CENTER: [number, number] = [20, 0];
 const GLOBE_SCALE = 300;
@@ -89,7 +89,7 @@ export default function AfricaMap({ countries }: Props) {
   const africaProjection = useMemo(() => {
     return geoEqualEarth()
       .rotate([-20, 0])
-      .fitSize([680, 680], africaCollection);
+      .fitSize([680, 650], africaCollection);
   }, [africaCollection]);
 
   // ─── Globe rotation animation ───
