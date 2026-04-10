@@ -30,7 +30,7 @@ const AFRICA_IDS = new Set([
 ]);
 
 const W = 760;
-const H = 780;
+const H = 741;
 // Africa centroid for the globe (lon, lat)
 const AFRICA_CENTER: [number, number] = [20, 0];
 const GLOBE_SCALE = 300;
