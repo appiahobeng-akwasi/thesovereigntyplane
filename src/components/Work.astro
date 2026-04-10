@@ -70,8 +70,6 @@ const workItems = [
                   alt={`${item.org} logo`}
                   class="work-item-logo"
                   loading="lazy"
-                  width="24"
-                  height="24"
                 />
                 <h3 class="work-item-org">{item.org}</h3>
               </div>
@@ -181,8 +179,9 @@ const workItems = [
   }
 
   .work-item-logo {
-    width: 24px;
-    height: 24px;
+    height: 22px;
+    width: auto;
+    max-width: 100px;
     object-fit: contain;
     flex-shrink: 0;
     opacity: 0.7;
