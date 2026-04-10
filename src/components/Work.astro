@@ -7,9 +7,6 @@ const workItems = [
     logoHasText: false,
     url: 'https://institute.global',
     role: 'Manager, Technology and Innovation',
-    description:
-      'Leading Sierra Leone\u2019s National AI Strategy, National Data Governance Strategy, and National Digital Development Bill. Lead technical advisor to the Ministry of Communications on a $50M World Bank Digital Transformation Project. Trained the Sierra Leonean Cabinet and 500+ civil servants alongside MIT and Qhala.',
-    location: 'Freetown, Sierra Leone',
   },
   {
     dates: 'Aug — Dec 2025',
@@ -18,9 +15,6 @@ const workItems = [
     logoHasText: false,
     url: 'https://www.sandtech.com',
     role: 'Consultant — National Health Information Hub',
-    description:
-      'Led end-to-end discovery, requirements, stakeholder alignment, and design of Sierra Leone\u2019s Ministry of Health National Health Information Hub, from inception to launch in four months. Defined data architecture aligned to national health data standards.',
-    location: 'Freetown, Sierra Leone',
   },
   {
     dates: '2023 — 2025',
@@ -29,9 +23,6 @@ const workItems = [
     logoHasText: true,
     url: 'https://www.medtroniclabs.org',
     role: 'Senior Programmes Lead',
-    description:
-      'Directed a multi-country digital health programme across Kenya, Ghana, Sierra Leone, and Tanzania. Improved healthcare access for 150,000+ underserved patients; achieved 60% improved health outcomes for nearly 100,000 enrolled patients \u2014 more than double the national baseline.',
-    location: 'Four countries, East & West Africa',
   },
   {
     dates: '2021 — 2022',
@@ -40,9 +31,6 @@ const workItems = [
     logoHasText: true,
     url: 'https://www.giz.de',
     role: 'Senior Technical Advisor — Digital Transformation & PPP',
-    description:
-      'Managed a \u20AC12M Innovation Fund supporting public-private digital health initiatives. Advised the Ghana Health Service on the adoption of AI-driven health solutions during the COVID-19 response. Funded the Locovent, a low-cost ventilator deployed at national scale.',
-    location: 'Accra, Ghana',
   },
   {
     dates: '2016 — 2021',
@@ -51,9 +39,6 @@ const workItems = [
     logoHasText: true,
     url: 'https://delftimaging.com',
     role: 'Project Manager — Africa',
-    description:
-      'Managed deployment of AI-driven TB diagnostic hardware (CAD4TB) across nine Sub-Saharan African countries. Owned donor reporting for WHO, USAID, FHI 360, and the Global Fund. Navigated regulatory approvals across multiple jurisdictions.',
-    location: 'Nine countries, Sub-Saharan Africa',
   },
 ];
 ---
@@ -86,9 +71,7 @@ const workItems = [
                 {!item.logoHasText && <h3 class="work-item-org">{item.org}</h3>}
               </div>
               <p class="work-item-role">{item.role}</p>
-              <p class="work-item-desc">{item.description}</p>
             </div>
-            <span class="work-item-location">{item.location}</span>
           </li>
         ))}
       </ol>
@@ -156,15 +139,15 @@ const workItems = [
     list-style: none;
   }
 
-  /* ── Individual work item: 3-column grid ── */
+  /* ── Individual work item: 2-column (dates + body) ── */
   .work-item {
     display: grid;
-    grid-template-columns: 120px minmax(0, 1fr) 220px;
+    grid-template-columns: 120px minmax(0, 1fr);
     gap: 32px;
-    padding-top: 28px;
-    padding-bottom: 28px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     border-top: 1px solid var(--rule);
-    align-items: start;
+    align-items: center;
   }
 
   .work-item:last-child {
@@ -178,7 +161,6 @@ const workItems = [
     color: var(--ink-mute);
     letter-spacing: 0.03em;
     line-height: 1.6;
-    padding-top: 2px;
     white-space: nowrap;
   }
 
@@ -187,7 +169,7 @@ const workItems = [
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
 
   .work-item-logo-link {
@@ -234,29 +216,7 @@ const workItems = [
     font-weight: 500;
     color: var(--ink-3);
     line-height: 1.4;
-    margin-bottom: 12px;
     letter-spacing: -0.003em;
-  }
-
-  .work-item-desc {
-    font-family: 'Inter Variable', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--ink-2);
-    line-height: 1.6;
-    letter-spacing: -0.003em;
-    max-width: 560px;
-  }
-
-  /* ── Location column ── */
-  .work-item-location {
-    font-family: 'JetBrains Mono Variable', monospace;
-    font-size: 11px;
-    color: var(--ink-mute);
-    letter-spacing: 0.03em;
-    line-height: 1.6;
-    text-align: right;
-    padding-top: 2px;
   }
 
   /* ── Responsive: collapse at 1100px ── */
@@ -286,12 +246,6 @@ const workItems = [
 
     .work-item-body {
       order: 1;
-    }
-
-    .work-item-location {
-      order: 2;
-      text-align: left;
-      padding-top: 4px;
     }
   }
 </style>
