@@ -1,6 +1,8 @@
+import { useRef } from 'react';
 import { usePlaneStore } from '../stores/plane';
 import { quadrantColor, quadrantName } from '../lib/plane-geometry';
 import { getCoherenceAdvice } from '../lib/coherence';
+import DownloadButton from './DownloadButton';
 import type { Country } from '../data/types';
 
 const MAX_SELECTED = 4;
@@ -122,6 +124,7 @@ export default function DetailPanel() {
   const clearSelected = usePlaneStore((s) => s.clearSelected);
   const view = usePlaneStore((s) => s.view);
   const scope = usePlaneStore((s) => s.scope);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   if (selected.length === 0) {
     const emptyMsg =
@@ -146,13 +149,21 @@ export default function DetailPanel() {
           <span className="detail-counter-num">{selected.length}</span>
           <span className="detail-counter-of"> of {MAX_SELECTED}</span>
         </div>
-        <button
-          className="detail-clear"
-          onClick={clearSelected}
-          aria-label="Clear all selections"
-        >
-          Clear all
-        </button>
+        <div className="detail-header-actions">
+          <DownloadButton
+            targetSelector=".detail-report-cards"
+            filename={`sovereignty-report-${selected.map((c) => c.iso_code).join('-')}`}
+            label="Download report card as PNG"
+            className="download-btn--report"
+          />
+          <button
+            className="detail-clear"
+            onClick={clearSelected}
+            aria-label="Clear all selections"
+          >
+            Clear all
+          </button>
+        </div>
       </div>
 
       {/* Comparison hint — show only after first selection */}
@@ -162,11 +173,13 @@ export default function DetailPanel() {
         </div>
       )}
 
-      {/* Cards grid */}
-      <div className={`detail-cards detail-cards--${Math.min(selected.length, MAX_SELECTED)}`}>
-        {selected.map((c, i) => (
-          <CountryCard key={c.iso_code} country={c} index={i} total={selected.length} />
-        ))}
+      {/* Cards grid — wrapped for screenshot capture */}
+      <div className="detail-report-cards" ref={cardsRef}>
+        <div className={`detail-cards detail-cards--${Math.min(selected.length, MAX_SELECTED)}`}>
+          {selected.map((c, i) => (
+            <CountryCard key={c.iso_code} country={c} index={i} total={selected.length} />
+          ))}
+        </div>
       </div>
     </aside>
   );

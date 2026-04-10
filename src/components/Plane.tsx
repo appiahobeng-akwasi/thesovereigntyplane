@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useState } from 'react';
+import { useMemo, useCallback, useState, useRef } from 'react';
 import { usePlaneStore } from '../stores/plane';
 import { filterByScope } from '../lib/countries';
 import {
@@ -8,6 +8,7 @@ import {
   quadrantName,
 } from '../lib/plane-geometry';
 import { getQuadrantDescription } from '../lib/coherence';
+import DownloadButton from './DownloadButton';
 import type { Country, Quadrant } from '../data/types';
 
 interface Props {
@@ -26,6 +27,8 @@ export default function Plane({ countries }: Props) {
   const view = usePlaneStore((s) => s.view);
   const selected = usePlaneStore((s) => s.selected);
   const toggleSelected = usePlaneStore((s) => s.toggleSelected);
+
+  const svgRef = useRef<SVGSVGElement>(null);
 
   const [tooltip, setTooltip] = useState<TooltipState>({
     visible: false,
@@ -74,6 +77,7 @@ export default function Plane({ countries }: Props) {
   return (
     <div className="viz-plane active" style={{ position: 'relative' }}>
       <svg
+        ref={svgRef}
         className="plot"
         viewBox={`0 0 ${P.W} ${P.H}`}
         xmlns="http://www.w3.org/2000/svg"
@@ -294,6 +298,13 @@ export default function Plane({ countries }: Props) {
           })}
         </g>
       </svg>
+
+      <DownloadButton
+        svgRef={svgRef}
+        filename={`sovereignty-plane-${scope}`}
+        label="Download the Sovereignty Plane as PNG"
+        className="download-btn--figure"
+      />
 
       {/* Floating quadrant tooltip — click-to-show, pointer-events none so it never blocks dots */}
       {tooltip.visible && tooltip.quadrant && (

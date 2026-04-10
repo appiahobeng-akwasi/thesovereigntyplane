@@ -566,6 +566,49 @@ svg.plot, svg.map {
   font-weight: 600;
 }
 
+/* ═══════════════ DOWNLOAD BUTTONS ═══════════════ */
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 5px;
+  cursor: pointer;
+  color: var(--ink-mute);
+  transition: color 180ms, border-color 180ms, background 180ms;
+}
+
+.download-btn:hover {
+  color: var(--ink);
+  border-color: var(--ink-mute);
+  background: rgba(138, 134, 128, 0.06);
+}
+
+/* Plane figure download — bottom-right of the chart */
+.download-btn--figure {
+  position: absolute;
+  bottom: 8px;
+  right: 0;
+}
+
+/* Report card download — sits next to Clear all */
+.detail-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.download-btn--report {
+  /* inherits base .download-btn styles */
+}
+
+/* Report cards wrapper — needs background for clean screenshot */
+.detail-report-cards {
+  background: var(--paper);
+}
+
 /* ═══════════════ RESPONSIVE ═══════════════ */
 @media (max-width: 1100px) {
   .view-toggle, .scope-toggle {
