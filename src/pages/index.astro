@@ -10,12 +10,14 @@ import Research from '../components/Research.astro';
 import Bio from '../components/Bio.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import IntroGate from '../components/IntroGate';
 import { getCountries } from '../data/queries';
 
 const countries = await getCountries();
 ---
 
 <Base>
+  <IntroGate countries={countries} client:load />
   <SiteHeader />
   <Hero />
   <HeroImage />
