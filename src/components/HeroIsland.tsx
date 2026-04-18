@@ -20,19 +20,33 @@ export default function HeroIsland() {
   useEffect(() => {
     registerGSAP();
 
+    // Entrance animations — use fromTo to avoid opacity conflicts
     if (headingRef.current) {
-      gsap.from(headingRef.current, { opacity: 0, y: 30, scale: 0.97, duration: 1, ease: 'power3.out' });
+      gsap.fromTo(headingRef.current,
+        { opacity: 0, y: 30, scale: 0.97 },
+        { opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power3.out' },
+      );
     }
     if (subRef.current) {
-      gsap.from(subRef.current, { opacity: 0, y: 30, duration: 0.8, delay: 0.2, ease: 'power3.out' });
+      gsap.fromTo(subRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power3.out' },
+      );
     }
     if (asideRef.current) {
-      gsap.from(asideRef.current, { opacity: 0, x: 40, duration: 0.8, delay: 0.4, ease: 'power2.out' });
+      gsap.fromTo(asideRef.current,
+        { opacity: 0, x: 40 },
+        { opacity: 1, x: 0, duration: 0.8, delay: 0.4, ease: 'power2.out' },
+      );
     }
     if (metaRef.current) {
-      gsap.from(metaRef.current, { opacity: 0, y: 20, duration: 0.6, delay: 0.1, ease: 'power2.out' });
+      gsap.fromTo(metaRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, delay: 0.1, ease: 'power2.out' },
+      );
     }
 
+    // Parallax background
     if (bgRef.current && sectionRef.current) {
       gsap.to(bgRef.current, {
         y: '20%',
@@ -46,18 +60,7 @@ export default function HeroIsland() {
       });
     }
 
-    if (headingRef.current && sectionRef.current) {
-      gsap.to(headingRef.current, {
-        opacity: 0,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom 60%',
-          scrub: true,
-        },
-      });
-    }
-
+    // Fade scroll indicator on scroll
     if (scrollRef.current && sectionRef.current) {
       gsap.to(scrollRef.current, {
         opacity: 0,
@@ -105,7 +108,7 @@ export default function HeroIsland() {
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(to bottom, rgba(250,250,249,0.88) 0%, rgba(250,250,249,0.65) 50%, rgba(250,250,249,0.95) 100%)',
+            background: 'linear-gradient(to bottom, rgba(250,250,249,0.92) 0%, rgba(250,250,249,0.78) 50%, rgba(250,250,249,0.96) 100%)',
             zIndex: 1,
           }}
         />
