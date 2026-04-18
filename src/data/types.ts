@@ -45,4 +45,4 @@ export interface CountryRow {
 }
 
 export type Scope = 'africa' | 'frontier';
-export type View = 'plane' | 'map';
+export type View = 'plane' | 'plane3d' | 'map';
