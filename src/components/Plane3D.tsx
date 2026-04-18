@@ -323,8 +323,8 @@ export default function Plane3D({ countries }: Plane3DProps) {
 
     // ── 9. Project and sort countries ──
     const projected = data.map(c => {
-      const x3d = c.formal_score / 100 * 10 - 5;
-      const z3d = -(c.substantive_score / 100 * 10 - 5);
+      const x3d = c.substantive_score / 100 * 10 - 5;
+      const z3d = -(c.formal_score / 100 * 10 - 5);
       const p = project3D(x3d, 0.3, z3d, rotateX, rotateY, scale, cx, cy);
       const baseRadius = 18 * (0.8 + (Math.abs(c.gap) / 100) * 0.5);
       const depthScale = PERSPECTIVE / (PERSPECTIVE + p.depth);
