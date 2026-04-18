@@ -53,11 +53,10 @@ export default function IntroGate() {
   const handleComplete = useCallback(() => {
     setFading((prev) => {
       if (prev) return prev;
-      // Trigger page reveal transition
-      document.documentElement.dataset.intro = 'revealing';
+      // Remove data-intro to trigger CSS transition from blurred to clear
+      delete document.documentElement.dataset.intro;
       setTimeout(() => {
         setVisible(false);
-        delete document.documentElement.dataset.intro;
       }, SKIP_FADE_MS);
       return true;
     });
