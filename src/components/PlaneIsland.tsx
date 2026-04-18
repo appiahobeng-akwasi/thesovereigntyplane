@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState, useEffect, useCallback, useRef } from 'react';
 import { usePlaneStore } from '../stores/plane';
 import Plane from './Plane';
 import AfricaMap from './Map';
@@ -16,6 +16,40 @@ export default function PlaneIsland({ countries }: Props) {
   const scope = usePlaneStore((s) => s.scope);
   const setView = usePlaneStore((s) => s.setView);
   const setScope = usePlaneStore((s) => s.setScope);
+
+  const vizRef = useRef<HTMLDivElement>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', handler);
+    return () => document.removeEventListener('fullscreenchange', handler);
+  }, []);
+
+  const toggleFullscreen = useCallback(() => {
+    if (!vizRef.current) return;
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      const el = vizRef.current as HTMLElement & { webkitRequestFullscreen?: () => void };
+      if (el.requestFullscreen) {
+        el.requestFullscreen();
+      } else if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen();
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'f' || e.key === 'F') {
+        if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+        toggleFullscreen();
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [toggleFullscreen]);
 
   const caption =
     view === 'plane'
@@ -83,7 +117,31 @@ export default function PlaneIsland({ countries }: Props) {
       </div>
 
       {/* Viz area */}
-      <div className="viz-area">
+      <div className="viz-area" ref={vizRef}>
+        {/* Fullscreen toggle */}
+        <button
+          className="fullscreen-btn"
+          onClick={toggleFullscreen}
+          title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+          aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+        >
+          {isFullscreen ? (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <polyline points="6,1 1,1 1,6" />
+              <polyline points="10,15 15,15 15,10" />
+              <polyline points="15,6 15,1 10,1" />
+              <polyline points="1,10 1,15 6,15" />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <polyline points="1,6 1,1 6,1" />
+              <polyline points="15,10 15,15 10,15" />
+              <polyline points="10,1 15,1 15,6" />
+              <polyline points="6,15 1,15 1,10" />
+            </svg>
+          )}
+        </button>
+
         <div className="viz-canvas">
           <Plane countries={countries} />
           {view === 'plane3d' && (
