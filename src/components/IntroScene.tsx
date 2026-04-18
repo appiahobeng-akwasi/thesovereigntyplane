@@ -1,7 +1,5 @@
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Text, Instance, Instances } from '@react-three/drei';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import type { Country } from '../data/types';
 import {
@@ -140,72 +138,12 @@ function NebulaRegions() {
   );
 }
 
-// ─── Connection Lines ─────────────────────────────────────────────────────────
-
-function ConnectionLines({
-  countries,
-  currentPositions,
-}: {
-  countries: Country[];
-  currentPositions: React.RefObject<[number, number, number][]>;
-}) {
-  const lines = useMemo(() => {
-    const result: { from: number; to: number; color: string }[] = [];
-    for (let i = 0; i < countries.length; i++) {
-      for (let j = i + 1; j < countries.length; j++) {
-        if (countries[i].region === countries[j].region) {
-          result.push({ from: i, to: j, color: nodeColor(countries[i]) });
-        }
-      }
-    }
-    return result;
-  }, [countries]);
-
-  const refs = useRef<(THREE.BufferAttribute | null)[]>([]);
-
-  useFrame(() => {
-    for (let li = 0; li < lines.length; li++) {
-      const attr = refs.current[li];
-      if (!attr) continue;
-      const a = currentPositions.current[lines[li].from];
-      const b = currentPositions.current[lines[li].to];
-      const arr = attr.array as Float32Array;
-      arr[0] = a[0]; arr[1] = a[1]; arr[2] = a[2];
-      arr[3] = b[0]; arr[4] = b[1]; arr[5] = b[2];
-      attr.needsUpdate = true;
-    }
-  });
-
-  return (
-    <>
-      {lines.map((line, idx) => (
-        <line key={idx}>
-          <bufferGeometry>
-            <bufferAttribute
-              ref={(el) => { refs.current[idx] = el; }}
-              attach="attributes-position"
-              args={[new Float32Array(6), 3]}
-            />
-          </bufferGeometry>
-          <lineBasicMaterial
-            color={line.color}
-            transparent
-            opacity={0.15}
-            depthWrite={false}
-          />
-        </line>
-      ))}
-    </>
-  );
-}
-
 // ─── Sovereignty Plane Surface ────────────────────────────────────────────────
 
 function PlaneSurface() {
   const groupRef = useRef<THREE.Group>(null!);
   const mainMatRef = useRef<THREE.MeshBasicMaterial>(null!);
   const quadMatRefs = useRef<(THREE.MeshBasicMaterial | null)[]>([]);
-  const labelRefs = useRef<(any | null)[]>([]);
 
   const gridHelper = useMemo(() => {
     const grid = new THREE.GridHelper(PLANE_SIZE, 10, '#333333', '#222222');
@@ -224,9 +162,6 @@ function PlaneSurface() {
       if (m) m.opacity = 0.12 * fadeIn;
     }
     (gridHelper.material as THREE.Material).opacity = 0.3 * fadeIn;
-    for (const l of labelRefs.current) {
-      if (l) l.fillOpacity = fadeIn;
-    }
   });
 
   const quadrants = [
@@ -263,53 +198,11 @@ function PlaneSurface() {
       ))}
 
       <primitive object={gridHelper} />
-
-      <Text
-        ref={(el) => { labelRefs.current[0] = el; }}
-        position={[0, 0.1, PLANE_SIZE / 2 + 1]}
-        fontSize={0.5}
-        color="#666666"
-        anchorX="center"
-        anchorY="middle"
-        fillOpacity={0}
-      >
-        Formal Sovereignty
-      </Text>
-      <Text
-        ref={(el) => { labelRefs.current[1] = el; }}
-        position={[-PLANE_SIZE / 2 - 1, 0.1, 0]}
-        fontSize={0.5}
-        color="#666666"
-        anchorX="center"
-        anchorY="middle"
-        rotation={[0, Math.PI / 2, 0]}
-        fillOpacity={0}
-      >
-        Substantive Sovereignty
-      </Text>
     </group>
   );
 }
 
-// ─── Country Nodes ────────────────────────────────────────────────────────────
-
-function CountryNodes({
-  countries,
-  currentPositions,
-}: {
-  countries: Country[];
-  currentPositions: React.RefObject<[number, number, number][]>;
-}) {
-  return (
-    <Instances limit={countries.length}>
-      <sphereGeometry args={[1, 16, 16]} />
-      <meshStandardMaterial toneMapped={false} emissive="white" emissiveIntensity={1.0} />
-      {countries.map((c, i) => (
-        <CountryNode key={c.iso_code} country={c} index={i} currentPositions={currentPositions} />
-      ))}
-    </Instances>
-  );
-}
+// ─── Country Nodes (individual meshes, no Instances/drei) ────────────────────
 
 function CountryNode({
   country,
@@ -320,23 +213,25 @@ function CountryNode({
   index: number;
   currentPositions: React.RefObject<[number, number, number][]>;
 }) {
-  const ref = useRef<THREE.InstancedMesh>(null!);
-  const color = useMemo(() => new THREE.Color(nodeColor(country)), [country]);
+  const ref = useRef<THREE.Mesh>(null!);
+  const color = useMemo(() => nodeColor(country), [country]);
   const size = nodeSize(country);
 
   useFrame(() => {
-    if (ref.current && currentPositions.current[index]) {
-      const [x, y, z] = currentPositions.current[index];
-      ref.current.position.set(x, y, z);
-    }
+    if (!ref.current || !currentPositions.current?.[index]) return;
+    const [x, y, z] = currentPositions.current[index];
+    ref.current.position.set(x, y, z);
   });
 
-  return <Instance ref={ref} scale={size} color={color} />;
+  return (
+    <mesh ref={ref} scale={size}>
+      <sphereGeometry args={[1, 12, 12]} />
+      <meshBasicMaterial color={color} />
+    </mesh>
+  );
 }
 
-// ─── Country Labels ───────────────────────────────────────────────────────────
-
-function CountryLabels({
+function CountryNodes({
   countries,
   currentPositions,
 }: {
@@ -346,37 +241,14 @@ function CountryLabels({
   return (
     <>
       {countries.map((c, i) => (
-        <CountryLabel key={c.iso_code} country={c} index={i} currentPositions={currentPositions} />
+        <CountryNode
+          key={c.iso_code}
+          country={c}
+          index={i}
+          currentPositions={currentPositions}
+        />
       ))}
     </>
-  );
-}
-
-function CountryLabel({
-  country,
-  index,
-  currentPositions,
-}: {
-  country: Country;
-  index: number;
-  currentPositions: React.RefObject<[number, number, number][]>;
-}) {
-  const ref = useRef<any>(null!);
-
-  useFrame(({ camera }) => {
-    if (!ref.current || !currentPositions.current[index]) return;
-    const [x, y, z] = currentPositions.current[index];
-    ref.current.position.set(x, y + 0.6, z);
-
-    const dist = camera.position.distanceTo(new THREE.Vector3(x, y, z));
-    const opacity = dist < 30 ? clamp01(1 - dist / 30) * 0.8 : 0;
-    ref.current.fillOpacity = opacity;
-  });
-
-  return (
-    <Text ref={ref} fontSize={0.3} color="#aaaaaa" anchorX="center" anchorY="bottom" fillOpacity={0}>
-      {country.iso_code}
-    </Text>
   );
 }
 
@@ -389,7 +261,6 @@ function CameraRig() {
     const elapsed = elapsedStore.current;
 
     if (elapsed <= PHASE_1_END) {
-      // Phase 1: fly forward through floating nodes
       const t = elapsed / PHASE_1_END;
       camera.position.set(
         CAMERA_START[0],
@@ -398,7 +269,6 @@ function CameraRig() {
       );
       camera.lookAt(0, 0, -5);
     } else if (elapsed <= PHASE_2_END) {
-      // Phase 2: pull up and back, nodes settle onto plane
       const t = (elapsed - PHASE_1_END) / (PHASE_2_END - PHASE_1_END);
       const eased = easeInOutCubic(t);
       camera.position.set(
@@ -408,7 +278,6 @@ function CameraRig() {
       );
       camera.lookAt(0, lerp(0, -3, eased), lerp(-5, 0, eased));
     } else {
-      // Phase 3: settle into final overhead view
       const t = clamp01((elapsed - PHASE_2_END) / (PHASE_3_END - PHASE_2_END));
       const eased = easeOutCubic(t);
       camera.position.set(
@@ -458,7 +327,6 @@ function SceneContent({ countries, onComplete, skipRequested }: SceneContentProp
     elapsedStore.current += delta;
     const elapsed = elapsedStore.current;
 
-    // Lerp node positions from random to plane during phase 2
     const lerpT =
       elapsed < PHASE_1_END
         ? 0
@@ -482,20 +350,14 @@ function SceneContent({ countries, onComplete, skipRequested }: SceneContentProp
 
   return (
     <>
-      <ambientLight intensity={0.3} />
-      <pointLight position={[10, 10, 10]} intensity={0.5} />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={0.8} />
 
       <CameraRig />
       <ParticleDust />
       <NebulaRegions />
       <PlaneSurface />
       <CountryNodes countries={countries} currentPositions={currentPositions} />
-      <CountryLabels countries={countries} currentPositions={currentPositions} />
-      <ConnectionLines countries={countries} currentPositions={currentPositions} />
-
-      <EffectComposer>
-        <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} intensity={0.6} />
-      </EffectComposer>
     </>
   );
 }
@@ -509,7 +371,6 @@ interface IntroSceneProps {
 }
 
 export default function IntroScene({ countries, onComplete, skipRequested }: IntroSceneProps) {
-  // Reset elapsed on mount
   elapsedStore.current = 0;
 
   return (
