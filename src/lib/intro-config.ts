@@ -5,7 +5,7 @@ import { quadrantColor } from './plane-geometry';
 export const PHASE_1_END = 2.0;
 export const PHASE_2_END = 4.0;
 export const PHASE_3_END = 5.5;
-export const SKIP_FADE_MS = 400;
+export const SKIP_FADE_MS = 700;
 
 // Title overlay timing (milliseconds)
 export const TITLE_DELAY_MS = 1500;

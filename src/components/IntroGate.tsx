@@ -29,6 +29,14 @@ export default function IntroGate() {
   const [mounted, setMounted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Set data-intro attribute on html element for page content transitions
+  useEffect(() => {
+    document.documentElement.dataset.intro = 'active';
+    return () => {
+      delete document.documentElement.dataset.intro;
+    };
+  }, []);
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -45,7 +53,12 @@ export default function IntroGate() {
   const handleComplete = useCallback(() => {
     setFading((prev) => {
       if (prev) return prev;
-      setTimeout(() => setVisible(false), SKIP_FADE_MS);
+      // Trigger page reveal transition
+      document.documentElement.dataset.intro = 'revealing';
+      setTimeout(() => {
+        setVisible(false);
+        delete document.documentElement.dataset.intro;
+      }, SKIP_FADE_MS);
       return true;
     });
   }, []);
@@ -78,8 +91,8 @@ export default function IntroGate() {
         inset: 0,
         zIndex: 9999,
         background: '#000',
-        opacity: fading ? 0 : 1,
-        transition: `opacity ${SKIP_FADE_MS}ms ease-out`,
+        transform: fading ? 'translateY(-100%)' : 'translateY(0)',
+        transition: fading ? `transform ${SKIP_FADE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)` : 'none',
         cursor: 'pointer',
       }}
     >
