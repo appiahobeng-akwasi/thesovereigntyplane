@@ -1,55 +1,16 @@
-import { useState, useEffect, useCallback, lazy, Suspense, Component } from 'react';
-import type { Country } from '../data/types';
-import type { ReactNode } from 'react';
-import { MOBILE_BREAKPOINT, SKIP_FADE_MS, PHASE_3_END } from '../lib/intro-config';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { SKIP_FADE_MS } from '../lib/intro-config';
 import IntroOverlay from './IntroOverlay';
-import IntroMobile from './IntroMobile';
 
-const IntroScene = lazy(() => import('./IntroScene'));
+const AUTO_DISMISS_MS = 8000;
 
-// Auto-dismiss timeout: animation duration + 1s buffer
-const AUTO_DISMISS_MS = (PHASE_3_END + 1) * 1000;
-
-// Error boundary that calls onError when R3F crashes
-class SceneErrorBoundary extends Component<
-  { children: ReactNode; onError: () => void },
-  { hasError: boolean }
-> {
-  constructor(props: { children: ReactNode; onError: () => void }) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-
-  componentDidCatch() {
-    this.props.onError();
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return <div style={{ position: 'absolute', inset: 0, background: '#0a0a0f' }} />;
-    }
-    return this.props.children;
-  }
-}
-
-interface IntroGateProps {
-  countries: Country[];
-}
-
-export default function IntroGate({ countries }: IntroGateProps) {
+export default function IntroGate() {
   const [visible, setVisible] = useState(true);
   const [fading, setFading] = useState(false);
-  const [skipRequested, setSkipRequested] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Detect viewport on mount
   useEffect(() => {
-    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
     setMounted(true);
   }, []);
 
@@ -63,43 +24,28 @@ export default function IntroGate({ countries }: IntroGateProps) {
     };
   }, [visible]);
 
-  // Called when animation completes or skip finishes
   const handleComplete = useCallback(() => {
     setFading((prev) => {
-      if (prev) return prev; // already fading, skip
-      setTimeout(() => {
-        setVisible(false);
-      }, SKIP_FADE_MS);
+      if (prev) return prev;
+      setTimeout(() => setVisible(false), SKIP_FADE_MS);
       return true;
     });
   }, []);
 
-  // Skip works directly in IntroGate — no dependency on R3F useFrame
-  useEffect(() => {
-    if (skipRequested && !fading) {
-      handleComplete();
-    }
-  }, [skipRequested, fading, handleComplete]);
-
-  // Auto-dismiss timeout — guarantees intro never gets stuck
+  // Auto-dismiss fallback
   useEffect(() => {
     if (!mounted || fading) return;
     const timer = setTimeout(handleComplete, AUTO_DISMISS_MS);
     return () => clearTimeout(timer);
   }, [mounted, fading, handleComplete]);
 
-  // Listen for keyboard skip
+  // Keyboard skip
   useEffect(() => {
     if (!visible || fading) return;
-    const handler = () => setSkipRequested(true);
+    const handler = () => handleComplete();
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [visible, fading]);
-
-  // Listen for click-anywhere skip (on the overlay container)
-  const handleContainerClick = useCallback(() => {
-    if (!fading) setSkipRequested(true);
-  }, [fading]);
+  }, [visible, fading, handleComplete]);
 
   if (!visible) return null;
   if (!mounted) {
@@ -109,7 +55,7 @@ export default function IntroGate({ countries }: IntroGateProps) {
           position: 'fixed',
           inset: 0,
           zIndex: 9999,
-          background: '#0a0a0f',
+          background: '#000',
         }}
       />
     );
@@ -117,38 +63,36 @@ export default function IntroGate({ countries }: IntroGateProps) {
 
   return (
     <div
-      onClick={handleContainerClick}
+      onClick={() => { if (!fading) handleComplete(); }}
       style={{
         position: 'fixed',
         inset: 0,
         zIndex: 9999,
+        background: '#000',
         opacity: fading ? 0 : 1,
-        transition: fading ? `opacity ${SKIP_FADE_MS}ms ease-out` : 'none',
+        transition: `opacity ${SKIP_FADE_MS}ms ease-out`,
         cursor: 'pointer',
       }}
     >
-      {isMobile ? (
-        <IntroMobile
-          countries={countries}
-          onComplete={handleComplete}
-          skipRequested={skipRequested}
-        />
-      ) : (
-        <SceneErrorBoundary onError={handleComplete}>
-          <Suspense
-            fallback={
-              <div style={{ position: 'absolute', inset: 0, background: '#0a0a0f' }} />
-            }
-          >
-            <IntroScene
-              countries={countries}
-              onComplete={handleComplete}
-              skipRequested={skipRequested}
-            />
-          </Suspense>
-        </SceneErrorBoundary>
-      )}
-      <IntroOverlay onSkip={() => setSkipRequested(true)} />
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        playsInline
+        onEnded={handleComplete}
+        onError={handleComplete}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+        }}
+      >
+        <source src="/intro.webm" type="video/webm" />
+        <source src="/intro.mp4" type="video/mp4" />
+      </video>
+      <IntroOverlay onSkip={handleComplete} />
     </div>
   );
 }

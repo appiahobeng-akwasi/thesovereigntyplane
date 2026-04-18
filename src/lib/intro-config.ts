@@ -2,20 +2,20 @@ import type { Country } from '../data/types';
 import { quadrantColor } from './plane-geometry';
 
 // Animation phase durations (seconds)
-export const PHASE_1_END = 1.5;
-export const PHASE_2_END = 3.0;
-export const PHASE_3_END = 4.5;
-export const SKIP_FADE_MS = 300;
+export const PHASE_1_END = 2.0;
+export const PHASE_2_END = 4.0;
+export const PHASE_3_END = 5.5;
+export const SKIP_FADE_MS = 400;
 
 // Camera positions
-export const CAMERA_START: [number, number, number] = [0, 3, 15];
-export const CAMERA_END: [number, number, number] = [0, 30, 0];
+export const CAMERA_START: [number, number, number] = [0, 3, 18];
+export const CAMERA_END: [number, number, number] = [0, 28, 2];
 
 // Scene
-export const SCENE_BG = '#0a0a0f';
-export const PARTICLE_COUNT = 400;
-export const PARTICLE_SPREAD = 30;
-export const NODE_BASE_SIZE = 0.5;
+export const SCENE_BG = '#08080e';
+export const PARTICLE_COUNT = 300;
+export const PARTICLE_SPREAD = 35;
+export const NODE_BASE_SIZE = 0.4;
 
 // Plane surface dimensions (world units, centered at origin)
 export const PLANE_SIZE = 20;
