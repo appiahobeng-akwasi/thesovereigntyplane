@@ -7,6 +7,10 @@ export const PHASE_2_END = 4.0;
 export const PHASE_3_END = 5.5;
 export const SKIP_FADE_MS = 400;
 
+// Title overlay timing (milliseconds)
+export const TITLE_DELAY_MS = 1500;
+export const SUBTITLE_DELAY_MS = 2500;
+
 // Camera positions
 export const CAMERA_START: [number, number, number] = [0, 3, 18];
 export const CAMERA_END: [number, number, number] = [0, 28, 2];
