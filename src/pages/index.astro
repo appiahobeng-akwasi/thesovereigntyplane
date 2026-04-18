@@ -1,16 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import Hero from '../components/Hero.astro';
-import HeroImage from '../components/HeroImage.astro';
 import PlaneSection from '../components/PlaneSection.astro';
 import QuadrantLegend from '../components/QuadrantLegend.astro';
-import Work from '../components/Work.astro';
-import Research from '../components/Research.astro';
-import Bio from '../components/Bio.astro';
-import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import IntroGate from '../components/IntroGate';
+import FloatingOrbs from '../components/FloatingOrbs';
+import HeroIsland from '../components/HeroIsland';
+import ResearchIsland from '../components/ResearchIsland';
+import WorkIsland from '../components/WorkIsland';
+import BioIsland from '../components/BioIsland';
+import ContactIsland from '../components/ContactIsland';
 import { getCountries } from '../data/queries';
 
 const countries = await getCountries();
@@ -19,9 +19,9 @@ const countries = await getCountries();
 <Base>
   <IntroGate client:load />
   <div class="page-content">
+    <FloatingOrbs client:load />
     <SiteHeader />
-    <Hero />
-    <HeroImage />
+    <HeroIsland client:load />
 
     <div class="section-rule">
       <div class="section-rule-line"></div>
@@ -35,25 +35,25 @@ const countries = await getCountries();
       <div class="section-rule-line"></div>
     </div>
 
-    <Research />
+    <ResearchIsland client:visible />
 
     <div class="section-rule">
       <div class="section-rule-line"></div>
     </div>
 
-    <Work />
+    <WorkIsland client:visible />
 
     <div class="section-rule">
       <div class="section-rule-line"></div>
     </div>
 
-    <Bio />
+    <BioIsland client:visible />
 
     <div class="section-rule">
       <div class="section-rule-line"></div>
     </div>
 
-    <Contact />
+    <ContactIsland client:visible />
     <Footer />
   </div>
 </Base>
@@ -83,7 +83,6 @@ const countries = await getCountries();
                 opacity 500ms ease-out;
   }
 
-  /* Blurred + scaled while intro overlay is covering the page */
   html[data-intro] .page-content {
     transform: scale(0.95);
     filter: blur(6px);

@@ -40,10 +40,14 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid transparent;
-    transition: border-color 200ms;
+    transition: border-color 200ms, box-shadow 300ms, transform 300ms;
   }
 
-  .site-header.scrolled { border-bottom-color: var(--rule); }
+  .site-header.scrolled {
+    border-bottom-color: var(--rule);
+    box-shadow: 0 1px 16px rgba(15, 15, 15, 0.06);
+    transform: translateY(-2px);
+  }
 
   .site-header-inner {
     max-width: 1440px;
