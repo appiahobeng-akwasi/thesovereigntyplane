@@ -51,7 +51,7 @@ function ParticleDust() {
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       arr[i * 3] = (Math.random() - 0.5) * PARTICLE_SPREAD;
       arr[i * 3 + 1] = (Math.random() - 0.5) * PARTICLE_SPREAD;
-      arr[i * 3 + 2] = (Math.random() - 0.5) * PARTICLE_SPREAD * 1.5 - 10;
+      arr[i * 3 + 2] = (Math.random() - 0.5) * PARTICLE_SPREAD - 5;
     }
     return arr;
   }, []);
@@ -75,10 +75,10 @@ function ParticleDust() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.06}
-        color="#888888"
+        size={0.12}
+        color="#aaaaaa"
         transparent
-        opacity={0.4}
+        opacity={0.5}
         sizeAttenuation
         depthWrite={false}
       />
@@ -108,7 +108,7 @@ function Nebula({ color, position }: { color: string; position: [number, number,
   useFrame(() => {
     if (!matRef.current) return;
     const fadeIn = clamp01((elapsedStore.current - PHASE_1_END) / (PHASE_2_END - PHASE_1_END));
-    matRef.current.opacity = 0.06 * fadeIn;
+    matRef.current.opacity = 0.12 * fadeIn;
   });
 
   return (
@@ -303,7 +303,7 @@ function CountryNodes({
   return (
     <Instances limit={countries.length}>
       <sphereGeometry args={[1, 16, 16]} />
-      <meshStandardMaterial toneMapped={false} emissive="white" emissiveIntensity={0.5} />
+      <meshStandardMaterial toneMapped={false} emissive="white" emissiveIntensity={1.0} />
       {countries.map((c, i) => (
         <CountryNode key={c.iso_code} country={c} index={i} currentPositions={currentPositions} />
       ))}
@@ -369,7 +369,7 @@ function CountryLabel({
     ref.current.position.set(x, y + 0.6, z);
 
     const dist = camera.position.distanceTo(new THREE.Vector3(x, y, z));
-    const opacity = dist < 20 ? clamp01(1 - dist / 20) * 0.8 : 0;
+    const opacity = dist < 30 ? clamp01(1 - dist / 30) * 0.8 : 0;
     ref.current.fillOpacity = opacity;
   });
 
@@ -389,32 +389,34 @@ function CameraRig() {
     const elapsed = elapsedStore.current;
 
     if (elapsed <= PHASE_1_END) {
+      // Phase 1: fly forward through floating nodes
       const t = elapsed / PHASE_1_END;
       camera.position.set(
         CAMERA_START[0],
         CAMERA_START[1],
-        lerp(CAMERA_START[2], CAMERA_START[2] - 8, easeOutCubic(t)),
+        lerp(CAMERA_START[2], CAMERA_START[2] - 6, easeOutCubic(t)),
       );
-      camera.lookAt(0, 0, -10);
+      camera.lookAt(0, 0, -5);
     } else if (elapsed <= PHASE_2_END) {
+      // Phase 2: pull up and back, nodes settle onto plane
       const t = (elapsed - PHASE_1_END) / (PHASE_2_END - PHASE_1_END);
       const eased = easeInOutCubic(t);
       camera.position.set(
         0,
-        lerp(CAMERA_START[1], 20, eased),
-        lerp(CAMERA_START[2] - 8, 5, eased),
+        lerp(CAMERA_START[1], 18, eased),
+        lerp(CAMERA_START[2] - 6, 5, eased),
       );
-      const lookY = lerp(0, -5, eased);
-      camera.lookAt(0, lookY, lerp(-10, 0, eased));
+      camera.lookAt(0, lerp(0, -3, eased), lerp(-5, 0, eased));
     } else {
+      // Phase 3: settle into final overhead view
       const t = clamp01((elapsed - PHASE_2_END) / (PHASE_3_END - PHASE_2_END));
       const eased = easeOutCubic(t);
       camera.position.set(
         0,
-        lerp(20, CAMERA_END[1], eased),
+        lerp(18, CAMERA_END[1], eased),
         lerp(5, CAMERA_END[2], eased),
       );
-      camera.lookAt(0, lerp(-5, 0, eased), 0);
+      camera.lookAt(0, lerp(-3, 0, eased), 0);
     }
   });
 

@@ -8,14 +8,14 @@ export const PHASE_3_END = 4.5;
 export const SKIP_FADE_MS = 300;
 
 // Camera positions
-export const CAMERA_START: [number, number, number] = [0, 5, 50];
-export const CAMERA_END: [number, number, number] = [0, 40, 0];
+export const CAMERA_START: [number, number, number] = [0, 3, 15];
+export const CAMERA_END: [number, number, number] = [0, 30, 0];
 
 // Scene
 export const SCENE_BG = '#0a0a0f';
-export const PARTICLE_COUNT = 500;
-export const PARTICLE_SPREAD = 60;
-export const NODE_BASE_SIZE = 0.3;
+export const PARTICLE_COUNT = 400;
+export const PARTICLE_SPREAD = 30;
+export const NODE_BASE_SIZE = 0.5;
 
 // Plane surface dimensions (world units, centered at origin)
 export const PLANE_SIZE = 20;
@@ -26,9 +26,9 @@ export const MOBILE_BREAKPOINT = 768;
 /** Deterministic random-ish 3D start position for a country node */
 export function randomStartPosition(index: number, total: number): [number, number, number] {
   const phi = (index / total) * Math.PI * 2;
-  const r = 8 + ((index * 7 + 3) % 13);
-  const y = ((index * 11 + 5) % 10) - 5;
-  return [Math.cos(phi) * r, y, Math.sin(phi) * r - 20];
+  const r = 4 + ((index * 7 + 3) % 8);
+  const y = ((index * 11 + 5) % 8) - 4;
+  return [Math.cos(phi) * r, y, Math.sin(phi) * r - 5];
 }
 
 /** Map country scores to target position on the 3D plane surface */
