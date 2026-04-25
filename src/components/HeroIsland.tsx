@@ -6,6 +6,12 @@ const scrollIndicatorKeyframes = `
   0%, 100% { transform: translateY(0); opacity: 1; }
   50% { transform: translateY(6px); opacity: 0.5; }
 }
+@media (max-width: 768px) {
+  #top { padding: 0 20px !important; padding-top: 100px !important; padding-bottom: 40px !important; min-height: auto !important; }
+  #top > div:nth-child(3) { grid-template-columns: 1fr !important; gap: 24px !important; }
+  #top h1 { font-size: clamp(36px, 10vw, 56px) !important; }
+  #top aside { padding-top: 20px !important; max-width: none !important; font-size: 16px !important; }
+}
 `;
 
 export default function HeroIsland() {

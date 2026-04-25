@@ -11,15 +11,15 @@
       <span class="site-id-text">The Sovereignty <em>Plane</em></span>
     </a>
     <nav class="site-nav" aria-label="Main navigation">
-      <a href="#plane">The Plane</a>
-      <a href="#research">Research</a>
-      <a href="#work">Work</a>
-      <a href="#bio">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#plane" class="nav-section">The Plane</a>
+      <a href="#research" class="nav-section">Research</a>
+      <a href="#work" class="nav-section">Work</a>
+      <a href="#bio" class="nav-section">About</a>
+      <a href="#contact" class="nav-section">Contact</a>
       <span class="nav-divider" aria-hidden="true"></span>
-      <a href="/methodology">Methodology</a>
-      <a href="/tracker">Tracker</a>
-      <a href="/changelog">Changelog</a>
+      <a href="/methodology" class="nav-page">Methodology</a>
+      <a href="/tracker" class="nav-page">Tracker</a>
+      <a href="/changelog" class="nav-page">Changelog</a>
     </nav>
   </div>
 </header>
@@ -152,8 +152,10 @@
   }
 
   @media (max-width: 680px) {
-    .site-nav { gap: 20px; }
-    .site-nav a:not(:last-child) { display: none; }
+    .site-nav { gap: 16px; }
+    .site-nav .nav-section { display: none; }
+    .site-nav .nav-divider { display: none; }
+    .site-nav .nav-page { font-size: 11px; }
     .site-id { font-size: 18px; gap: 8px; }
     .site-id-mark { width: 18px; height: 22px; }
     .mark-v { left: 6px; }
