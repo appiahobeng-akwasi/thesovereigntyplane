@@ -1,12 +1,11 @@
 {
   "_meta": {
-    "version": "1.0",
-    "generated_at": "2026-04-08",
+    "version": "2.1",
+    "generated_at": "2026-04-25",
     "source_paper": "Appiah, A. (2026). Negotiating Intelligence: African Agency in the Global AI Value Chain. Working paper, prepared for submission to Data & Policy (Cambridge University Press).",
-    "scope": "v1 — country-level aggregate scores only. v2 will add indicator-level drill-down (44 indicators × 15 African countries = 660 scored data points) when the scoring workbook is loaded.",
+    "scope": "v2.1 — country-level composite scores from the master tracker (19 countries × 44 indicators = 836 scored data points).",
     "notes": "Labels (dx, dy, anchor) are hand-tuned offsets to prevent collisions on the plane. Map coordinates are fallback values for the simplified circle map; production should use TopoJSON feature IDs instead."
   },
-
   "countries": [
     {
       "iso_code": "SEN",
@@ -16,8 +15,8 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": false,
-      "formal_score": 61,
-      "substantive_score": 20,
+      "formal_score": 52.8,
+      "substantive_score": 11.7,
       "quadrant": "theatre",
       "label_dx": -10,
       "label_dy": 4,
@@ -35,8 +34,8 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": true,
-      "formal_score": 78,
-      "substantive_score": 40,
+      "formal_score": 83.3,
+      "substantive_score": 36.7,
       "quadrant": "theatre",
       "label_dx": 10,
       "label_dy": -7,
@@ -54,8 +53,8 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": false,
-      "formal_score": 61,
-      "substantive_score": 27,
+      "formal_score": 69.4,
+      "substantive_score": 36.7,
       "quadrant": "theatre",
       "label_dx": 10,
       "label_dy": -7,
@@ -73,8 +72,8 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": true,
-      "formal_score": 67,
-      "substantive_score": 40,
+      "formal_score": 86.1,
+      "substantive_score": 41.7,
       "quadrant": "theatre",
       "label_dx": -10,
       "label_dy": 4,
@@ -92,8 +91,8 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": true,
-      "formal_score": 78,
-      "substantive_score": 53,
+      "formal_score": 77.8,
+      "substantive_score": 33.3,
       "quadrant": "theatre",
       "label_dx": 10,
       "label_dy": 4,
@@ -111,16 +110,16 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": true,
-      "formal_score": 67,
-      "substantive_score": 47,
-      "quadrant": "theatre",
+      "formal_score": 90.3,
+      "substantive_score": 53.3,
+      "quadrant": "interdep",
       "label_dx": 10,
       "label_dy": 4,
       "label_anchor": "start",
       "map_topojson_id": "KEN",
       "map_cx": 470,
       "map_cy": 385,
-      "narrative": "The ODPC suspended Worldcoin's biometric collection in 2023, has issued more than 110 decisions, and is extending its geographic reach through county offices. The only African country with a publicly quantified AI strategy budget: KES 152 billion."
+      "narrative": "One of two African states in the negotiated interdependence zone, alongside South Africa. The ODPC suspended Worldcoin's biometric collection in 2023, has issued more than 110 decisions, and is extending its geographic reach through county offices. The only African country with a publicly quantified AI strategy budget: KES 152 billion."
     },
     {
       "iso_code": "GHA",
@@ -130,8 +129,8 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": false,
-      "formal_score": 50,
-      "substantive_score": 33,
+      "formal_score": 72.2,
+      "substantive_score": 16.7,
       "quadrant": "theatre",
       "label_dx": 10,
       "label_dy": 4,
@@ -149,8 +148,8 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": false,
-      "formal_score": 28,
-      "substantive_score": 13,
+      "formal_score": 43.1,
+      "substantive_score": 20.0,
       "quadrant": "depend",
       "label_dx": 10,
       "label_dy": 4,
@@ -168,9 +167,9 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": false,
-      "formal_score": 39,
-      "substantive_score": 27,
-      "quadrant": "theatre",
+      "formal_score": 48.6,
+      "substantive_score": 11.7,
+      "quadrant": "depend",
       "label_dx": 10,
       "label_dy": 4,
       "label_anchor": "start",
@@ -187,8 +186,8 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": false,
-      "formal_score": 17,
-      "substantive_score": 7,
+      "formal_score": 27.8,
+      "substantive_score": 6.7,
       "quadrant": "depend",
       "label_dx": 10,
       "label_dy": -8,
@@ -206,8 +205,8 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": false,
-      "formal_score": 17,
-      "substantive_score": 7,
+      "formal_score": 36.1,
+      "substantive_score": 11.7,
       "quadrant": "depend",
       "label_dx": 14,
       "label_dy": 4,
@@ -225,8 +224,8 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": false,
-      "formal_score": 17,
-      "substantive_score": 7,
+      "formal_score": 43.1,
+      "substantive_score": 15.0,
       "quadrant": "depend",
       "label_dx": 10,
       "label_dy": 16,
@@ -244,8 +243,8 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": false,
-      "formal_score": 22,
-      "substantive_score": 13,
+      "formal_score": 20.8,
+      "substantive_score": 1.7,
       "quadrant": "depend",
       "label_dx": 10,
       "label_dy": 4,
@@ -263,8 +262,8 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": true,
-      "formal_score": 61,
-      "substantive_score": 53,
+      "formal_score": 87.5,
+      "substantive_score": 68.3,
       "quadrant": "interdep",
       "label_dx": 10,
       "label_dy": 4,
@@ -272,7 +271,7 @@
       "map_topojson_id": "ZAF",
       "map_cx": 395,
       "map_cy": 635,
-      "narrative": "The only African state in the negotiated interdependence zone. The Information Regulator has pursued criminal prosecutions yielding prison sentences. The Competition Commission treats data accumulation as a metric of market dominance — bridging data governance and competition policy."
+      "narrative": "One of two African states in the negotiated interdependence zone, alongside Kenya. The Information Regulator has pursued criminal prosecutions yielding prison sentences. The Competition Commission treats data accumulation as a metric of market dominance — bridging data governance and competition policy."
     },
     {
       "iso_code": "TUN",
@@ -282,16 +281,16 @@
       "is_reference": false,
       "in_africa_scope": true,
       "in_frontier_scope": false,
-      "formal_score": 33,
-      "substantive_score": 40,
-      "quadrant": "adhoc",
+      "formal_score": 52.8,
+      "substantive_score": 26.7,
+      "quadrant": "theatre",
       "label_dx": 10,
       "label_dy": 4,
       "label_anchor": "start",
       "map_topojson_id": "TUN",
       "map_cx": 315,
       "map_cy": 135,
-      "narrative": "The only African state below the coherence diagonal. No comprehensive AI law, yet produced InstaDeep — acquired by BioNTech for £362 million up front and up to £200 million in earn-out — and hosts more than 120 AI startups, multiple NVIDIA DGX deployments, and TunBERT. Substantive capacity through ecosystem dynamics rather than state architecture."
+      "narrative": "Formal architecture now above the coherence threshold following strategy publication and institutional development, but substantive capacity lags. Produced InstaDeep — acquired by BioNTech for £362 million up front and up to £200 million in earn-out — and hosts more than 120 AI startups, multiple NVIDIA DGX deployments, and TunBERT. The ecosystem outpaces the state architecture that would govern it."
     },
     {
       "iso_code": "FRA",
@@ -301,8 +300,8 @@
       "is_reference": true,
       "in_africa_scope": true,
       "in_frontier_scope": false,
-      "formal_score": 89,
-      "substantive_score": 87,
+      "formal_score": 100.0,
+      "substantive_score": 88.3,
       "quadrant": "interdep",
       "label_dx": -10,
       "label_dy": 4,
@@ -320,8 +319,8 @@
       "is_reference": true,
       "in_africa_scope": true,
       "in_frontier_scope": false,
-      "formal_score": 78,
-      "substantive_score": 87,
+      "formal_score": 98.6,
+      "substantive_score": 88.3,
       "quadrant": "interdep",
       "label_dx": 10,
       "label_dy": -7,
@@ -339,8 +338,8 @@
       "is_reference": true,
       "in_africa_scope": true,
       "in_frontier_scope": true,
-      "formal_score": 78,
-      "substantive_score": 80,
+      "formal_score": 93.1,
+      "substantive_score": 80.0,
       "quadrant": "interdep",
       "label_dx": -10,
       "label_dy": 4,
@@ -358,9 +357,9 @@
       "is_reference": true,
       "in_africa_scope": true,
       "in_frontier_scope": true,
-      "formal_score": 56,
-      "substantive_score": 67,
-      "quadrant": "adhoc",
+      "formal_score": 95.8,
+      "substantive_score": 80.0,
+      "quadrant": "interdep",
       "label_dx": 10,
       "label_dy": 4,
       "label_anchor": "start",
@@ -370,29 +369,102 @@
       "narrative": "External calibration point. Substantive capacity meaningfully exceeds formal architecture — the largest below-diagonal gap in the reference set."
     }
   ],
-
   "sub_dimensions": [
-    { "slug": "ai-strategy", "axis": "formal", "name": "National AI Strategy", "display_order": 1, "weight": 1.0, "description": "Presence, scope, and governmental endorsement of a formal national AI strategy." },
-    { "slug": "data-protection-law", "axis": "formal", "name": "Data Protection Legal Framework", "display_order": 2, "weight": 1.0, "description": "Comprehensive data protection legislation covering personal data, automated decision-making, and cross-border transfers." },
-    { "slug": "institutional-architecture", "axis": "formal", "name": "Institutional Architecture", "display_order": 3, "weight": 1.0, "description": "Formal bodies with jurisdiction over AI governance: data protection authorities, AI councils, sector regulators." },
-    { "slug": "international-engagement", "axis": "formal", "name": "International AI Engagement", "display_order": 4, "weight": 1.0, "description": "Membership in international AI governance forums (GPAI, OECD Principles, Paris Statement, UN panels)." },
-    { "slug": "continental-commitments", "axis": "formal", "name": "Continental AI Commitments", "display_order": 5, "weight": 1.0, "description": "Ratification of African Union frameworks including Malabo Convention and the Continental AI Strategy." },
-    { "slug": "enforcement", "axis": "substantive", "name": "Enforcement Capacity", "display_order": 6, "weight": 1.0, "description": "Demonstrated ability of regulators to investigate, sanction, and litigate against major AI providers and data controllers." },
-    { "slug": "procurement", "axis": "substantive", "name": "Procurement Power", "display_order": 7, "weight": 1.0, "description": "State capacity to negotiate AI procurement contracts with switching rights, audit access, and knowledge transfer clauses." },
-    { "slug": "assurance", "axis": "substantive", "name": "Assurance Infrastructure", "display_order": 8, "weight": 1.0, "description": "Institutional capacity to evaluate, audit, and certify AI systems deployed in-country." },
-    { "slug": "delivery", "axis": "substantive", "name": "Delivery Capability", "display_order": 9, "weight": 1.0, "description": "Demonstrated ability of the state to deploy AI-enabled public services at scale." },
-    { "slug": "negotiation", "axis": "substantive", "name": "Negotiation Capability", "display_order": 10, "weight": 1.0, "description": "State capacity to renegotiate existing AI deployments, partnerships, and licensing arrangements on favourable terms." },
-    { "slug": "epistemic-alignment", "axis": "substantive", "name": "Epistemic Alignment", "display_order": 11, "weight": 0.0, "description": "Reserved for future scoring. Measures whether deployed AI systems reflect or displace local knowledge systems." }
+    {
+      "slug": "ai-strategy",
+      "axis": "formal",
+      "name": "National AI Strategy",
+      "display_order": 1,
+      "weight": 1.0,
+      "description": "Presence, scope, and governmental endorsement of a formal national AI strategy."
+    },
+    {
+      "slug": "data-protection-law",
+      "axis": "formal",
+      "name": "Data Protection Legal Framework",
+      "display_order": 2,
+      "weight": 1.0,
+      "description": "Comprehensive data protection legislation covering personal data, automated decision-making, and cross-border transfers."
+    },
+    {
+      "slug": "institutional-architecture",
+      "axis": "formal",
+      "name": "Institutional Architecture",
+      "display_order": 3,
+      "weight": 1.0,
+      "description": "Formal bodies with jurisdiction over AI governance: data protection authorities, AI councils, sector regulators."
+    },
+    {
+      "slug": "international-engagement",
+      "axis": "formal",
+      "name": "International AI Engagement",
+      "display_order": 4,
+      "weight": 1.0,
+      "description": "Membership in international AI governance forums (GPAI, OECD Principles, Paris Statement, UN panels)."
+    },
+    {
+      "slug": "continental-commitments",
+      "axis": "formal",
+      "name": "Continental AI Commitments",
+      "display_order": 5,
+      "weight": 1.0,
+      "description": "Ratification of African Union frameworks including Malabo Convention and the Continental AI Strategy."
+    },
+    {
+      "slug": "enforcement",
+      "axis": "substantive",
+      "name": "Enforcement Capacity",
+      "display_order": 6,
+      "weight": 1.0,
+      "description": "Demonstrated ability of regulators to investigate, sanction, and litigate against major AI providers and data controllers."
+    },
+    {
+      "slug": "procurement",
+      "axis": "substantive",
+      "name": "Procurement Power",
+      "display_order": 7,
+      "weight": 1.0,
+      "description": "State capacity to negotiate AI procurement contracts with switching rights, audit access, and knowledge transfer clauses."
+    },
+    {
+      "slug": "assurance",
+      "axis": "substantive",
+      "name": "Assurance Infrastructure",
+      "display_order": 8,
+      "weight": 1.0,
+      "description": "Institutional capacity to evaluate, audit, and certify AI systems deployed in-country."
+    },
+    {
+      "slug": "delivery",
+      "axis": "substantive",
+      "name": "Delivery Capability",
+      "display_order": 9,
+      "weight": 1.0,
+      "description": "Demonstrated ability of the state to deploy AI-enabled public services at scale."
+    },
+    {
+      "slug": "negotiation",
+      "axis": "substantive",
+      "name": "Negotiation Capability",
+      "display_order": 10,
+      "weight": 1.0,
+      "description": "State capacity to renegotiate existing AI deployments, partnerships, and licensing arrangements on favourable terms."
+    },
+    {
+      "slug": "epistemic-alignment",
+      "axis": "substantive",
+      "name": "Epistemic Alignment",
+      "display_order": 11,
+      "weight": 0.0,
+      "description": "Reserved for future scoring. Measures whether deployed AI systems reflect or displace local knowledge systems."
+    }
   ],
-
   "indicators": {
     "_note": "Placeholder. The full 44-indicator set with rubrics will be loaded at v2 from Akwasi's scoring workbook. Each indicator will have a slug, name, parent sub_dimension, rubric (0-3), and display order."
   },
-
   "scores": {
     "_note": "Empty at v1. The 660-row scoring grid (44 indicators × 15 African countries) is loaded from the scoring workbook at v2."
   },
-
   "sources": {
     "_note": "Empty at v1. Citations accompany scores and are loaded together at v2."
   }
