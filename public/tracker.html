@@ -183,6 +183,49 @@ footer .col{max-width:380px}
 /* Loading state */
 .loading{padding:48px 0; text-align:center; color:var(--ink-mute); font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:0.08em}
 
+/* Mobile */
+@media (max-width:780px){
+  h1{font-size:36px}
+  h2{font-size:22px}
+  .sub{font-size:14px}
+  hr.rule{margin:32px 0}
+
+  header.top{flex-direction:column; align-items:flex-start; gap:16px}
+  .nav{gap:16px; flex-wrap:wrap}
+  .nav a{font-size:10px; padding:4px 0}
+
+  .hero{margin:24px 0 20px; gap:24px}
+  .hero .pull{font-size:14px; padding-left:16px}
+
+  .plane-section{gap:24px}
+  .plane-wrap{aspect-ratio:1/1; max-height:none}
+
+  .cards{grid-template-columns:1fr; border-left:0}
+  .card{padding:18px 16px; border-left:1px solid var(--rule)}
+  .card .ctry{font-size:20px}
+  .card .scores .v{font-size:24px}
+
+  .ind-filters{gap:8px}
+  .ind-filters label{font-size:9px; width:100%}
+  .ind-filters select, .ind-filters input{min-width:0; width:100%; font-size:12px}
+
+  .table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:0 -20px; padding:0 20px}
+  .itable{min-width:800px; font-size:12px}
+  .itable th{font-size:9px; padding:8px 6px}
+  .itable td{padding:8px 6px; font-size:12px}
+  .itable td.evidence{max-width:200px; font-size:11px}
+
+  .dim-row{grid-template-columns:50px 1fr 60px; gap:8px}
+  .dim-row .stat{display:none}
+
+  .detail-panel{padding:20px 0}
+  .detail-grid{gap:24px}
+
+  footer{flex-direction:column; gap:16px}
+  footer .col{max-width:none}
+  footer .col[style*="text-align:right"]{text-align:left !important}
+}
+
 /* Print */
 @media print{
   .orb,.toggles,.ind-filters,.pagination,.nav{display:none}
@@ -315,7 +358,7 @@ footer .col{max-width:380px}
       <label><span class="micro">Search</span><input type="text" id="filter-search" placeholder="indicator or evidence text"></label>
     </div>
 
-    <div style="overflow-x:auto"><table class="itable" id="indicators-table">
+    <div class="table-scroll" style="overflow-x:auto"><table class="itable" id="indicators-table">
       <thead><tr>
         <th data-sort="country">Country</th>
         <th data-sort="indicator_code">Code</th>
