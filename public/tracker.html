@@ -235,7 +235,7 @@ footer .col{max-width:380px}
     </div>
 
     <div class="plane-section">
-      <div class="plane-wrap"><canvas id="plane"></canvas></div>
+      <div class="plane-wrap"><canvas id="plane-canvas"></canvas></div>
       <aside>
         <div class="legend">
           <div class="swatch" style="background:var(--theatre)"></div>
@@ -410,7 +410,7 @@ function quadrantPlugin() {
   };
 }
 function buildPlane(scope) {
-  const ctx = document.getElementById("plane").getContext("2d");
+  const ctx = document.getElementById("plane-canvas").getContext("2d");
   if (planeChart) planeChart.destroy();
   const filter = scope === "african" ? r => r.sample_group !== "Reference anchor"
     : scope === "reference" ? r => r.sample_group === "Reference anchor" : () => true;
