@@ -6,6 +6,12 @@
     <span class="footer-copy">&copy; 2026 AKWASI APPIAH OBENG</span>
     <span class="footer-location">FREETOWN &middot; ACCRA</span>
   </div>
+  <div class="footer-links">
+    Methodology and live tracker available at
+    <a href="/methodology.html">/methodology</a> and
+    <a href="/tracker.html">/tracker</a>.
+    Changelog at <a href="/changelog.html">/changelog</a>.
+  </div>
 </footer>
 
 <style>
@@ -30,6 +36,25 @@
     color: var(--ink-mute);
     letter-spacing: 0.08em;
     text-transform: uppercase;
+  }
+
+  .footer-links {
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.08em;
+    padding-bottom: 32px;
+  }
+
+  .footer-links a {
+    color: var(--ink-2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    transition: border-color 180ms;
+  }
+
+  .footer-links a:hover {
+    border-bottom-color: var(--ink);
   }
 
   /* ── Responsive ── */

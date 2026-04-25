@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Changelog · The Sovereignty Plane</title>
+<meta name="theme-color" content="#fafaf9">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#fafaf9; --ink:#0f0f0f; --ink-2:#3a362f; --ink-3:#5a564b; --ink-mute:#8a8680;
+  --rule:#e6e3dc; --rule-strong:#cfcbc1;
+  --theatre:#8a3a2a; --theatre-soft:rgba(138,58,42,0.08);
+  --interdep:#2d5a3a; --interdep-soft:rgba(45,90,58,0.08);
+  --serif:'Instrument Serif', Georgia, serif;
+  --sans:'Inter Variable', 'Inter', -apple-system, system-ui, sans-serif;
+  --mono:'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg)}
+body{color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;letter-spacing:-0.005em}
+a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule-strong)}
+a:hover{border-bottom-color:var(--ink)}
+.wrap{max-width:1100px;margin:0 auto;padding:32px 56px 96px}
+@media (max-width:780px){.wrap{padding:24px 20px 64px}}
+
+.micro{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-mute)}
+.mono{font-family:var(--mono)}
+
+header.top{display:flex;align-items:center;justify-content:space-between;padding-bottom:18px;border-bottom:1px solid var(--rule);gap:32px;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;gap:2px}
+.brand .mk{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink-mute)}
+.brand .nm{font-family:var(--serif);font-size:24px;letter-spacing:-0.012em}
+.brand .nm em{font-style:italic;color:var(--theatre)}
+.nav{display:flex;gap:28px}
+.nav a{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-3);border:0;padding:6px 0;position:relative}
+.nav a:hover{color:var(--ink)}
+.nav a.active{color:var(--ink)}
+.nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--ink)}
+
+h1{font-family:var(--serif);font-size:54px;font-weight:400;line-height:1.05;letter-spacing:-0.025em;margin:48px 0 14px}
+h1 em{font-style:italic;color:var(--theatre)}
+.sub{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink-3);line-height:1.55;max-width:760px;margin-bottom:32px}
+
+.filters{display:flex;gap:14px;align-items:center;margin:24px 0;padding-bottom:20px;border-bottom:1px solid var(--rule);flex-wrap:wrap}
+.filters select{padding:7px 11px;border:1px solid var(--rule-strong);background:var(--bg);font-family:var(--sans);font-size:13px;border-radius:2px;color:var(--ink)}
+
+.timeline{display:flex;flex-direction:column}
+.entry{display:grid;grid-template-columns:120px 100px 1fr 100px 80px;gap:24px;padding:20px 0;border-bottom:1px solid var(--rule);align-items:flex-start}
+@media (max-width:920px){.entry{grid-template-columns:1fr;gap:6px}}
+.entry .ver-date{display:flex;flex-direction:column;gap:4px}
+.entry .ver{font-family:var(--mono);font-size:11px;color:var(--ink-2);letter-spacing:0.04em}
+.entry .date{font-family:var(--mono);font-size:11px;color:var(--ink-mute);letter-spacing:0.04em}
+.entry .country{font-size:13px;font-weight:500;color:var(--ink-2)}
+.entry .country .iso{display:block;font-family:var(--mono);font-size:10px;color:var(--ink-mute);letter-spacing:0.05em;margin-top:2px}
+.entry .body strong{display:block;color:var(--ink);margin-bottom:4px;font-size:14px}
+.entry .body .ind{font-family:var(--mono);font-size:10.5px;color:var(--ink-mute);letter-spacing:0.04em;margin-bottom:6px}
+.entry .body .why{color:var(--ink-3);font-size:13px;line-height:1.5}
+.entry .change{font-family:var(--mono);font-size:12px;color:var(--ink-2);text-align:center}
+.entry .delta{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:2px;display:inline-block;text-align:center;min-width:36px}
+.delta.up{background:var(--interdep-soft);color:var(--interdep)}
+.delta.down{background:var(--theatre-soft);color:var(--theatre)}
+.delta.flat{background:var(--rule);color:var(--ink-mute)}
+
+.empty{padding:48px 0;text-align:center;color:var(--ink-mute);font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.08em}
+
+.versionchip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--rule-strong);border-radius:2px;font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;color:var(--ink-3)}
+.versionchip .dot{width:6px;height:6px;border-radius:50%;background:var(--interdep)}
+
+.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:-1}
+.orb.o1{top:30%;right:8%;width:280px;height:280px;background:rgba(138,106,31,0.05)}
+
+footer{margin-top:96px;padding-top:32px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-3);line-height:1.55}
+footer .col{max-width:380px}
+footer a{color:var(--ink-2)}
+</style>
+</head>
+<body>
+<div class="orb o1"></div>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="mk">The Sovereignty Plane</div>
+      <div class="nm">The <em>changelog</em></div>
+    </div>
+    <nav class="nav">
+      <a href="/#plane">The Plane</a>
+      <a href="/methodology">Methodology</a>
+      <a href="/tracker">Tracker</a>
+      <a href="/methodology/changelog" class="active">Changelog</a>
+      <a href="/#bio">About</a>
+    </nav>
+  </header>
+
+  <h1>The <em>audit trail</em>.</h1>
+  <p class="sub">Every score change in the master tracker, with date, scorer, trigger, and rationale. This is the page reviewers can use to challenge whether a score moved appropriately. It is also the defence if anyone asks how the data evolved.</p>
+
+  <div><span class="versionchip" id="version-chip"><span class="dot"></span></span></div>
+
+  <div class="filters">
+    <label class="micro">Country
+      <select id="filter-country" style="margin-left:8px"><option value="all">All</option></select>
+    </label>
+    <label class="micro">Version
+      <select id="filter-version" style="margin-left:8px"><option value="all">All</option></select>
+    </label>
+  </div>
+
+  <div class="timeline" id="timeline"></div>
+
+  <footer>
+    <div class="col">
+      <strong>How version control works.</strong> The <code class="mono" style="font-size:12px">master_tracker.xlsx</code> file is archived with a timestamp before each material refresh. The current file's <code class="mono" style="font-size:12px">Version_Log</code> sheet captures every indicator-level change. To roll back, restore the archive copy. To add a change, edit the score and append a row.
+    </div>
+    <div class="col" style="text-align:right">
+      <span class="micro">Source</span><br>
+      <span class="mono" style="font-size:11px">02_data/master_tracker.xlsx → Version_Log sheet</span><br><br>
+      <a href="/tracker" class="mono" style="font-size:11px">/tracker</a> ·
+      <a href="/methodology" class="mono" style="font-size:11px">/methodology</a>
+    </div>
+  </footer>
+</div>
+
+<script id="data-versions" type="application/json">[{"version":"v2.0","date":"2026-04-25","country":"All cohort","iso3":"","indicator_code":"","indicator":"Master tracker v2.0 baseline","old_value":"","new_value":"","delta":"","scorer":"AI-assisted (Cowork v2026-04-25)","trigger":"Cohort expansion","rationale":"Built master tracker with 19 countries \u00d7 44 indicators. West Africa pre-loaded from refreshed v1.1.","source":""},{"version":"v2.1","date":"2026-04-25","country":"All cohort","iso3":"","indicator_code":"","indicator":"","old_value":"","new_value":"","delta":"","scorer":"AI-assisted (Cowork v2026-04-25)","trigger":"Cohort expansion to 19 countries","rationale":"Scored 660 indicators across 15 countries (11 African + 4 reference). All flagged AI-assisted, pending human validation.","source":""}]</script>
+<script id="data-meta" type="application/json">{"tracker_version":"v2.1","exported_at":"2026-04-25T16:57:55.397718+00:00","tracker_path":"02_data/master_tracker.xlsx","country_count":19,"indicator_count":44,"score_count":836,"score_count_total":836,"scored_country_count":19,"version_log_entry_count":2,"methodology_lock":"v1.0","methodology_locked_at":"2026-04-25"}</script>
+
+<script>
+const VERSIONS = JSON.parse(document.getElementById("data-versions").textContent);
+const META = JSON.parse(document.getElementById("data-meta").textContent);
+
+document.getElementById("version-chip").innerHTML +=
+  `<span style="margin-left:6px">Tracker ${META.tracker_version} · ${VERSIONS.length} change ${VERSIONS.length === 1 ? "entry" : "entries"} · last update ${VERSIONS[VERSIONS.length-1]?.date || "—"}</span>`;
+
+// Populate filter dropdowns
+const countries = [...new Set(VERSIONS.map(v => v.country).filter(c => c))].sort();
+document.getElementById("filter-country").innerHTML += countries.map(c => `<option value="${c}">${c}</option>`).join("");
+const versionsList = [...new Set(VERSIONS.map(v => v.version))].sort().reverse();
+document.getElementById("filter-version").innerHTML += versionsList.map(v => `<option value="${v}">${v}</option>`).join("");
+
+function render() {
+  const c = document.getElementById("filter-country").value;
+  const v = document.getElementById("filter-version").value;
+  const filtered = VERSIONS.filter(e =>
+    (c === "all" || e.country === c) &&
+    (v === "all" || e.version === v)
+  ).reverse();
+
+  if (!filtered.length) {
+    document.getElementById("timeline").innerHTML = `<div class="empty">No entries match these filters.</div>`;
+    return;
+  }
+  document.getElementById("timeline").innerHTML = filtered.map(e => {
+    const delta = e.delta;
+    let dCls = "flat", dTxt = "·";
+    if (delta && !isNaN(parseFloat(delta))) {
+      const n = parseFloat(delta);
+      dCls = n > 0 ? "up" : n < 0 ? "down" : "flat";
+      dTxt = n > 0 ? `+${n}` : n < 0 ? `${n}` : "·";
+    }
+    const change = e.old_value !== "" && e.new_value !== "" && e.old_value !== e.new_value
+      ? `${e.old_value} → ${e.new_value}` : "—";
+    return `<div class="entry">
+      <div class="ver-date">
+        <div class="ver">${e.version}</div>
+        <div class="date">${e.date}</div>
+      </div>
+      <div class="country">${e.country || "—"}${e.iso3 ? `<span class="iso">${e.iso3}</span>` : ""}</div>
+      <div class="body">
+        <strong>${e.indicator || e.trigger || "Change"}</strong>
+        ${e.indicator_code ? `<div class="ind">${e.indicator_code}</div>` : ""}
+        <div class="why">${e.rationale || "—"}</div>
+      </div>
+      <div class="change">${change}</div>
+      <div><span class="delta ${dCls}">${dTxt}</span></div>
+    </div>`;
+  }).join("");
+}
+document.getElementById("filter-country").addEventListener("change", render);
+document.getElementById("filter-version").addEventListener("change", render);
+render();
+</script>
+</body>
+</html>

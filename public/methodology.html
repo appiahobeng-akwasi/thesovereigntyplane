@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Methodology · The Sovereignty Plane</title>
+<meta name="theme-color" content="#fafaf9">
+<meta name="description" content="The locked methodology of the Sovereignty Plane. Forty-four indicators, 0-3 ordinal scale, equal weighting, perpendicular gap metric.">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#fafaf9; --ink:#0f0f0f; --ink-2:#3a362f; --ink-3:#5a564b; --ink-mute:#8a8680;
+  --rule:#e6e3dc; --rule-strong:#cfcbc1;
+  --theatre:#8a3a2a; --theatre-soft:rgba(138,58,42,0.08);
+  --interdep:#2d5a3a; --interdep-soft:rgba(45,90,58,0.08);
+  --serif:'Instrument Serif', Georgia, serif;
+  --sans:'Inter Variable', 'Inter', -apple-system, system-ui, sans-serif;
+  --mono:'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg)}
+body{color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;letter-spacing:-0.005em}
+a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule-strong);transition:border-color .15s}
+a:hover{border-bottom-color:var(--ink)}
+.wrap{max-width:1200px;margin:0 auto;padding:32px 56px 96px}
+@media (max-width:780px){.wrap{padding:24px 20px 64px}}
+.micro{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-mute)}
+.mono{font-family:var(--mono)}
+
+header.top{display:flex;align-items:center;justify-content:space-between;padding-bottom:18px;border-bottom:1px solid var(--rule);gap:32px;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;gap:2px}
+.brand .mk{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink-mute)}
+.brand .nm{font-family:var(--serif);font-size:24px;letter-spacing:-0.012em}
+.brand .nm em{font-style:italic;color:var(--theatre)}
+.nav{display:flex;gap:28px}
+.nav a{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-3);border:0;padding:6px 0;position:relative}
+.nav a:hover{color:var(--ink)}
+.nav a.active{color:var(--ink)}
+.nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--ink)}
+
+.versionchip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--rule-strong);border-radius:2px;font-family:var(--mono);font-size:10.5px;letter-spacing:0.05em;color:var(--ink-3)}
+.versionchip .dot{width:6px;height:6px;border-radius:50%;background:var(--interdep)}
+
+.layout{display:grid;grid-template-columns:1fr 280px;gap:56px;margin-top:48px;align-items:flex-start}
+@media (max-width:1000px){.layout{grid-template-columns:1fr}}
+
+article{font-family:var(--serif);font-size:17px;line-height:1.65;color:var(--ink-2)}
+article h1{font-family:var(--serif);font-size:54px;font-weight:400;line-height:1.05;letter-spacing:-0.025em;color:var(--ink);margin:0 0 14px}
+article h2{font-family:var(--serif);font-size:24px;font-weight:400;line-height:1.2;letter-spacing:-0.012em;color:var(--ink);margin:48px 0 14px;padding-top:8px;scroll-margin-top:80px}
+article h2::before{content:attr(data-marker);font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink-mute);display:block;margin-bottom:8px;font-style:normal;font-weight:400}
+article p{margin:14px 0;font-family:var(--sans);font-size:15px;color:var(--ink-2)}
+article p:first-of-type{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--ink-2);line-height:1.55;margin-bottom:24px}
+article ul, article ol{font-family:var(--sans);font-size:15px;color:var(--ink-2);padding-left:22px;margin:14px 0}
+article li{margin:6px 0;line-height:1.6}
+article strong{color:var(--ink);font-weight:600}
+article em{color:var(--ink);font-style:italic}
+article code{font-family:var(--mono);font-size:13px;background:rgba(0,0,0,0.04);padding:1px 6px;border-radius:2px}
+article a{color:var(--ink)}
+
+.mtable{width:100%;border-collapse:collapse;margin:24px 0;font-family:var(--sans);font-size:13.5px}
+.mtable th{padding:10px 12px;text-align:left;border-bottom:1px solid var(--rule-strong);font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-mute);font-weight:500;background:rgba(0,0,0,0.012)}
+.mtable td{padding:11px 12px;border-bottom:1px solid var(--rule);color:var(--ink-2);vertical-align:top;line-height:1.5}
+.mtable tr:hover td{background:rgba(0,0,0,0.012)}
+
+aside.toc{position:sticky;top:24px;font-family:var(--sans)}
+aside.toc h3{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink-mute);margin:0 0 12px}
+aside.toc nav{display:flex;flex-direction:column;gap:6px}
+aside.toc a{font-size:13px;color:var(--ink-3);border:0;padding:5px 0 5px 12px;border-left:1px solid var(--rule);transition:all .15s}
+aside.toc a:hover{color:var(--ink);border-left-color:var(--ink-3)}
+aside.toc a.active{color:var(--ink);border-left-color:var(--ink);font-weight:500}
+aside.toc .download-buttons{margin-top:24px;padding-top:18px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:8px}
+aside.toc .download-buttons a{padding:7px 12px;border:1px solid var(--rule-strong);border-radius:2px;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:0.06em;color:var(--ink-3)}
+aside.toc .download-buttons a:hover{border-color:var(--ink);color:var(--ink)}
+
+.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:-1}
+.orb.o1{top:20%;right:5%;width:280px;height:280px;background:rgba(45,90,58,0.05)}
+.orb.o2{bottom:15%;left:10%;width:240px;height:240px;background:rgba(138,58,42,0.05)}
+
+footer{margin-top:96px;padding-top:32px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-3);line-height:1.55}
+footer .col{max-width:380px}
+footer a{color:var(--ink-2)}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="mk">The Sovereignty Plane</div>
+      <div class="nm">The <em>methodology</em></div>
+    </div>
+    <nav class="nav">
+      <a href="/#plane">The Plane</a>
+      <a href="/methodology" class="active">Methodology</a>
+      <a href="/tracker">Tracker</a>
+      <a href="/methodology/changelog">Changelog</a>
+      <a href="/#bio">About</a>
+    </nav>
+  </header>
+
+  <div style="margin-top:48px">
+    <span class="versionchip"><span class="dot"></span>v1.0 · locked 2026-04-25 · 44 indicators · 0-3 scale</span>
+  </div>
+
+  <div class="layout">
+    <article>
+      <h1>Methodology</h1>
+<p>The Sovereignty Plane measures the gap between what a state has <em>declared</em> about AI sovereignty and what it can <em>actually do</em>. Every country in the sample is scored on two axes. Formal sovereignty captures the declared architecture: strategies, laws, institutions, partnerships. Substantive sovereignty captures the operational capacity: enforcement, procurement, assurance, delivery, negotiation.</p>
+<p>The framework rests on the wager that these two things often diverge. A country can publish a sophisticated AI strategy and still be unable to enforce a single rule against a hyperscaler. A country can run a national AI deployment at scale and still lack the formal architecture that the deployment demands. Both patterns matter. The Plane makes both visible.</p>
+<h2 id='sample-design'>§01 Sample design</h2>
+<p>The core sample is fifteen African states stratified across the African Union's five geographic regions, plus four reference countries from the Tony Blair Institute's <em>State of Compute Access</em> framework. Total sample: nineteen.</p>
+<table class='mtable'><thead><tr><th>Region</th><th>Countries</th></tr></thead><tbody><tr><td>North Africa</td><td>Egypt, Morocco, Tunisia</td></tr><tr><td>West Africa</td><td>Nigeria, Ghana, Senegal, Sierra Leone</td></tr><tr><td>East Africa</td><td>Kenya, Rwanda, Ethiopia</td></tr><tr><td>Central Africa</td><td>Cameroon, Gabon</td></tr><tr><td>Southern Africa</td><td>South Africa, Botswana, Malawi</td></tr><tr><td>Reference</td><td>France, Japan, UAE, Brazil</td></tr></tbody></table>
+<p>The selection logic prioritises capacity diversity within each region. North Africa contributes its strategy publishers. West Africa is over-sampled at four because Nigeria and Ghana both anchor the paper's argument. East Africa includes the enforcement breakthrough case (Kenya) and a regional digital leader (Rwanda) alongside a low-evidence comparator (Ethiopia). Central Africa has two countries because the evidence base is thinner. Southern Africa includes the strongest substantive case in the corpus (South Africa) plus a documented deployment outlier (Malawi).</p>
+<p>The four reference countries serve as calibration anchors. They are scored using the same rubric as the African states. They define what the rubric ceiling looks like so that reviewers can see the rubric discriminates rather than caps.</p>
+<h2 id='dimensions'>§02 Two axes, eleven dimensions, forty-four indicators</h2>
+<p>Formal sovereignty is the y-axis. Six dimensions, four indicators each, twenty-four indicators in total.</p>
+<table class='mtable'><thead><tr><th>Code</th><th>Dimension</th><th>What it measures</th></tr></thead><tbody><tr><td>F1</td><td>National AI Strategy</td><td>Strategy publication, scope, budget, implementation plan</td></tr><tr><td>F2</td><td>Data Protection Law</td><td>Statute, DPA, cross-border regime, enforcement framework</td></tr><tr><td>F3</td><td>Regulatory Institutions</td><td>AI body, digital ministry, standards, ethics guidance</td></tr><tr><td>F4</td><td>International Commitments</td><td>Continental, multilateral, bilateral, norm alignment</td></tr><tr><td>F5</td><td>Digital Infrastructure Policy</td><td>Broadband, cloud, localisation, cybersecurity</td></tr><tr><td>F6</td><td>Partnership Architecture</td><td>Strategic, donor, bilateral, PPP frameworks</td></tr></tbody></table>
+<p>Substantive sovereignty is the x-axis. Five dimensions, four indicators each, twenty indicators in total.</p>
+<table class='mtable'><thead><tr><th>Code</th><th>Dimension</th><th>Test question</th></tr></thead><tbody><tr><td>S1</td><td>Enforcement Capacity</td><td>Can the state enforce its rules against a major AI provider?</td></tr><tr><td>S2</td><td>Procurement Power</td><td>Can the state walk away from a vendor without losing operational continuity?</td></tr><tr><td>S3</td><td>Assurance Infrastructure</td><td>Can the state assess whether a deployed AI system is fit for purpose?</td></tr><tr><td>S4</td><td>Delivery Capability</td><td>Is AI generating measurable service or productivity improvements?</td></tr><tr><td>S5</td><td>Negotiation Capability</td><td>Can the state renegotiate terms when conditions change?</td></tr></tbody></table>
+<p>Each indicator is scored on a 0-3 ordinal scale. Composite scores are normalised to 0-100 percentages.</p>
+<h2 id='scoring-rubric'>§03 Scoring rubric</h2>
+<p>Every indicator is scored against a four-point ordinal scale. The rubric is the same for formal and substantive indicators.</p>
+<table class='mtable'><thead><tr><th>Score</th><th>Label</th><th>Definition</th><th>Evidence standard</th></tr></thead><tbody><tr><td>0</td><td>Absent</td><td>No evidence of activity, policy, or capability</td><td>No documents, no institutional presence, no press references</td></tr><tr><td>1</td><td>Nascent</td><td>Draft, announced, or limited pilot</td><td>Published draft, announced commitment, single pilot project</td></tr><tr><td>2</td><td>Enacted / Partial</td><td>Formally adopted with partial operation</td><td>Enacted law or formal launch, observable activity, evidence of implementation gaps</td></tr><tr><td>3</td><td>Operational / Comprehensive</td><td>Fully operational with documented practice</td><td>Operating institution with track record, documented enforcement, scaled deployment</td></tr></tbody></table>
+<p>The rubric was kept deliberately compact. Four steps create enough discrimination to separate Sierra Leone from Kenya without inviting endless ordinal arguments between intermediate scores.</p>
+<h2 id='sovereignty-gap'>§04 Aggregation and the sovereignty gap</h2>
+<p>For each axis, the country's composite score is the sum of indicator scores divided by the maximum possible, expressed as a percentage. The formal axis has a maximum raw score of 24 indicators × 3 = 72. The substantive axis has a maximum raw score of 20 × 3 = 60.</p>
+<p>The sovereignty gap is the perpendicular distance from the country's point on the Plane to the diagonal where Formal % equals Substantive %. Computed as <code>(Formal % - Substantive %) / sqrt(2)</code>. Reported in percentage points.</p>
+<p>A positive gap indicates formal architecture outrunning operational capacity. We call this <em>sovereignty theatre</em>. A negative gap indicates operational capacity outrunning formal architecture. We call this <em>ad-hoc capability</em>. A near-zero gap indicates coherence: either <em>negotiated interdependence</em> if both axes are high, or <em>dependency by default</em> if both are low.</p>
+<h2 id='confidence-flags'>§05 Confidence flags</h2>
+<p>Every score carries a confidence flag.</p>
+<ul><li><strong>High</strong> — at least two independent primary sources verify the score.</li><li><strong>Medium</strong> — one primary source, or AI-assisted inference from authoritative secondary material.</li><li><strong>Low</strong> — no primary source located; score based on triangulation and judgement.</li></ul>
+<p>Low-confidence indicators are visually marked in the tracker and disclosed in the paper's limitations section. They are not removed from the composite. Excluding them would distort the regional comparison; flagging them transparently lets reviewers weight them as they choose.</p>
+<h2 id='validation-states'>§06 Validation states</h2>
+<p>Every score progresses through three validation states.</p>
+<ol><li><strong>AI-assisted</strong> — initial score generated by an AI research workflow with cited evidence. This is the default state at first scoring.</li><li><strong>Human-reviewed</strong> — the author has reviewed the AI-generated score and either accepted, adjusted, or rejected it. The review action and date are recorded.</li><li><strong>Expert-validated</strong> — a third-party domain expert (regional researcher, regulator, or programme reviewer) has signed off on the score.</li></ol>
+<p>Submission to <em>Data & Policy</em> requires every score in the cohort to be at least Human-reviewed. Expert-validated is the gold standard and is sought for the highest-stakes country scores.</p>
+<h2 id='data-sources'>§07 Data sources hierarchy</h2>
+<p>Sources are weighted in the following order:</p>
+<ol><li>Primary government sources: legislation, gazette publications, regulator websites, ministry portals, official strategy documents.</li><li>Authoritative regional and international trackers: African Union AI Strategy tracker, UNESCO AI Policy Observatory, the African Observatory on Responsible AI's Africa AI Policy Tool, OECD AI Policy Observatory, Carnegie AfTech.</li><li>Peer-reviewed academic sources: CIGI policy briefs, Global Studies Quarterly, Data & Policy.</li><li>Reputable secondary sources: Reuters, Bloomberg, Financial Times, sector-specific outlets with named bylines.</li><li>AI-assisted retrieval: explicitly flagged when AI tools assisted in source discovery.</li></ol>
+<p>Where sources disagree, the most conservative score is used and the discrepancy is documented in the indicator's evidence note.</p>
+<h2 id='cutoff'>§08 Cutoff</h2>
+<p>The current cohort scoring reflects evidence available as of <strong>2026-04-30</strong>. Evidence published after the cutoff is recorded in subsequent tracker versions but does not retroactively change scores in this version.</p>
+<h2 id='limitations'>§09 Limitations</h2>
+<p>The framework has four limitations the paper discloses explicitly.</p>
+<p>First, single-scorer bias. One author made the bulk of scoring decisions. Inter-rater reliability is partial; expert-validation rounds with the ILINA Program partially mitigate this but do not eliminate it.</p>
+<p>Second, variable evidence base across countries. Some primary sources are not in English. Cameroon and Gabon's evidence base is markedly thinner than Nigeria's or Kenya's. Confidence flags transparently reflect this.</p>
+<p>Third, snapshot nature. The AI policy landscape is moving rapidly. The 2026-04-30 cutoff captures one moment; the framework is designed to be re-applied at future cutoffs.</p>
+<p>Fourth, judgement in qualitative scoring. The rubric does not eliminate judgement, particularly on indicators like "ethics guidance" and "negotiation capability" where contracts are rarely public. The methodology lock means definitions are stable, but interpretation always carries some scorer voice.</p>
+<h2 id='sixth-signal'>§10 Optional sixth signal</h2>
+<p>The methodology includes an optional sixth signal — <em>epistemic alignment</em> — which captures whether deployed AI systems reflect local knowledge, languages, and contexts rather than imported defaults. Indicators include African-language AI activity, indigenous knowledge representation in training data, and local institutional ownership of model artefacts.</p>
+<p>This signal is reported as supplementary analysis rather than folded into the substantive composite. It is conceptually important to the paper's argument about negotiated intelligence but has not yet been calibrated to the same standard as the five core substantive signals.</p>
+<h2 id='scope'>§11 What this framework is not</h2>
+<p>The Sovereignty Plane is a diagnostic tool, not a definitive index. It is designed to make a comparative argument about formal-versus-substantive divergence visible and quantifiable. It is not designed to rank countries on AI capability writ large, nor to predict policy outcomes. It is not a substitute for country-level case studies; it is a complement that surfaces patterns case studies can then test.</p>
+<p>Reviewers should treat the country scores as indicative positions on a two-dimensional surface rather than as point estimates of a latent capability. The value lies in the <em>shape of the cohort</em> — the spread of points, the regional clusters, the diagonal — more than in any single country's exact coordinates.</p>
+    </article>
+
+    <aside class="toc">
+      <h3>On this page</h3>
+      <nav id="toc-nav"></nav>
+      <div class="download-buttons">
+        <a href="/methodology_v1.0.pdf">Download methodology PDF</a>
+        <a href="/master_tracker.xlsx">Download master tracker</a>
+        <a href="/methodology/changelog">View changelog</a>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <div class="col">
+      <strong>Locked methodology v1.0.</strong> Any change to indicator definitions, scale, or aggregation requires an Architectural Decision Record and a version bump. Cutoff: 2026-04-30. Submission target: <em>Data &amp; Policy</em> (Cambridge University Press).
+    </div>
+    <div class="col" style="text-align:right">
+      <span class="micro">Source</span><br>
+      <span class="mono" style="font-size:11px">00_governance/methodology/methodology_v1.0_2026-04-25.md</span><br><br>
+      <a href="/tracker" class="mono" style="font-size:11px">/tracker →</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+// Inject §-markers and build TOC
+document.querySelectorAll("article h2").forEach((h, i) => {
+  h.setAttribute("data-marker", `§${String(i+1).padStart(2, "0")}`);
+});
+const toc = document.getElementById("toc-nav");
+toc.innerHTML = [...document.querySelectorAll("article h2")].map(h => {
+  const id = h.id || h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  if (!h.id) h.id = id;
+  return `<a href="#${id}">${h.textContent}</a>`;
+}).join("");
+
+// TOC active state on scroll
+const headings = [...document.querySelectorAll("article h2")];
+const tocLinks = [...toc.querySelectorAll("a")];
+function onScroll() {
+  const top = window.scrollY + 100;
+  let active = headings[0];
+  for (const h of headings) {
+    if (h.offsetTop <= top) active = h;
+  }
+  tocLinks.forEach(a => a.classList.remove("active"));
+  const match = tocLinks.find(a => a.getAttribute("href") === "#" + active.id);
+  if (match) match.classList.add("active");
+}
+window.addEventListener("scroll", onScroll, {passive:true});
+onScroll();
+</script>
+</body>
+</html>

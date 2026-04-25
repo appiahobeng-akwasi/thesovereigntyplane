@@ -125,7 +125,7 @@ export default function HeroIsland() {
         >
           <div ref={metaRef} style={{ paddingTop: 24 }}>
             {[
-              { label: 'Instrument', value: 'The Sovereignty Plane\n44 indicators \u00b7 15 states' },
+              { label: 'Instrument', value: 'The Sovereignty Plane\n836 indicators \u00b7 19 countries' },
               { label: 'Working paper', value: 'Negotiating Intelligence\nsubmitted to Data & Policy, 2026' },
               { label: 'Author', value: 'Akwasi Appiah Obeng' },
             ].map((item) => (
@@ -170,7 +170,7 @@ export default function HeroIsland() {
                 lineHeight: 1.6, maxWidth: 520, letterSpacing: '-0.003em',
               }}
             >
-              A two-dimensional diagnostic measuring formal sovereignty against substantive sovereignty across fifteen African states, forty-four indicators, and 660 scored data points. From the working paper <em>Negotiating Intelligence: African Agency in the Global AI Value Chain.</em>
+              A two-dimensional diagnostic measuring formal sovereignty against substantive sovereignty across nineteen countries — fifteen African states and four reference cases — 836 indicators, and methodology v1.0 locked 25 April 2026. From the working paper <em>Negotiating Intelligence: African Agency in the Global AI Value Chain.</em>
             </p>
           </div>
 

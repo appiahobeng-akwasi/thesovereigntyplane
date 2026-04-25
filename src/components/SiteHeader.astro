@@ -16,6 +16,10 @@
       <a href="#work">Work</a>
       <a href="#bio">About</a>
       <a href="#contact">Contact</a>
+      <span class="nav-divider" aria-hidden="true"></span>
+      <a href="/methodology.html">Methodology</a>
+      <a href="/tracker.html">Tracker</a>
+      <a href="/changelog.html">Changelog</a>
     </nav>
   </div>
 </header>
@@ -135,6 +139,13 @@
 
   .site-nav a:hover { color: var(--ink); }
   .site-nav a:hover::after { transform: scaleX(1); }
+
+  .nav-divider {
+    width: 1px;
+    height: 12px;
+    background: var(--rule);
+    align-self: center;
+  }
 
   @media (max-width: 1100px) {
     .site-header-inner { padding-left: 32px; padding-right: 32px; }
