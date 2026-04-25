@@ -6,7 +6,7 @@ const items = [
     type: 'Working paper',
     title: 'Negotiating Intelligence: African Agency in the Global AI Value Chain',
     meta: 'Prepared for submission to Data & Policy (Cambridge University Press) \u00b7 April 2026',
-    description: 'Introduces the formal\u2013substantive sovereignty distinction and the Sovereignty Plane. Applied to fifteen African states and four reference countries across forty-four indicators and 660 scored data points.',
+    description: 'Introduces the formal\u2013substantive sovereignty distinction and the Sovereignty Plane. Applied to fifteen African states and four reference countries across forty-four indicators and 836 scored data points (660 across the African sample, 176 across the four reference anchors).',
     linkText: 'Download PDF \u2192',
     linkHref: '/papers/negotiating-intelligence.pdf',
   },
