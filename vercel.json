@@ -1,4 +1,10 @@
 {
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/tracker", "destination": "/tracker.html" },
+    { "source": "/methodology", "destination": "/methodology.html" },
+    { "source": "/changelog", "destination": "/changelog.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
