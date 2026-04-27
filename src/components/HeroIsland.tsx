@@ -178,6 +178,29 @@ export default function HeroIsland() {
             >
               A two-dimensional diagnostic measuring formal sovereignty against substantive sovereignty across nineteen countries — fifteen African states and four reference cases — 836 indicators, and methodology v1.0 locked 25 April 2026. From the working paper <em>Negotiating Intelligence: African Agency in the Global AI Value Chain.</em>
             </p>
+            <a
+              href="/score"
+              style={{
+                display: 'inline-block',
+                marginTop: 24,
+                fontFamily: "'JetBrains Mono Variable', monospace",
+                fontSize: 10.5,
+                fontWeight: 500,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                border: '1px solid var(--ink)',
+                background: 'var(--ink)',
+                color: 'var(--paper)',
+                padding: '10px 20px',
+                borderRadius: 2,
+                textDecoration: 'none',
+                transition: 'background 150ms',
+              }}
+              onMouseEnter={(e) => { (e.target as HTMLAnchorElement).style.background = 'var(--ink-2)'; }}
+              onMouseLeave={(e) => { (e.target as HTMLAnchorElement).style.background = 'var(--ink)'; }}
+            >
+              Score your country
+            </a>
           </div>
 
           <aside
