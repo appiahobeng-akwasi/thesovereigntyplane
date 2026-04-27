@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import ScoringWizard from '../components/scoring/ScoringWizard';
+import '../styles/scoring.css';
+
+import indicatorsData from '../data/indicators.json';
+import scoresData from '../data/scores.json';
+import summaryData from '../data/summary.json';
+import countriesData from '../data/countries.json';
+
+const indicators = indicatorsData.map((ind: any) => ({
+  axis: ind.axis,
+  dimension_code: ind.dimension_code,
+  dimension: ind.dimension,
+  indicator_code: ind.indicator_code,
+  indicator: ind.indicator,
+  max_score: ind.max_score,
+}));
+
+const baselineScores = scoresData.map((s: any) => ({
+  row_id: s.row_id,
+  country: s.country,
+  iso3: s.iso3,
+  indicator_code: s.indicator_code,
+  score: s.score,
+  confidence: s.confidence,
+  evidence_note: s.evidence_note || '',
+  primary_source_url: s.primary_source_url || '',
+}));
+
+const cohort = summaryData.map((s: any) => ({
+  country: s.country,
+  iso3: s.iso3,
+  formal_pct: s.formal_pct,
+  substantive_pct: s.substantive_pct,
+  quadrant: s.quadrant,
+}));
+
+const countries = countriesData
+  .map((c: any) => ({ country: c.country, iso3: c.iso3 }))
+  .sort((a: any, b: any) => a.country.localeCompare(b.country));
+---
+
+<Base
+  title="Score Your Country — The Sovereignty Plane"
+  description="Apply the Sovereignty Plane framework to any country. Walk through forty-four indicators, score each one, and see the result plotted alongside the existing nineteen-country cohort."
+>
+  <ScoringWizard
+    client:load
+    indicators={indicators}
+    baselineScores={baselineScores}
+    cohort={cohort}
+    countries={countries}
+  />
+</Base>
