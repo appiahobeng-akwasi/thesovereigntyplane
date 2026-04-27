@@ -1,0 +1,13 @@
+{
+  "tracker_version": "v2.2",
+  "exported_at": "2026-04-27T15:40:16.172643+00:00",
+  "tracker_path": "02_data/master_tracker.xlsx",
+  "country_count": 19,
+  "indicator_count": 44,
+  "score_count": 836,
+  "score_count_total": 836,
+  "scored_country_count": 19,
+  "version_log_entry_count": 27,
+  "methodology_lock": "v1.0",
+  "methodology_locked_at": "2026-04-25"
+}

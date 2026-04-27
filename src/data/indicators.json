@@ -1,0 +1,354 @@
+[
+  {
+    "axis": "Formal",
+    "dimension_code": "F1",
+    "dimension": "National AI Strategy",
+    "indicator_code": "F1.1",
+    "indicator": "National AI strategy status",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F1",
+    "dimension": "National AI Strategy",
+    "indicator_code": "F1.2",
+    "indicator": "Strategy scope and specificity",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F1",
+    "dimension": "National AI Strategy",
+    "indicator_code": "F1.3",
+    "indicator": "Budget provision for AI",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F1",
+    "dimension": "National AI Strategy",
+    "indicator_code": "F1.4",
+    "indicator": "Implementation plan with timelines",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F2",
+    "dimension": "Data Protection Law",
+    "indicator_code": "F2.1",
+    "indicator": "Data protection law status",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F2",
+    "dimension": "Data Protection Law",
+    "indicator_code": "F2.2",
+    "indicator": "Data Protection Authority status",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F2",
+    "dimension": "Data Protection Law",
+    "indicator_code": "F2.3",
+    "indicator": "Cross-border data regime",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F2",
+    "dimension": "Data Protection Law",
+    "indicator_code": "F2.4",
+    "indicator": "Enforcement framework in law",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F3",
+    "dimension": "Regulatory Institutions",
+    "indicator_code": "F3.1",
+    "indicator": "Dedicated AI governance body",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F3",
+    "dimension": "Regulatory Institutions",
+    "indicator_code": "F3.2",
+    "indicator": "Lead digital ministry or agency",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F3",
+    "dimension": "Regulatory Institutions",
+    "indicator_code": "F3.3",
+    "indicator": "Standards or technical guidance",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F3",
+    "dimension": "Regulatory Institutions",
+    "indicator_code": "F3.4",
+    "indicator": "Ethics or responsible AI guidance",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F4",
+    "dimension": "International Commitments",
+    "indicator_code": "F4.1",
+    "indicator": "Continental/regional framework participation",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F4",
+    "dimension": "International Commitments",
+    "indicator_code": "F4.2",
+    "indicator": "Multilateral AI governance engagement",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F4",
+    "dimension": "International Commitments",
+    "indicator_code": "F4.3",
+    "indicator": "Bilateral AI governance cooperation",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F4",
+    "dimension": "International Commitments",
+    "indicator_code": "F4.4",
+    "indicator": "International norm alignment",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F5",
+    "dimension": "Digital Infrastructure Policy",
+    "indicator_code": "F5.1",
+    "indicator": "Broadband/connectivity policy",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F5",
+    "dimension": "Digital Infrastructure Policy",
+    "indicator_code": "F5.2",
+    "indicator": "Cloud/data infrastructure policy",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F5",
+    "dimension": "Digital Infrastructure Policy",
+    "indicator_code": "F5.3",
+    "indicator": "Data localisation/residency provisions",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F5",
+    "dimension": "Digital Infrastructure Policy",
+    "indicator_code": "F5.4",
+    "indicator": "Cybersecurity governance",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F6",
+    "dimension": "Partnership Architecture",
+    "indicator_code": "F6.1",
+    "indicator": "Strategic AI partnerships",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F6",
+    "dimension": "Partnership Architecture",
+    "indicator_code": "F6.2",
+    "indicator": "Donor-supported AI programmes",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F6",
+    "dimension": "Partnership Architecture",
+    "indicator_code": "F6.3",
+    "indicator": "Bilateral technology partnerships",
+    "max_score": 3
+  },
+  {
+    "axis": "Formal",
+    "dimension_code": "F6",
+    "dimension": "Partnership Architecture",
+    "indicator_code": "F6.4",
+    "indicator": "PPP framework for digital/AI",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S1",
+    "dimension": "Enforcement Capacity",
+    "indicator_code": "S1.1",
+    "indicator": "Statutory enforcement authority",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S1",
+    "dimension": "Enforcement Capacity",
+    "indicator_code": "S1.2",
+    "indicator": "Demonstrated enforcement capacity",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S1",
+    "dimension": "Enforcement Capacity",
+    "indicator_code": "S1.3",
+    "indicator": "Compliance monitoring infrastructure",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S1",
+    "dimension": "Enforcement Capacity",
+    "indicator_code": "S1.4",
+    "indicator": "Documented enforcement actions",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S2",
+    "dimension": "Procurement Power",
+    "indicator_code": "S2.1",
+    "indicator": "Standard AI procurement clauses",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S2",
+    "dimension": "Procurement Power",
+    "indicator_code": "S2.2",
+    "indicator": "Portability requirements",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S2",
+    "dimension": "Procurement Power",
+    "indicator_code": "S2.3",
+    "indicator": "Switching provisions",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S2",
+    "dimension": "Procurement Power",
+    "indicator_code": "S2.4",
+    "indicator": "Audit rights in contracts",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S3",
+    "dimension": "Assurance Infrastructure",
+    "indicator_code": "S3.1",
+    "indicator": "AI evaluation/testing capability",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S3",
+    "dimension": "Assurance Infrastructure",
+    "indicator_code": "S3.2",
+    "indicator": "Red-teaming capability",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S3",
+    "dimension": "Assurance Infrastructure",
+    "indicator_code": "S3.3",
+    "indicator": "Accredited third-party testing",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S3",
+    "dimension": "Assurance Infrastructure",
+    "indicator_code": "S3.4",
+    "indicator": "Incident response",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S4",
+    "dimension": "Delivery Capability",
+    "indicator_code": "S4.1",
+    "indicator": "AI in public health",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S4",
+    "dimension": "Delivery Capability",
+    "indicator_code": "S4.2",
+    "indicator": "AI in agriculture/food security",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S4",
+    "dimension": "Delivery Capability",
+    "indicator_code": "S4.3",
+    "indicator": "AI in education/citizen services",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S4",
+    "dimension": "Delivery Capability",
+    "indicator_code": "S4.4",
+    "indicator": "Measurable impact documented",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S5",
+    "dimension": "Negotiation Capacity",
+    "indicator_code": "S5.1",
+    "indicator": "Technology transfer clauses",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S5",
+    "dimension": "Negotiation Capacity",
+    "indicator_code": "S5.2",
+    "indicator": "Local content requirements",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S5",
+    "dimension": "Negotiation Capacity",
+    "indicator_code": "S5.3",
+    "indicator": "Renegotiation track record",
+    "max_score": 3
+  },
+  {
+    "axis": "Substantive",
+    "dimension_code": "S5",
+    "dimension": "Negotiation Capacity",
+    "indicator_code": "S5.4",
+    "indicator": "Exit provisions exercised",
+    "max_score": 3
+  }
+]

@@ -1,0 +1,135 @@
+[
+  {
+    "country": "Egypt",
+    "iso3": "EGY",
+    "region": "North Africa",
+    "sample_group": "Core sample",
+    "slug": "egypt"
+  },
+  {
+    "country": "Morocco",
+    "iso3": "MAR",
+    "region": "North Africa",
+    "sample_group": "Core sample",
+    "slug": "morocco"
+  },
+  {
+    "country": "Tunisia",
+    "iso3": "TUN",
+    "region": "North Africa",
+    "sample_group": "Core sample",
+    "slug": "tunisia"
+  },
+  {
+    "country": "Nigeria",
+    "iso3": "NGA",
+    "region": "West Africa",
+    "sample_group": "Core sample",
+    "slug": "nigeria"
+  },
+  {
+    "country": "Ghana",
+    "iso3": "GHA",
+    "region": "West Africa",
+    "sample_group": "Core sample",
+    "slug": "ghana"
+  },
+  {
+    "country": "Senegal",
+    "iso3": "SEN",
+    "region": "West Africa",
+    "sample_group": "Core sample",
+    "slug": "senegal"
+  },
+  {
+    "country": "Sierra Leone",
+    "iso3": "SLE",
+    "region": "West Africa",
+    "sample_group": "Core sample",
+    "slug": "sierra-leone"
+  },
+  {
+    "country": "Kenya",
+    "iso3": "KEN",
+    "region": "East Africa",
+    "sample_group": "Core sample",
+    "slug": "kenya"
+  },
+  {
+    "country": "Rwanda",
+    "iso3": "RWA",
+    "region": "East Africa",
+    "sample_group": "Core sample",
+    "slug": "rwanda"
+  },
+  {
+    "country": "Ethiopia",
+    "iso3": "ETH",
+    "region": "East Africa",
+    "sample_group": "Core sample",
+    "slug": "ethiopia"
+  },
+  {
+    "country": "Cameroon",
+    "iso3": "CMR",
+    "region": "Central Africa",
+    "sample_group": "Core sample",
+    "slug": "cameroon"
+  },
+  {
+    "country": "Gabon",
+    "iso3": "GAB",
+    "region": "Central Africa",
+    "sample_group": "Core sample",
+    "slug": "gabon"
+  },
+  {
+    "country": "South Africa",
+    "iso3": "ZAF",
+    "region": "Southern Africa",
+    "sample_group": "Core sample",
+    "slug": "south-africa"
+  },
+  {
+    "country": "Botswana",
+    "iso3": "BWA",
+    "region": "Southern Africa",
+    "sample_group": "Core sample",
+    "slug": "botswana"
+  },
+  {
+    "country": "Malawi",
+    "iso3": "MWI",
+    "region": "Southern Africa",
+    "sample_group": "Core sample",
+    "slug": "malawi"
+  },
+  {
+    "country": "France",
+    "iso3": "FRA",
+    "region": "Reference",
+    "sample_group": "Reference anchor",
+    "slug": "france"
+  },
+  {
+    "country": "Japan",
+    "iso3": "JPN",
+    "region": "Reference",
+    "sample_group": "Reference anchor",
+    "slug": "japan"
+  },
+  {
+    "country": "UAE",
+    "iso3": "ARE",
+    "region": "Reference",
+    "sample_group": "Reference anchor",
+    "slug": "uae"
+  },
+  {
+    "country": "Brazil",
+    "iso3": "BRA",
+    "region": "Reference",
+    "sample_group": "Reference anchor",
+    "slug": "brazil"
+  }
+]
