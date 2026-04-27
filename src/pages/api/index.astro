@@ -1,0 +1,201 @@
+---
+import Base from '../../layouts/Base.astro';
+import '../../styles/api-docs.css';
+
+const endpoints = [
+  { path: '/api/v1/meta', method: 'GET', description: 'Tracker version, export timestamp, and schema version', cache: '1 hour' },
+  { path: '/api/v1/countries', method: 'GET', description: 'The 19-country roster with regions and sample groups', cache: '24 hours' },
+  { path: '/api/v1/indicators', method: 'GET', description: 'The 44 indicator definitions', cache: '24 hours' },
+  { path: '/api/v1/summary', method: 'GET', description: 'Country composites (formal %, substantive %, gap, quadrant)', cache: '1 hour' },
+  { path: '/api/v1/dimensions', method: 'GET', description: 'Per-country per-dimension averages', cache: '1 hour' },
+  { path: '/api/v1/scores', method: 'GET', description: 'All 836 indicator-level scores', cache: '1 hour' },
+  { path: '/api/v1/versions', method: 'GET', description: 'Version log audit trail', cache: '1 hour' },
+  { path: '/api/v1/scores/{iso3}', method: 'GET', description: "One country's 44 indicator scores", cache: '1 hour' },
+  { path: '/api/v1/dimensions/{iso3}', method: 'GET', description: "One country's dimension breakdowns", cache: '1 hour' },
+];
+
+const sampleResponse = JSON.stringify({
+  version: 'v1',
+  tracker_version: 'v2.2',
+  exported_at: '2026-04-27T15:40:16Z',
+  endpoint: 'summary',
+  data: [
+    { country: 'Egypt', iso3: 'EGY', formal_pct: 83.3, substantive_pct: 38.3, gap_pp: 45.0, quadrant: 'theatre' },
+    { country: 'Kenya', iso3: 'KEN', formal_pct: 90.3, substantive_pct: 58.3, gap_pp: 32.0, quadrant: 'interdep' },
+  ],
+}, null, 2);
+
+const baseUrl = 'https://thesovereigntyplane.report';
+---
+
+<Base
+  title="API Documentation — The Sovereignty Plane"
+  description="Read-only API access to nineteen-country, 836-indicator AI sovereignty data. Free for academic and policy use. No registration required."
+>
+  <div class="api-docs">
+    <header class="api-hero">
+      <span class="api-section-label">&sect; API</span>
+      <h1 class="api-title">The Sovereignty Plane <em>API</em></h1>
+      <p class="api-lede">
+        Read-only access to nineteen-country, 836-indicator AI sovereignty data.
+        Free for academic and policy use. No registration required.
+      </p>
+      <div class="api-chips">
+        <span class="api-chip">REST / JSON</span>
+        <span class="api-chip">CORS enabled</span>
+        <span class="api-chip">CC-BY 4.0</span>
+        <span class="api-chip">Framework v2.2</span>
+      </div>
+    </header>
+
+    <section class="api-section" id="quick-start">
+      <span class="api-section-label">&sect;01 &middot; Quick start</span>
+      <h2 class="api-section-title">Three lines to the data</h2>
+
+      <h3 class="api-example-label">curl</h3>
+      <div class="api-code-block">
+        <pre><code>curl {baseUrl}/api/v1/summary</code></pre>
+        <button class="api-copy-btn" data-code={`curl ${baseUrl}/api/v1/summary`} type="button">Copy</button>
+      </div>
+
+      <h3 class="api-example-label">Python</h3>
+      <div class="api-code-block">
+        <pre><code>{`import requests
+r = requests.get("${baseUrl}/api/v1/summary")
+data = r.json()
+for country in data["data"]:
+    print(country["country"], country["formal_pct"], country["substantive_pct"])`}</code></pre>
+        <button class="api-copy-btn" data-code={`import requests\nr = requests.get("${baseUrl}/api/v1/summary")\ndata = r.json()\nfor country in data["data"]:\n    print(country["country"], country["formal_pct"], country["substantive_pct"])`} type="button">Copy</button>
+      </div>
+
+      <h3 class="api-example-label">JavaScript</h3>
+      <div class="api-code-block">
+        <pre><code>{`const response = await fetch('${baseUrl}/api/v1/summary');
+const data = await response.json();
+console.log(data.data);`}</code></pre>
+        <button class="api-copy-btn" data-code={`const response = await fetch('${baseUrl}/api/v1/summary');\nconst data = await response.json();\nconsole.log(data.data);`} type="button">Copy</button>
+      </div>
+    </section>
+
+    <section class="api-section" id="endpoints">
+      <span class="api-section-label">&sect;02 &middot; Endpoints</span>
+      <h2 class="api-section-title">Endpoint reference</h2>
+      <p class="api-body">All endpoints return JSON with a standard envelope. CORS is open to all origins. ETag headers are set for conditional requests.</p>
+
+      <div class="api-endpoint-table">
+        <div class="api-endpoint-header">
+          <span>Endpoint</span>
+          <span>Description</span>
+          <span>Cache</span>
+        </div>
+        {endpoints.map((ep) => (
+          <div class="api-endpoint-row">
+            <code class="api-endpoint-path">{ep.method} {ep.path}</code>
+            <span class="api-endpoint-desc">{ep.description}</span>
+            <span class="api-endpoint-cache">{ep.cache}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="api-section" id="response-format">
+      <span class="api-section-label">&sect;03 &middot; Response format</span>
+      <h2 class="api-section-title">Standard envelope</h2>
+      <p class="api-body">Every response wraps the data payload in a versioned envelope with metadata.</p>
+      <div class="api-code-block">
+        <pre><code>{sampleResponse}</code></pre>
+        <button class="api-copy-btn" data-code={sampleResponse} type="button">Copy</button>
+      </div>
+      <p class="api-body">
+        Errors return the same structure with an <code>error</code> field instead of <code>data</code>.
+        Standard HTTP status codes: 200 OK, 304 Not Modified (ETag match), 404 Not Found.
+      </p>
+    </section>
+
+    <section class="api-section" id="schema">
+      <span class="api-section-label">&sect;04 &middot; Schema</span>
+      <h2 class="api-section-title">Key fields</h2>
+
+      <h3 class="api-schema-heading">Summary (country composites)</h3>
+      <div class="api-schema-grid">
+        <div class="api-schema-field"><code>country</code><span>Country name</span></div>
+        <div class="api-schema-field"><code>iso3</code><span>ISO 3166-1 alpha-3 code</span></div>
+        <div class="api-schema-field"><code>formal_pct</code><span>Formal sovereignty score (0-100)</span></div>
+        <div class="api-schema-field"><code>substantive_pct</code><span>Substantive sovereignty score (0-100)</span></div>
+        <div class="api-schema-field"><code>gap_pp</code><span>Formal minus substantive, percentage points</span></div>
+        <div class="api-schema-field"><code>quadrant</code><span>theatre | interdep | adhoc | depend</span></div>
+      </div>
+
+      <h3 class="api-schema-heading">Scores (indicator-level)</h3>
+      <div class="api-schema-grid">
+        <div class="api-schema-field"><code>indicator_code</code><span>e.g. F1.1, S3.2</span></div>
+        <div class="api-schema-field"><code>score</code><span>0 (Absent) to 3 (Operational)</span></div>
+        <div class="api-schema-field"><code>confidence</code><span>High | Medium | Low</span></div>
+        <div class="api-schema-field"><code>evidence_note</code><span>Brief supporting evidence</span></div>
+      </div>
+
+      <h3 class="api-schema-heading">Indicators (definitions)</h3>
+      <div class="api-schema-grid">
+        <div class="api-schema-field"><code>axis</code><span>Formal | Substantive</span></div>
+        <div class="api-schema-field"><code>dimension_code</code><span>F1-F6 or S1-S5</span></div>
+        <div class="api-schema-field"><code>indicator</code><span>Full indicator name</span></div>
+        <div class="api-schema-field"><code>max_score</code><span>Always 3</span></div>
+      </div>
+    </section>
+
+    <section class="api-section" id="versioning">
+      <span class="api-section-label">&sect;05 &middot; Versioning</span>
+      <h2 class="api-section-title">Stability guarantee</h2>
+      <p class="api-body">
+        The <code>v1</code> API is stable. Breaking changes will ship under <code>v2</code> with at least six months of overlap.
+        Bug fixes and new fields do not bump the version. New endpoints may be added to <code>v1</code> without notice.
+      </p>
+    </section>
+
+    <section class="api-section" id="licence">
+      <span class="api-section-label">&sect;06 &middot; Licence</span>
+      <h2 class="api-section-title">Open data</h2>
+      <p class="api-body">
+        All data is licensed under <strong>CC-BY 4.0</strong>. The methodology is CC-BY 4.0.
+        You are free to use, share, and adapt the data for any purpose, provided you give appropriate credit.
+      </p>
+    </section>
+
+    <section class="api-section" id="citation">
+      <span class="api-section-label">&sect;07 &middot; Citation</span>
+      <h2 class="api-section-title">How to cite</h2>
+      <div class="api-citation-block">
+        <p>
+          Appiah Obeng, A. and Bockarie, T. (2026). <em>Sovereignty Plane Data</em>.
+          Tracker version v2.2. Retrieved [date] from
+          https://thesovereigntyplane.report/api/v1/[endpoint]. CC-BY 4.0.
+        </p>
+        <button class="api-copy-btn" data-code='Appiah Obeng, A. and Bockarie, T. (2026). Sovereignty Plane Data. Tracker version v2.2. Retrieved [date] from https://thesovereigntyplane.report/api/v1/[endpoint]. CC-BY 4.0.' type="button">Copy</button>
+      </div>
+    </section>
+
+    <section class="api-section" id="contact">
+      <span class="api-section-label">&sect;08 &middot; Contact</span>
+      <h2 class="api-section-title">Get in touch</h2>
+      <p class="api-body">
+        Questions, bug reports, or partnership inquiries:
+        <a href="mailto:appiahk4@gmail.com" style="border-bottom: 1px solid var(--rule);">appiahk4@gmail.com</a>
+      </p>
+      <p class="api-body" style="font-style: italic; color: var(--ink-mute);">
+        If you build something with this data, tell me about it.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<script>
+  document.querySelectorAll('.api-copy-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const code = (btn as HTMLElement).dataset.code || '';
+      await navigator.clipboard.writeText(code);
+      const original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(() => { btn.textContent = original; }, 1500);
+    });
+  });
+</script>
