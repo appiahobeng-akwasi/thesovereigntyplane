@@ -1,7 +1,7 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import indicatorsData from '../../../data/indicators.json';
 
 // --- Simple in-memory rate limiter ---
@@ -23,14 +23,12 @@ function checkRateLimit(ip: string): { allowed: boolean; retryAfter?: number } {
   const minuteKey = `${ip}:minute`;
   const hourKey = `${ip}:hour`;
 
-  // Per-minute check
   let minuteBucket = rateBuckets.get(minuteKey);
   if (!minuteBucket || now > minuteBucket.resetAt) {
     minuteBucket = { count: 0, resetAt: now + 60_000 };
     rateBuckets.set(minuteKey, minuteBucket);
   }
 
-  // Per-hour check
   let hourBucket = rateBuckets.get(hourKey);
   if (!hourBucket || now > hourBucket.resetAt) {
     hourBucket = { count: 0, resetAt: now + 3_600_000 };
@@ -57,8 +55,6 @@ const telemetryLog: Array<{
   country: string;
   indicator_code: string;
   response_time_ms: number;
-  input_tokens: number;
-  output_tokens: number;
 }> = [];
 
 function hashIp(ip: string): string {
@@ -93,7 +89,7 @@ export const POST: APIRoute = async ({ request }) => {
   };
 
   // Check API key availability
-  const apiKey = import.meta.env.ANTHROPIC_API_KEY;
+  const apiKey = import.meta.env.GEMINI_API_KEY;
   if (!apiKey) {
     return new Response(
       JSON.stringify({
@@ -165,7 +161,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   // Build prompt
-  const systemPrompt = `You are scoring a country on the Sovereignty Plane v2.2 framework. The rubric uses a 0-3 ordinal scale:
+  const prompt = `You are scoring a country on the Sovereignty Plane v2.2 framework. The rubric uses a 0-3 ordinal scale:
 
 - 0 (Absent): no evidence of activity, policy, or capability
 - 1 (Nascent): draft, announced, or limited pilot
@@ -183,28 +179,24 @@ Indicator: ${indicator.indicator_code} — ${indicator.indicator}
 Axis: ${indicator.axis}
 Dimension: ${indicator.dimension}
 
-Return ONLY valid JSON with this exact structure (no markdown, no explanation):
+Score ${country} on this indicator. Current date context: April 2026.
+
+Return ONLY valid JSON with this exact structure (no markdown, no code fences, no explanation):
 {"score": 0, "confidence": "Medium", "justification": "one sentence max 25 words", "source_url": "https://... or empty string"}`;
 
-  const userMessage = `Score ${country} on indicator ${indicator.indicator_code} (${indicator.indicator}). Current date context: April 2026.`;
-
-  // Call Anthropic
+  // Call Gemini
   const startTime = Date.now();
-  const client = new Anthropic({ apiKey });
-
-  let result: { score: number; confidence: string; justification: string; source_url: string };
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      const message = await client.messages.create({
-        model: 'claude-sonnet-4-5-20241022',
-        max_tokens: 200,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: userMessage }],
-      });
+      const result = await model.generateContent(prompt);
+      const text = result.response.text().trim();
 
-      const text = message.content[0].type === 'text' ? message.content[0].text : '';
-      result = JSON.parse(text.trim());
+      // Strip markdown code fences if present
+      const jsonText = text.replace(/^```json?\s*\n?/i, '').replace(/\n?```\s*$/i, '').trim();
+      const parsed = JSON.parse(jsonText);
 
       // Log telemetry
       telemetryLog.push({
@@ -213,22 +205,19 @@ Return ONLY valid JSON with this exact structure (no markdown, no explanation):
         country,
         indicator_code,
         response_time_ms: Date.now() - startTime,
-        input_tokens: message.usage.input_tokens,
-        output_tokens: message.usage.output_tokens,
       });
 
-      // Keep telemetry bounded
       if (telemetryLog.length > 10000) telemetryLog.splice(0, telemetryLog.length - 5000);
 
       return new Response(
         JSON.stringify({
           version: 'v1',
           endpoint: 'suggest',
-          data: result,
+          data: parsed,
         }),
         { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders } },
       );
-    } catch (e) {
+    } catch {
       if (attempt === 1) {
         return new Response(
           JSON.stringify({
@@ -238,11 +227,9 @@ Return ONLY valid JSON with this exact structure (no markdown, no explanation):
           { status: 502, headers: { 'Content-Type': 'application/json', ...corsHeaders } },
         );
       }
-      // Retry on first failure
     }
   }
 
-  // Should not reach here, but safety return
   return new Response(
     JSON.stringify({
       version: 'v1',

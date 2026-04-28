@@ -44,7 +44,7 @@ const countries = countriesData
 // The key is never exposed to the client — the wizard calls /api/v1/suggest which
 // reads the key server-side. We pass a boolean flag so the button can be hidden
 // gracefully when the key is not set.
-const aiEnabled = !!import.meta.env.ANTHROPIC_API_KEY;
+const aiEnabled = !!import.meta.env.GEMINI_API_KEY;
 ---
 
 <Base
