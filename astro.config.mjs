@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://thesovereigntyplane.report',
-  output: 'hybrid',
+  output: 'static',
   adapter: vercel(),
   integrations: [react(), sitemap()],
   build: {
