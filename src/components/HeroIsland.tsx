@@ -176,7 +176,7 @@ export default function HeroIsland() {
                 lineHeight: 1.6, maxWidth: 520, letterSpacing: '-0.003em',
               }}
             >
-              A two-dimensional diagnostic measuring formal sovereignty against substantive sovereignty across nineteen countries — fifteen African states and four reference cases — 836 indicators, and methodology v1.0 locked 25 April 2026. From the working paper <em>Negotiating Intelligence: African Agency in the Global AI Value Chain.</em>
+              A diagnostic for AI sovereignty and readiness across nineteen countries. Two dimensions, eleven sub-dimensions, forty-four indicators, 836 data points. From the working paper <em>Negotiating Intelligence: African Agency in the Global AI Value Chain.</em>
             </p>
             <a
               href="/score"
@@ -201,6 +201,16 @@ export default function HeroIsland() {
             >
               Score your country
             </a>
+            <p
+              style={{
+                marginTop: 32,
+                fontFamily: "'Inter Variable', sans-serif",
+                fontSize: 13, fontWeight: 400, color: 'var(--ink-2)',
+                lineHeight: 1.6, maxWidth: 520, letterSpacing: '-0.003em',
+              }}
+            >
+              The global AI economy is shaped by two trends moving in opposite directions. Frontier AI training is concentrating in a small number of US and Chinese firms, with single training runs projected to cost between 10 and 100 billion dollars by 2030. At the same time, the cost of running an existing capability is falling by roughly three to five times each year. The strategic question for African states is not whether they can match frontier compute spending. It is whether they will be ready to govern, procure, and deliver the capability that diffuses from that frontier. The Sovereignty Plane measures that readiness as a substantive matter, not a formal one.
+            </p>
           </div>
 
           <aside
@@ -213,7 +223,7 @@ export default function HeroIsland() {
               borderTop: '1px solid var(--ink)',
             }}
           >
-            &ldquo;Publishing a strategy is easy. Building an institution that can enforce against a hyperscaler is not.&rdquo;
+            &ldquo;Formal markers accumulate fast. Substantive capacity does not. The next three to five years are the window before deployment patterns lock in.&rdquo;
           </aside>
         </div>
 
