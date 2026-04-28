@@ -501,6 +501,95 @@
   border-color: var(--ink);
 }
 
+/* ── AI suggest ── */
+
+.suggest-btn {
+  border-color: var(--rule);
+  color: var(--ink-mute);
+  font-size: 10px;
+  padding: 6px 12px;
+  align-self: flex-start;
+}
+
+.suggest-btn:disabled {
+  border-color: var(--rule);
+  color: var(--ink-mute);
+  opacity: 0.6;
+}
+
+.suggest-error {
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 10px;
+  color: var(--theatre);
+  margin-top: 4px;
+}
+
+.suggest-card {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 16px 20px;
+}
+
+.suggest-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.suggest-card-score {
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.suggest-card-confidence {
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.suggest-card-justification {
+  font-family: 'Inter Variable', sans-serif;
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.suggest-card-source {
+  display: block;
+  font-family: 'JetBrains Mono Variable', monospace;
+  font-size: 11px;
+  color: var(--ink-mute);
+  word-break: break-all;
+  margin-bottom: 12px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1px;
+  transition: color 150ms;
+}
+
+.suggest-card-source:hover {
+  color: var(--ink);
+}
+
+.suggest-card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.suggest-card-actions .wizard-btn {
+  font-size: 9px;
+  padding: 5px 10px;
+}
+
 /* ── Dimension footer ── */
 
 .wizard-dimension-footer {

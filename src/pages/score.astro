@@ -39,6 +39,12 @@ const cohort = summaryData.map((s: any) => ({
 const countries = countriesData
   .map((c: any) => ({ country: c.country, iso3: c.iso3 }))
   .sort((a: any, b: any) => a.country.localeCompare(b.country));
+
+// AI-suggest is enabled when the Anthropic API key is configured on the server.
+// The key is never exposed to the client — the wizard calls /api/v1/suggest which
+// reads the key server-side. We pass a boolean flag so the button can be hidden
+// gracefully when the key is not set.
+const aiEnabled = !!import.meta.env.GEMINI_API_KEY;
 ---
 
 <Base
@@ -51,5 +57,6 @@ const countries = countriesData
     baselineScores={baselineScores}
     cohort={cohort}
     countries={countries}
+    aiEnabled={aiEnabled}
   />
 </Base>

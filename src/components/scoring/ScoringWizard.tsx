@@ -13,9 +13,10 @@ interface Props {
   baselineScores: BaselineScore[];
   cohort: CohortSummary[];
   countries: { country: string; iso3: string }[];
+  aiEnabled: boolean;
 }
 
-export default function ScoringWizard({ indicators, baselineScores, cohort, countries }: Props) {
+export default function ScoringWizard({ indicators, baselineScores, cohort, countries, aiEnabled }: Props) {
   const step = useScoringStore((s) => s.step);
   const session = useScoringStore((s) => s.session);
 
@@ -51,7 +52,7 @@ export default function ScoringWizard({ indicators, baselineScores, cohort, coun
       )}
 
       {step >= STEP_FIRST_DIMENSION && step <= STEP_LAST_DIMENSION && (
-        <DimensionScreen indicators={indicators} />
+        <DimensionScreen indicators={indicators} aiEnabled={aiEnabled} />
       )}
 
       {step === STEP_REVIEW && (
