@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { useScoringStore, STEP_LAST_DIMENSION } from '../../stores/scoring';
-import { computeResult, saveSession, exportSessionAsJson, downloadJson } from '../../lib/scoring';
+import { computeResult, saveSession, exportSessionAsJson, downloadJson, exportSessionAsCsv, downloadCsv, downloadSvgAsPng } from '../../lib/scoring';
 import { quadrantColor } from '../../lib/plane-geometry';
 import { getQuadrantDescription, getCoherenceAdvice } from '../../lib/coherence';
 import ResultPlane from './ResultPlane';
@@ -19,6 +19,7 @@ export default function ReviewScreen({ indicators, cohort }: Props) {
 
   const [interpretOpen, setInterpretOpen] = useState(false);
   const [saved, setSaved] = useState(false);
+  const svgRef = useRef<SVGSVGElement>(null);
 
   if (!session) return null;
 
@@ -37,6 +38,19 @@ export default function ReviewScreen({ indicators, cohort }: Props) {
     const json = exportSessionAsJson(session, result);
     const filename = `${session.session_id.replace(/\s+/g, '_')}.json`;
     downloadJson(filename, json);
+  };
+
+  const handleExportCsv = () => {
+    const csv = exportSessionAsCsv(session, indicators, result);
+    const filename = `${session.session_id.replace(/\s+/g, '_')}.csv`;
+    downloadCsv(filename, csv);
+  };
+
+  const handleExportPng = () => {
+    if (svgRef.current) {
+      const filename = `${session.country.replace(/\s+/g, '_')}_sovereignty_plane.png`;
+      downloadSvgAsPng(svgRef.current, filename);
+    }
   };
 
   const handleNewScoring = () => {
@@ -126,6 +140,7 @@ export default function ReviewScreen({ indicators, cohort }: Props) {
 
       {/* Plane scatter */}
       <ResultPlane
+        ref={svgRef}
         cohort={cohort}
         user={{
           country: session.country,
@@ -165,7 +180,13 @@ export default function ReviewScreen({ indicators, cohort }: Props) {
 
       {/* Actions */}
       <div className="review-actions">
-        <button type="button" className="wizard-btn wizard-btn--primary" onClick={handleExportJson}>
+        <button type="button" className="wizard-btn wizard-btn--primary" onClick={handleExportPng}>
+          Download plane (PNG)
+        </button>
+        <button type="button" className="wizard-btn wizard-btn--primary" onClick={handleExportCsv}>
+          Download scores (CSV)
+        </button>
+        <button type="button" className="wizard-btn" onClick={handleExportJson}>
           Export JSON
         </button>
         <button type="button" className="wizard-btn" onClick={handleSave}>

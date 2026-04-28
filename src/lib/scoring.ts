@@ -184,6 +184,91 @@ export function downloadJson(filename: string, content: string): void {
   URL.revokeObjectURL(url);
 }
 
+// --- CSV export ---
+
+export function exportSessionAsCsv(
+  session: ScoringSession,
+  indicators: IndicatorDef[],
+  result: ComputedResult,
+): string {
+  const rows: string[] = [];
+  rows.push('indicator_code,indicator,axis,dimension,score,confidence,evidence,source_url');
+
+  for (const ind of indicators) {
+    const entry = session.scores[ind.indicator_code];
+    const score = entry?.score !== null && entry?.score !== undefined ? String(entry.score) : '';
+    const confidence = entry?.confidence || '';
+    const evidence = csvEscape(entry?.evidence || '');
+    const source = csvEscape(entry?.source_url || '');
+    rows.push(`${ind.indicator_code},${csvEscape(ind.indicator)},${ind.axis},${csvEscape(ind.dimension)},${score},${confidence},${evidence},${source}`);
+  }
+
+  // Append summary row
+  rows.push('');
+  rows.push(`# Country: ${session.country}`);
+  rows.push(`# Formal: ${result.formal_pct}%`);
+  rows.push(`# Substantive: ${result.substantive_pct}%`);
+  rows.push(`# Gap: ${result.gap_pp} pp`);
+  rows.push(`# Quadrant: ${result.position_label}`);
+  rows.push(`# Framework: v2.3`);
+  rows.push(`# Exported: ${new Date().toISOString()}`);
+
+  return rows.join('\n');
+}
+
+function csvEscape(value: string): string {
+  if (value.includes(',') || value.includes('"') || value.includes('\n')) {
+    return `"${value.replace(/"/g, '""')}"`;
+  }
+  return value;
+}
+
+export function downloadCsv(filename: string, content: string): void {
+  const blob = new Blob([content], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// --- PNG export from SVG ---
+
+export function downloadSvgAsPng(svgElement: SVGSVGElement, filename: string): void {
+  const svgData = new XMLSerializer().serializeToString(svgElement);
+  const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+  const url = URL.createObjectURL(svgBlob);
+
+  const img = new Image();
+  img.onload = () => {
+    const scale = 2; // 2x for retina
+    const canvas = document.createElement('canvas');
+    canvas.width = svgElement.viewBox.baseVal.width * scale;
+    canvas.height = svgElement.viewBox.baseVal.height * scale;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.fillStyle = '#fafaf9';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.scale(scale, scale);
+    ctx.drawImage(img, 0, 0);
+
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      const pngUrl = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = pngUrl;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(pngUrl);
+    }, 'image/png');
+
+    URL.revokeObjectURL(url);
+  };
+  img.src = url;
+}
+
 // --- Baseline pre-population ---
 
 export function buildBaselineScores(

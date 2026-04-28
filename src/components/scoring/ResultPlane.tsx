@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { PLANE as P, quadrantColor, quadrantWashColor } from '../../lib/plane-geometry';
 import type { Quadrant } from '../../data/types';
 
@@ -21,7 +22,7 @@ interface Props {
   user: UserPoint;
 }
 
-export default function ResultPlane({ cohort, user }: Props) {
+const ResultPlane = forwardRef<SVGSVGElement, Props>(function ResultPlane({ cohort, user }, ref) {
   const l = P.ml;
   const r = P.ml + P.iw;
   const t = P.mt;
@@ -40,6 +41,7 @@ export default function ResultPlane({ cohort, user }: Props) {
     <div className="result-plane-container">
       <div className="result-plane-label">Position on the Sovereignty Plane</div>
       <svg
+        ref={ref}
         viewBox={`0 0 ${P.W} ${P.H}`}
         xmlns="http://www.w3.org/2000/svg"
         role="img"
@@ -144,4 +146,6 @@ export default function ResultPlane({ cohort, user }: Props) {
       </svg>
     </div>
   );
-}
+});
+
+export default ResultPlane;
