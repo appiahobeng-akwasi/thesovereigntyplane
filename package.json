@@ -12,6 +12,7 @@
     "generate-types": "tsx scripts/generate-types.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.91.1",
     "@astrojs/check": "^0.9.8",
     "@astrojs/react": "5.0.3",
     "@astrojs/sitemap": "3.7.2",
