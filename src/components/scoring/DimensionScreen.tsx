@@ -4,9 +4,10 @@ import type { IndicatorDef, IndicatorScore } from '../../lib/scoring';
 
 interface Props {
   indicators: IndicatorDef[];
+  aiEnabled: boolean;
 }
 
-export default function DimensionScreen({ indicators }: Props) {
+export default function DimensionScreen({ indicators, aiEnabled }: Props) {
   const step = useScoringStore((s) => s.step);
   const session = useScoringStore((s) => s.session);
   const setIndicatorScore = useScoringStore((s) => s.setIndicatorScore);
@@ -45,6 +46,8 @@ export default function DimensionScreen({ indicators }: Props) {
             indicator={ind}
             value={value}
             onChange={(update) => setIndicatorScore(ind.indicator_code, update)}
+            country={session.country}
+            aiEnabled={aiEnabled}
           />
         );
       })}
