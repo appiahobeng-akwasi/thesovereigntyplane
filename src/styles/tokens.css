@@ -17,6 +17,39 @@
   --adhoc-soft: rgba(138, 106, 31, 0.05);
   --depend: #6b6862;
   --depend-soft: rgba(107, 104, 98, 0.04);
+
+  /*
+    Layout scale. The site was designed on a 1440px canvas. On wider displays
+    the page container grows and --ts (type/measure scale) enlarges text,
+    reading measures and rail columns proportionally, so the page fills the
+    screen instead of sitting as a 1440px strip with wide empty margins.
+    Use calc(<design px> * var(--ts)) for any size that should grow.
+  */
+  --page-max: 100%;
+  --page-pad: 56px;
+  --rail: 240px;
+  --rail-gap: 56px;
+  --ts: 1;
+}
+
+@media (min-width: 1680px) {
+  :root {
+    --page-max: 100%;
+    --page-pad: 72px;
+    --rail: 280px;
+    --rail-gap: 64px;
+    --ts: 1.14;
+  }
+}
+
+@media (min-width: 2240px) {
+  :root {
+    --page-max: 100%;
+    --page-pad: 96px;
+    --rail: 320px;
+    --rail-gap: 72px;
+    --ts: 1.32;
+  }
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +66,7 @@ body {
   color: var(--ink);
   font-family: 'Inter Variable', 'Inter', -apple-system, sans-serif;
   font-weight: 400;
-  font-size: 15px;
+  font-size: calc(15px * var(--ts));
   line-height: 1.55;
   font-feature-settings: 'kern', 'ss01', 'cv11';
 }

@@ -1,8 +1,8 @@
 /* ═══════════════ VIEW TOGGLE ═══════════════ */
 .view-toggle {
   display: grid;
-  grid-template-columns: 240px minmax(0, 1fr);
-  gap: 56px;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  gap: var(--rail-gap);
   margin-bottom: 40px;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--rule);
@@ -28,7 +28,7 @@
   border: none;
   cursor: pointer;
   font-family: 'Instrument Serif', serif;
-  font-size: 28px;
+  font-size: calc(28px * var(--ts));
   font-weight: 400;
   color: var(--ink-mute);
   padding: 0 0 8px;
@@ -49,8 +49,8 @@
 /* ═══════════════ SCOPE TOGGLE ═══════════════ */
 .scope-toggle {
   display: grid;
-  grid-template-columns: 240px minmax(0, 1fr);
-  gap: 56px;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  gap: var(--rail-gap);
   margin-bottom: 48px;
 }
 
@@ -74,7 +74,7 @@
   border: 1px solid var(--rule);
   cursor: pointer;
   font-family: 'Inter Variable', sans-serif;
-  font-size: 12px;
+  font-size: calc(12px * var(--ts));
   font-weight: 500;
   color: var(--ink-3);
   padding: 8px 16px;
@@ -105,14 +105,14 @@
 .viz-area {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 380px;
-  gap: 56px;
+  grid-template-columns: minmax(0, 1fr) calc(380px * var(--ts));
+  gap: var(--rail-gap);
   align-items: start;
 }
 
 .viz-canvas {
   position: relative;
-  min-height: 560px;
+  min-height: calc(560px * var(--ts));
 }
 
 .viz-plane, .viz-map {
@@ -131,10 +131,10 @@ svg.plot, svg.map {
   border-top: 1px solid var(--rule-soft);
   font-family: 'Instrument Serif', serif;
   font-style: italic;
-  font-size: 15px;
+  font-size: calc(15px * var(--ts));
   line-height: 1.55;
   color: var(--ink-3);
-  max-width: 640px;
+  max-width: calc(640px * var(--ts));
 }
 
 .viz-caption b {
@@ -203,10 +203,10 @@ svg.plot, svg.map {
 .detail-empty {
   font-family: 'Instrument Serif', serif;
   font-style: italic;
-  font-size: 17px;
+  font-size: calc(17px * var(--ts));
   line-height: 1.5;
   color: var(--ink-mute);
-  max-width: 300px;
+  max-width: calc(300px * var(--ts));
 }
 
 /* ═══════════════ SELECTION HEADER ═══════════════ */
@@ -221,7 +221,7 @@ svg.plot, svg.map {
 
 .detail-counter {
   font-family: 'JetBrains Mono Variable', monospace;
-  font-size: 11px;
+  font-size: calc(11px * var(--ts));
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--ink-mute);
@@ -229,7 +229,7 @@ svg.plot, svg.map {
 
 .detail-counter-num {
   font-family: 'Instrument Serif', serif;
-  font-size: 20px;
+  font-size: calc(20px * var(--ts));
   color: var(--ink);
   letter-spacing: normal;
   text-transform: none;
@@ -245,7 +245,7 @@ svg.plot, svg.map {
   border-radius: 100px;
   padding: 5px 14px;
   font-family: 'Inter Variable', sans-serif;
-  font-size: 11px;
+  font-size: calc(11px * var(--ts));
   font-weight: 500;
   color: var(--ink-3);
   cursor: pointer;
@@ -260,7 +260,7 @@ svg.plot, svg.map {
 
 .detail-compare-hint {
   font-family: 'Inter Variable', sans-serif;
-  font-size: 12px;
+  font-size: calc(12px * var(--ts));
   color: var(--ink-mute);
   font-style: italic;
   margin-bottom: 20px;
@@ -315,7 +315,7 @@ svg.plot, svg.map {
 
 .detail-name {
   font-family: 'Instrument Serif', serif;
-  font-size: 52px;
+  font-size: calc(52px * var(--ts));
   font-weight: 400;
   line-height: 0.96;
   letter-spacing: -0.02em;
@@ -339,7 +339,7 @@ svg.plot, svg.map {
 
 .detail-region {
   font-family: 'Inter Variable', sans-serif;
-  font-size: 12px;
+  font-size: calc(12px * var(--ts));
   color: var(--ink-mute);
   margin-bottom: 28px;
   letter-spacing: 0.01em;
@@ -359,7 +359,7 @@ svg.plot, svg.map {
   align-items: center;
   gap: 8px;
   font-family: 'Inter Variable', sans-serif;
-  font-size: 11px;
+  font-size: calc(11px * var(--ts));
   font-weight: 500;
   padding: 6px 13px;
   border-radius: 100px;
@@ -417,7 +417,7 @@ svg.plot, svg.map {
 
 .score-name {
   font-family: 'JetBrains Mono Variable', monospace;
-  font-size: 10px;
+  font-size: calc(10px * var(--ts));
   color: var(--ink-mute);
   margin-bottom: 6px;
   text-transform: uppercase;
@@ -426,7 +426,7 @@ svg.plot, svg.map {
 
 .score-num {
   font-family: 'Instrument Serif', serif;
-  font-size: 40px;
+  font-size: calc(40px * var(--ts));
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.02em;
@@ -439,7 +439,7 @@ svg.plot, svg.map {
 .detail-note {
   font-family: 'Instrument Serif', serif;
   font-style: italic;
-  font-size: 16px;
+  font-size: calc(16px * var(--ts));
   line-height: 1.55;
   color: var(--ink-2);
   margin-bottom: 24px;
@@ -463,7 +463,7 @@ svg.plot, svg.map {
 
 .detail-methodology-text {
   font-family: 'Inter Variable', sans-serif;
-  font-size: 12.5px;
+  font-size: calc(12.5px * var(--ts));
   color: var(--ink-3);
   line-height: 1.55;
   letter-spacing: -0.003em;
@@ -488,7 +488,7 @@ svg.plot, svg.map {
 .detail-coherence-direction {
   font-family: 'Instrument Serif', serif;
   font-style: italic;
-  font-size: 17px;
+  font-size: calc(17px * var(--ts));
   line-height: 1.45;
   color: var(--ink);
   margin-bottom: 16px;
@@ -506,7 +506,7 @@ svg.plot, svg.map {
 .detail-coherence-actions li {
   counter-increment: actions;
   font-family: 'Inter Variable', sans-serif;
-  font-size: 13px;
+  font-size: calc(13px * var(--ts));
   color: var(--ink-2);
   line-height: 1.5;
   padding-left: 28px;
@@ -540,7 +540,7 @@ svg.plot, svg.map {
   border: 1px solid var(--rule);
   box-shadow: 0 4px 24px rgba(15, 15, 15, 0.08);
   padding: 20px 24px;
-  max-width: 300px;
+  max-width: calc(300px * var(--ts));
   pointer-events: none;
   border-radius: 2px;
 }
@@ -548,14 +548,14 @@ svg.plot, svg.map {
 .quadrant-tooltip-name {
   font-family: 'Instrument Serif', serif;
   font-style: italic;
-  font-size: 20px;
+  font-size: calc(20px * var(--ts));
   margin-bottom: 8px;
   letter-spacing: -0.01em;
 }
 
 .quadrant-tooltip-desc {
   font-family: 'Inter Variable', sans-serif;
-  font-size: 13px;
+  font-size: calc(13px * var(--ts));
   color: var(--ink-2);
   line-height: 1.55;
   letter-spacing: -0.003em;

@@ -1,9 +1,9 @@
 /* ── Wizard layout ── */
 
 .wizard {
-  max-width: 860px;
+  max-width: calc(860px * var(--ts));
   margin: 0 auto;
-  padding: 0 56px;
+  padding: 0 var(--page-pad);
   min-height: 100vh;
 }
 
@@ -17,7 +17,7 @@
 .wizard-landing-question {
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
-  font-size: clamp(36px, 5vw, 64px);
+  font-size: clamp(36px, 5vw, calc(64px * var(--ts)));
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--ink);
@@ -30,11 +30,11 @@
 
 .wizard-landing-body {
   font-family: 'Inter Variable', sans-serif;
-  font-size: 15px;
+  font-size: calc(15px * var(--ts));
   font-weight: 400;
   color: var(--ink-2);
   line-height: 1.6;
-  max-width: 560px;
+  max-width: calc(560px * var(--ts));
   margin-bottom: 40px;
 }
 
@@ -151,7 +151,7 @@
 .wizard-setup-title {
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
-  font-size: 32px;
+  font-size: calc(32px * var(--ts));
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -323,7 +323,7 @@
 .wizard-dimension-name {
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
-  font-size: 28px;
+  font-size: calc(28px * var(--ts));
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -353,7 +353,7 @@
 
 .indicator-card-name {
   font-family: 'Inter Variable', sans-serif;
-  font-size: 15px;
+  font-size: calc(15px * var(--ts));
   font-weight: 500;
   color: var(--ink);
   line-height: 1.4;
@@ -611,7 +611,7 @@
 .wizard-review-title {
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
-  font-size: 32px;
+  font-size: calc(32px * var(--ts));
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -724,7 +724,7 @@
 
 .review-interpretation-text {
   font-family: 'Inter Variable', sans-serif;
-  font-size: 14px;
+  font-size: calc(14px * var(--ts));
   color: var(--ink-2);
   line-height: 1.6;
   margin-bottom: 16px;

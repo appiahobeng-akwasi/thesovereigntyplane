@@ -1,11 +1,43 @@
 ---
+import summary from '../data/summary.json';
+
+/*
+  Quadrant membership is derived from the tracker export at build time so the
+  legend copy can never drift from the scores shown on the Plane above it.
+  (It previously hard-coded counts and country names from an earlier tracker
+  version.)
+*/
+const WORDS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight',
+  'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen'];
+
+const core = summary.filter((s) => s.sample_group === 'Core sample');
+const coreCount = core.length;
+const inQuadrant = (q: string) => core.filter((s) => s.quadrant === q).map((s) => s.country);
+const listNames = (names: string[]) =>
+  names.length <= 1 ? names.join('') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+
+const theatreNames = inQuadrant('theatre');
+const interdepNames = inQuadrant('interdep');
+const adhocNames = inQuadrant('adhoc');
+const dependNames = inQuadrant('depend');
+
+const countSentence = (names: string[]) =>
+  `${WORDS[names.length]} of ${WORDS[coreCount].toLowerCase()} African states sit here.`;
+
+const namedSentence = (names: string[], noneText: string) =>
+  names.length === 0
+    ? noneText
+    : names.length === 1
+      ? `Only ${names[0]} among the African sample.`
+      : `${WORDS[names.length]} African cases: ${listNames(names)}.`;
+
 const quadrants = [
   {
     id: 'theatre',
     marker: 'Above the diagonal',
     name: 'Sovereignty Theatre',
     description:
-      'Strategies, laws, and institutions accumulate faster than the capacity to enforce, evaluate, or renegotiate. Seven of fifteen African states sit here.',
+      `Strategies, laws, and institutions accumulate faster than the capacity to enforce, evaluate, or renegotiate. ${countSentence(theatreNames)}`,
     color: 'var(--theatre)',
     colorSoft: 'var(--theatre-soft)',
   },
@@ -14,7 +46,7 @@ const quadrants = [
     marker: 'At or near diagonal, upper',
     name: 'Negotiated Interdependence',
     description:
-      'Formal architecture matched by operational capacity. The state can enforce against major providers and bargain credibly. Only South Africa among the African sample.',
+      `Formal architecture matched by operational capacity. The state can enforce against major providers and bargain credibly. ${namedSentence(interdepNames, 'No African state in the current cohort sits here.')}`,
     color: 'var(--interdep)',
     colorSoft: 'var(--interdep-soft)',
   },
@@ -23,7 +55,7 @@ const quadrants = [
     marker: 'Below the diagonal',
     name: 'Ad-Hoc Capability',
     description:
-      'Capacity outruns formal architecture. Ecosystems, private investment, or diaspora networks generate capability without state-led planning. Tunisia is the only African case.',
+      `Capacity outruns formal architecture. Ecosystems, private investment, or diaspora networks generate capability without state-led planning. ${namedSentence(adhocNames, 'No African state in the current cohort sits here.')}`,
     color: 'var(--adhoc)',
     colorSoft: 'var(--adhoc-soft)',
   },
@@ -32,7 +64,7 @@ const quadrants = [
     marker: 'Lower-left',
     name: 'Dependency by Default',
     description:
-      'Limited formal architecture and limited substantive capacity. The state is a passive recipient of AI systems built, governed, and operated elsewhere.',
+      `Limited formal architecture and limited substantive capacity. The state is a passive recipient of AI systems built, governed, and operated elsewhere. ${countSentence(dependNames)}`,
     color: 'var(--depend)',
     colorSoft: 'var(--depend-soft)',
   },
@@ -69,25 +101,25 @@ const quadrants = [
 <style>
   /* ── Legend section ── */
   .legend {
-    max-width: 1440px;
+    max-width: var(--page-max);
     margin: 0 auto;
-    padding: 0 56px;
-    padding-top: 120px;
-    padding-bottom: 120px;
+    padding: 0 var(--page-pad);
+    padding-top: calc(120px * var(--ts));
+    padding-bottom: calc(120px * var(--ts));
     border-top: 1px solid var(--rule);
   }
 
   /* ── Header block ── */
   .legend-header {
     display: grid;
-    grid-template-columns: 240px minmax(0, 1fr);
-    gap: 56px;
-    margin-bottom: 72px;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    gap: var(--rail-gap);
+    margin-bottom: calc(72px * var(--ts));
   }
 
   .legend-section-label {
     font-family: 'JetBrains Mono Variable', monospace;
-    font-size: 10px;
+    font-size: calc(10px * var(--ts));
     color: var(--ink-mute);
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -97,7 +129,7 @@ const quadrants = [
   .legend-title {
     font-family: 'Instrument Serif', Georgia, serif;
     font-weight: 400;
-    font-size: clamp(36px, 4.4vw, 64px);
+    font-size: clamp(36px, 4.4vw, calc(64px * var(--ts)));
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: var(--ink);
@@ -110,37 +142,32 @@ const quadrants = [
 
   .legend-lede {
     font-family: 'Inter Variable', sans-serif;
-    font-size: 15px;
+    font-size: calc(15px * var(--ts));
     font-weight: 400;
     color: var(--ink-2);
     line-height: 1.6;
-    max-width: 600px;
+    max-width: calc(600px * var(--ts));
     letter-spacing: -0.003em;
   }
 
   /* ── Quadrant grid ── */
-  .quadrant-grid {
-    display: grid;
-    grid-template-columns: 240px minmax(0, 1fr);
-    gap: 0;
-  }
-
   /*
     The label rail is empty visually for the grid —
-    cards sit in a 2-column sub-grid inside the content column.
-    We achieve this by spanning the grid and using inner columns.
+    cards sit in a 2-column sub-grid inside the content column,
+    offset by the rail width so they line up with the header copy.
   */
   .quadrant-grid {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin-left: calc(240px + 56px);
-    gap: 20px;
+    margin-left: calc(var(--rail) + var(--rail-gap));
+    gap: calc(20px * var(--ts));
   }
 
   /* ── Card ── */
   .quad-card {
     background: var(--card-soft);
     border: 1px solid var(--rule-soft);
-    padding: 32px 28px 28px;
+    padding: calc(32px * var(--ts)) calc(28px * var(--ts)) calc(28px * var(--ts));
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -170,7 +197,7 @@ const quadrants = [
 
   .quad-card-marker-text {
     font-family: 'JetBrains Mono Variable', monospace;
-    font-size: 10px;
+    font-size: calc(10px * var(--ts));
     color: var(--ink-mute);
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -180,7 +207,7 @@ const quadrants = [
   .quad-card-name {
     font-family: 'Instrument Serif', Georgia, serif;
     font-weight: 400;
-    font-size: 26px;
+    font-size: calc(26px * var(--ts));
     line-height: 1.15;
     letter-spacing: -0.01em;
     color: var(--ink);
@@ -190,7 +217,7 @@ const quadrants = [
   /* ── Description ── */
   .quad-card-desc {
     font-family: 'Inter Variable', sans-serif;
-    font-size: 13.5px;
+    font-size: calc(13.5px * var(--ts));
     font-weight: 400;
     color: var(--ink-2);
     line-height: 1.55;

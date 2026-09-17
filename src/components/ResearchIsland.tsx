@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { px, railGrid, railOffset } from '../lib/scale';
 import { registerGSAP, scrollFadeIn, mouse3DTilt } from '../lib/gsap-setup';
 
 const items = [
@@ -61,33 +62,33 @@ export default function ResearchIsland() {
 
   return (
     <section id="research" style={{
-      maxWidth: 1440, margin: '0 auto', padding: '120px 56px',
+      maxWidth: 'var(--page-max)', margin: '0 auto', padding: `${px(120)} var(--page-pad)`,
       borderTop: '1px solid var(--rule)',
     }}>
       <div style={{
-        display: 'grid', gridTemplateColumns: '240px minmax(0, 1fr)',
-        gap: 56, marginBottom: 72,
+        display: 'grid', gridTemplateColumns: railGrid,
+        gap: 'var(--rail-gap)', marginBottom: px(72),
       }}>
         <span style={{
-          fontFamily: "'JetBrains Mono Variable', monospace", fontSize: 10,
+          fontFamily: "'JetBrains Mono Variable', monospace", fontSize: px(10),
           color: 'var(--ink-mute)', letterSpacing: '0.08em', textTransform: 'uppercase',
           paddingTop: 10,
         }}>{'\u00A7'}03 {'\u00B7'} Research</span>
         <h2 style={{
           fontFamily: "'Instrument Serif', Georgia, serif", fontWeight: 400,
-          fontSize: 'clamp(36px, 4.4vw, 64px)', lineHeight: 1.05,
+          fontSize: `clamp(36px, 4.4vw, ${px(64)})`, lineHeight: 1.05,
           letterSpacing: '-0.02em', color: 'var(--ink)',
         }}>Writing at the intersection of <em>governance,</em> capacity, and care.</h2>
       </div>
 
-      <div ref={listRef} style={{ marginLeft: 'calc(240px + 56px)' }}>
+      <div ref={listRef} style={{ marginLeft: railOffset }}>
         {items.map((item) => (
           <article
             key={item.title}
             className="research-item"
             style={{
-              display: 'grid', gridTemplateColumns: '120px minmax(0, 1fr) 160px',
-              gap: 32, alignItems: 'start', padding: '32px 0',
+              display: 'grid', gridTemplateColumns: `${px(120)} minmax(0, 1fr) ${px(160)}`,
+              gap: px(32), alignItems: 'start', padding: `${px(32)} 0`,
               borderTop: '1px solid var(--rule)',
               transition: 'transform 250ms ease, box-shadow 250ms ease',
               willChange: 'transform',
@@ -100,35 +101,35 @@ export default function ResearchIsland() {
             }}
           >
             <span style={{
-              fontFamily: "'JetBrains Mono Variable', monospace", fontSize: 10,
+              fontFamily: "'JetBrains Mono Variable', monospace", fontSize: px(10),
               color: 'var(--ink-mute)', letterSpacing: '0.06em', textTransform: 'uppercase',
               paddingTop: 4,
             }}>{item.type}</span>
             <div>
               <h3 style={{
                 fontFamily: "'Instrument Serif', Georgia, serif", fontWeight: 400,
-                fontSize: 22, lineHeight: 1.2, letterSpacing: '-0.01em',
+                fontSize: px(22), lineHeight: 1.2, letterSpacing: '-0.01em',
                 color: 'var(--ink)', marginBottom: 8,
               }}>{item.title}</h3>
               <span style={{
                 display: 'block', fontFamily: "'JetBrains Mono Variable', monospace",
-                fontSize: 10, color: 'var(--ink-mute)', letterSpacing: '0.04em',
+                fontSize: px(10), color: 'var(--ink-mute)', letterSpacing: '0.04em',
                 marginBottom: 14, lineHeight: 1.5,
               }}>{item.meta}</span>
               <p style={{
-                fontFamily: "'Inter Variable', sans-serif", fontSize: 13.5, fontWeight: 400,
+                fontFamily: "'Inter Variable', sans-serif", fontSize: px(13.5), fontWeight: 400,
                 color: 'var(--ink-2)', lineHeight: 1.55, letterSpacing: '-0.003em',
-                maxWidth: 560,
+                maxWidth: px(560),
               }}>{item.description}</p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6, paddingTop: 4 }}>
               <a href={item.linkHref} {...(item.linkHref.endsWith('.pdf') ? { download: '' } : {})} style={{
-                fontFamily: "'JetBrains Mono Variable', monospace", fontSize: 11,
+                fontFamily: "'JetBrains Mono Variable', monospace", fontSize: px(11),
                 color: 'var(--ink-2)', letterSpacing: '0.03em', textAlign: 'right',
               }}>{item.linkText}</a>
               {(item as any).externalHref && (
                 <a href={(item as any).externalHref} target="_blank" rel="noopener noreferrer" style={{
-                  fontFamily: "'JetBrains Mono Variable', monospace", fontSize: 10,
+                  fontFamily: "'JetBrains Mono Variable', monospace", fontSize: px(10),
                   color: 'var(--ink-mute)', letterSpacing: '0.03em',
                 }}>LinkedIn post {'\u2197'}</a>
               )}

@@ -26,22 +26,22 @@ const { countries } = Astro.props;
 
 <style>
   .plane-section {
-    max-width: 1440px;
+    max-width: var(--page-max);
     margin: 0 auto;
-    padding: 120px 56px;
+    padding: calc(120px * var(--ts)) var(--page-pad);
     position: relative;
   }
 
   .plane-header {
     display: grid;
-    grid-template-columns: 240px minmax(0, 1fr);
-    gap: 56px;
-    margin-bottom: 72px;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    gap: var(--rail-gap);
+    margin-bottom: calc(72px * var(--ts));
   }
 
   .sec-label {
     font-family: 'JetBrains Mono Variable', monospace;
-    font-size: 11px;
+    font-size: calc(11px * var(--ts));
     color: var(--ink-mute);
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -52,13 +52,13 @@ const { countries } = Astro.props;
     display: block;
     color: var(--ink-mute);
     margin-bottom: 10px;
-    font-size: 10px;
+    font-size: calc(10px * var(--ts));
   }
 
   .sec-label-name {
     display: block;
     font-family: 'Instrument Serif', serif;
-    font-size: 28px;
+    font-size: calc(28px * var(--ts));
     font-style: italic;
     color: var(--ink);
     text-transform: none;
@@ -69,7 +69,7 @@ const { countries } = Astro.props;
   .plane-title {
     font-family: 'Instrument Serif', serif;
     font-weight: 400;
-    font-size: clamp(48px, 6.4vw, 96px);
+    font-size: clamp(48px, 6.4vw, calc(96px * var(--ts)));
     line-height: 0.96;
     letter-spacing: -0.02em;
     margin-bottom: 32px;
@@ -80,10 +80,10 @@ const { countries } = Astro.props;
   .plane-lede {
     font-family: 'Instrument Serif', serif;
     font-style: italic;
-    font-size: 22px;
+    font-size: calc(22px * var(--ts));
     line-height: 1.45;
     color: var(--ink-2);
-    max-width: 640px;
+    max-width: calc(640px * var(--ts));
     letter-spacing: -0.005em;
   }
 

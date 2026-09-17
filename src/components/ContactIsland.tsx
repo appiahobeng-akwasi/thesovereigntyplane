@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { px, railGrid } from '../lib/scale';
 import { registerGSAP, scrollFadeIn } from '../lib/gsap-setup';
 
 const gradientKeyframes = `
@@ -25,7 +26,7 @@ export default function ContactIsland() {
         ref={sectionRef}
         id="contact"
         style={{
-          maxWidth: 1440, margin: '0 auto', padding: '120px 56px',
+          maxWidth: 'var(--page-max)', margin: '0 auto', padding: `${px(120)} var(--page-pad)`,
           borderTop: '1px solid var(--rule)', position: 'relative', overflow: 'hidden',
         }}
       >
@@ -39,16 +40,16 @@ export default function ContactIsland() {
 
         <div className="contact-content" style={{
           position: 'relative', zIndex: 1,
-          display: 'grid', gridTemplateColumns: '240px minmax(0, 1fr)', gap: 56,
+          display: 'grid', gridTemplateColumns: railGrid, gap: 'var(--rail-gap)',
         }}>
           <span style={{
-            fontFamily: "'JetBrains Mono Variable', monospace", fontSize: 10,
+            fontFamily: "'JetBrains Mono Variable', monospace", fontSize: px(10),
             color: 'var(--ink-mute)', letterSpacing: '0.08em', textTransform: 'uppercase',
             paddingTop: 6,
           }}>{'\u00A7'}06 {'\u00B7'} Contact</span>
-          <div style={{ maxWidth: 640 }}>
+          <div style={{ maxWidth: px(640) }}>
             <p style={{
-              fontFamily: "'Inter Variable', sans-serif", fontSize: 15, fontWeight: 400,
+              fontFamily: "'Inter Variable', sans-serif", fontSize: px(15), fontWeight: 400,
               color: 'var(--ink-2)', lineHeight: 1.6, letterSpacing: '-0.003em',
               marginBottom: 32,
             }}>
@@ -71,7 +72,7 @@ export default function ContactIsland() {
                   target={link.href.startsWith('http') ? '_blank' : undefined}
                   rel={link.href.startsWith('http') ? 'noopener' : undefined}
                   style={{
-                    fontFamily: "'JetBrains Mono Variable', monospace", fontSize: 11,
+                    fontFamily: "'JetBrains Mono Variable', monospace", fontSize: px(11),
                     color: 'var(--ink-2)', letterSpacing: '0.03em',
                     transition: 'color 180ms, transform 200ms',
                     display: 'inline-block',
@@ -88,7 +89,7 @@ export default function ContactIsland() {
               ))}
             </div>
             <p style={{
-              fontFamily: "'Inter Variable', sans-serif", fontSize: 13,
+              fontFamily: "'Inter Variable', sans-serif", fontSize: px(13),
               color: 'var(--ink-mute)', marginTop: 16,
             }}>
               Also reachable on{' '}

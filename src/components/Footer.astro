@@ -16,9 +16,9 @@
 
 <style>
   .site-footer {
-    max-width: 1440px;
+    max-width: var(--page-max);
     margin: 0 auto;
-    padding: 0 56px;
+    padding: 0 var(--page-pad);
     border-top: 1px solid var(--rule);
   }
 
@@ -32,7 +32,7 @@
   .footer-copy,
   .footer-location {
     font-family: 'JetBrains Mono Variable', monospace;
-    font-size: 10px;
+    font-size: calc(10px * var(--ts));
     color: var(--ink-mute);
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -40,7 +40,7 @@
 
   .footer-links {
     font-family: 'JetBrains Mono Variable', monospace;
-    font-size: 10px;
+    font-size: calc(10px * var(--ts));
     color: var(--ink-mute);
     letter-spacing: 0.08em;
     padding-bottom: 32px;

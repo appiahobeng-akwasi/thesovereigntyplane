@@ -56,12 +56,14 @@
   }
 
   .site-header-inner {
-    max-width: 1440px;
+    max-width: var(--page-max);
     margin: 0 auto;
-    padding: 22px 56px;
+    padding: calc(22px * var(--ts)) var(--page-pad);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
   }
 
   .site-id {
@@ -69,10 +71,11 @@
     align-items: center;
     gap: 12px;
     font-family: 'Instrument Serif', serif;
-    font-size: 22px;
+    font-size: calc(22px * var(--ts));
     line-height: 1;
     color: var(--ink);
     letter-spacing: -0.005em;
+    white-space: nowrap;
   }
 
   .site-id em {
@@ -115,8 +118,8 @@
 
   .site-nav {
     display: flex;
-    gap: 36px;
-    font-size: 13px;
+    gap: calc(36px * var(--ts));
+    font-size: calc(13px * var(--ts));
     font-weight: 400;
     letter-spacing: 0.01em;
     color: var(--ink-2);
@@ -154,6 +157,8 @@
   }
 
   @media (max-width: 680px) {
+    .site-header-inner { padding: 12px 20px; gap: 12px; }
+    .site-nav { width: 100%; justify-content: space-between; }
     .site-nav { gap: 16px; }
     .site-nav .nav-section { display: none; }
     .site-nav .nav-divider { display: none; }
