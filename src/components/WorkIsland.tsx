@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { px, railGrid } from '../lib/scale';
 import { registerGSAP, scrollFadeIn, mouse3DTilt } from '../lib/gsap-setup';
 
 const floatKeyframes = `
@@ -34,14 +35,14 @@ export default function WorkIsland() {
     <>
       <style dangerouslySetInnerHTML={{ __html: floatKeyframes }} />
       <section id="work" style={{
-        maxWidth: 1440, margin: '0 auto', padding: '120px 56px',
+        maxWidth: 'var(--page-max)', margin: '0 auto', padding: `${px(120)} var(--page-pad)`,
       }}>
         <div style={{
-          display: 'grid', gridTemplateColumns: '240px minmax(0, 1fr)', gap: 56,
+          display: 'grid', gridTemplateColumns: railGrid, gap: 'var(--rail-gap)',
         }}>
           <div>
             <span style={{
-              fontFamily: "'JetBrains Mono Variable', monospace", fontSize: 10,
+              fontFamily: "'JetBrains Mono Variable', monospace", fontSize: px(10),
               letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--ink-mute)',
               position: 'sticky', top: 100,
             }}>{'\u00A7'}04 / Work</span>
@@ -49,13 +50,13 @@ export default function WorkIsland() {
           <div>
             <h2 style={{
               fontFamily: "'Instrument Serif', Georgia, serif", fontWeight: 400,
-              fontSize: 'clamp(36px, 4.2vw, 60px)', lineHeight: 1.08,
+              fontSize: `clamp(36px, 4.2vw, ${px(60)})`, lineHeight: 1.08,
               letterSpacing: '-0.02em', color: 'var(--ink)', marginBottom: 24,
             }}>Ten years <em>inside</em> African digital transformation.</h2>
             <p style={{
-              fontFamily: "'Inter Variable', sans-serif", fontSize: 15, fontWeight: 400,
-              color: 'var(--ink-2)', lineHeight: 1.6, maxWidth: 640,
-              marginBottom: 64, letterSpacing: '-0.003em',
+              fontFamily: "'Inter Variable', sans-serif", fontSize: px(15), fontWeight: 400,
+              color: 'var(--ink-2)', lineHeight: 1.6, maxWidth: px(640),
+              marginBottom: px(64), letterSpacing: '-0.003em',
             }}>
               The Sovereignty Plane is a theoretical instrument. It was written because the practitioner experience below made the gap impossible to unsee.
             </p>
@@ -66,8 +67,8 @@ export default function WorkIsland() {
                   key={item.org}
                   className="work-item"
                   style={{
-                    display: 'grid', gridTemplateColumns: '120px minmax(0, 1fr)',
-                    gap: 32, paddingTop: 20, paddingBottom: 20,
+                    display: 'grid', gridTemplateColumns: `${px(120)} minmax(0, 1fr)`,
+                    gap: px(32), paddingTop: px(20), paddingBottom: px(20),
                     borderTop: '1px solid var(--rule)', alignItems: 'center',
                     transition: 'transform 250ms ease, box-shadow 250ms ease',
                     willChange: 'transform',
@@ -75,7 +76,7 @@ export default function WorkIsland() {
                   }}
                 >
                   <span style={{
-                    fontFamily: "'JetBrains Mono Variable', monospace", fontSize: 11,
+                    fontFamily: "'JetBrains Mono Variable', monospace", fontSize: px(11),
                     color: 'var(--ink-mute)', letterSpacing: '0.03em', lineHeight: 1.6,
                     whiteSpace: 'nowrap',
                   }}>{item.dates}</span>
@@ -89,9 +90,9 @@ export default function WorkIsland() {
                           alt={`${item.org} logo`}
                           loading="lazy"
                           style={{
-                            height: item.logoHasText ? 26 : 22,
+                            height: px(item.logoHasText ? 26 : 22),
                             width: 'auto',
-                            maxWidth: item.logoHasText ? 140 : 100,
+                            maxWidth: px(item.logoHasText ? 140 : 100),
                             objectFit: 'contain',
                             flexShrink: 0,
                             opacity: 0.7,
@@ -103,13 +104,13 @@ export default function WorkIsland() {
                         />
                       </a>
                       {!item.logoHasText && <h3 style={{
-                        fontFamily: "'Inter Variable', sans-serif", fontSize: 16,
+                        fontFamily: "'Inter Variable', sans-serif", fontSize: px(16),
                         fontWeight: 600, color: 'var(--ink)', lineHeight: 1.35,
                         letterSpacing: '-0.01em',
                       }}>{item.org}</h3>}
                     </div>
                     <p style={{
-                      fontFamily: "'Inter Variable', sans-serif", fontSize: 13,
+                      fontFamily: "'Inter Variable', sans-serif", fontSize: px(13),
                       fontWeight: 500, color: 'var(--ink-3)', lineHeight: 1.4,
                       letterSpacing: '-0.003em',
                     }}>{item.role}</p>

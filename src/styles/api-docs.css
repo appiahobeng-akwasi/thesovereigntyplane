@@ -1,9 +1,9 @@
 /* ── API docs layout ── */
 
 .api-docs {
-  max-width: 860px;
+  max-width: calc(860px * var(--ts));
   margin: 0 auto;
-  padding: 0 56px 120px;
+  padding: 0 var(--page-pad) 120px;
 }
 
 /* ── Hero ── */
@@ -17,7 +17,7 @@
 .api-title {
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
-  font-size: clamp(36px, 5vw, 56px);
+  font-size: clamp(36px, 5vw, calc(56px * var(--ts)));
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--ink);
@@ -30,11 +30,11 @@
 
 .api-lede {
   font-family: 'Inter Variable', sans-serif;
-  font-size: 15px;
+  font-size: calc(15px * var(--ts));
   font-weight: 400;
   color: var(--ink-2);
   line-height: 1.6;
-  max-width: 560px;
+  max-width: calc(560px * var(--ts));
   margin-bottom: 24px;
 }
 
@@ -75,7 +75,7 @@
 .api-section-title {
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
-  font-size: 28px;
+  font-size: calc(28px * var(--ts));
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -84,7 +84,7 @@
 
 .api-body {
   font-family: 'Inter Variable', sans-serif;
-  font-size: 14px;
+  font-size: calc(14px * var(--ts));
   color: var(--ink-2);
   line-height: 1.6;
   margin-bottom: 20px;
@@ -117,7 +117,7 @@
 
 .api-code-block code {
   font-family: 'JetBrains Mono Variable', monospace;
-  font-size: 12px;
+  font-size: calc(12px * var(--ts));
   line-height: 1.6;
   color: var(--ink);
   white-space: pre;
@@ -194,7 +194,7 @@
 
 .api-endpoint-desc {
   font-family: 'Inter Variable', sans-serif;
-  font-size: 13px;
+  font-size: calc(13px * var(--ts));
   color: var(--ink-2);
 }
 

@@ -126,10 +126,10 @@
     "axis": "Formal",
     "dimension_code": "F1",
     "dimension": "National AI Strategy",
-    "avg_score": 1.0,
-    "pct": 33.3,
+    "avg_score": 1.5,
+    "pct": 50.0,
     "indicators_scored": 4,
-    "status": "Weak"
+    "status": "Moderate"
   },
   {
     "country": "Morocco",
@@ -390,8 +390,8 @@
     "axis": "Formal",
     "dimension_code": "F3",
     "dimension": "Regulatory Institutions",
-    "avg_score": 2.5,
-    "pct": 83.3,
+    "avg_score": 2.25,
+    "pct": 75.0,
     "indicators_scored": 4,
     "status": "Strong"
   },
@@ -654,8 +654,8 @@
     "axis": "Formal",
     "dimension_code": "F5",
     "dimension": "Digital Infrastructure Policy",
-    "avg_score": 1.5,
-    "pct": 50.0,
+    "avg_score": 1.75,
+    "pct": 58.3,
     "indicators_scored": 4,
     "status": "Moderate"
   },
@@ -1226,8 +1226,8 @@
     "axis": "Formal",
     "dimension_code": "F2",
     "dimension": "Data Protection Law",
-    "avg_score": 0.25,
-    "pct": 8.3,
+    "avg_score": 1.0,
+    "pct": 33.3,
     "indicators_scored": 4,
     "status": "Weak"
   },
@@ -1281,8 +1281,8 @@
     "axis": "Substantive",
     "dimension_code": "S1",
     "dimension": "Enforcement Capacity",
-    "avg_score": 0,
-    "pct": 0.0,
+    "avg_score": 0.25,
+    "pct": 8.3,
     "indicators_scored": 4,
     "status": "Weak"
   },
@@ -1457,8 +1457,8 @@
     "axis": "Formal",
     "dimension_code": "F1",
     "dimension": "National AI Strategy",
-    "avg_score": 1.75,
-    "pct": 58.3,
+    "avg_score": 1.25,
+    "pct": 41.7,
     "indicators_scored": 4,
     "status": "Moderate"
   },

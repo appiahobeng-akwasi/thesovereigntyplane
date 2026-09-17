@@ -3,6 +3,7 @@ import { usePlaneStore } from '../stores/plane';
 import { quadrantColor, quadrantName } from '../lib/plane-geometry';
 import { getCoherenceAdvice } from '../lib/coherence';
 import DownloadButton from './DownloadButton';
+import { px } from '../lib/scale';
 import type { Country } from '../data/types';
 
 const MAX_SELECTED = 4;
@@ -44,7 +45,7 @@ function CountryCard({ country, index, total }: { country: Country; index: numbe
         </div>
       )}
 
-      <div className="detail-name" style={isCompare ? { fontSize: '28px' } : undefined}>
+      <div className="detail-name" style={isCompare ? { fontSize: px(28) } : undefined}>
         <span className="detail-flag" aria-hidden="true">{isoToFlag(country.iso_code)}</span>
         {country.name}
       </div>
@@ -65,19 +66,19 @@ function CountryCard({ country, index, total }: { country: Country; index: numbe
       <div className="detail-scores">
         <div className="score-cell">
           <div className="score-name">Formal</div>
-          <div className="score-num" style={isCompare ? { fontSize: '28px' } : undefined}>
+          <div className="score-num" style={isCompare ? { fontSize: px(28) } : undefined}>
             {country.formal_score}
           </div>
         </div>
         <div className="score-cell">
           <div className="score-name">Substantive</div>
-          <div className="score-num" style={isCompare ? { fontSize: '28px' } : undefined}>
+          <div className="score-num" style={isCompare ? { fontSize: px(28) } : undefined}>
             {country.substantive_score}
           </div>
         </div>
         <div className="score-cell">
           <div className="score-name">Gap</div>
-          <div className={`score-num ${gapClass}`} style={isCompare ? { fontSize: '28px' } : undefined}>
+          <div className={`score-num ${gapClass}`} style={isCompare ? { fontSize: px(28) } : undefined}>
             {sign}
             {country.gap}
           </div>
@@ -104,7 +105,7 @@ function CountryCard({ country, index, total }: { country: Country; index: numbe
       {/* Coherence recommendations */}
       <div className="detail-coherence">
         <div className="detail-coherence-label">Path to coherence</div>
-        <div className="detail-coherence-direction" style={isCompare ? { fontSize: '14px' } : undefined}>
+        <div className="detail-coherence-direction" style={isCompare ? { fontSize: px(14) } : undefined}>
           {advice.direction}
         </div>
         {!isCompare && (

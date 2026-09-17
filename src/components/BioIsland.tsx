@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { px, railGrid } from '../lib/scale';
 import { registerGSAP, gsap, ScrollTrigger } from '../lib/gsap-setup';
 
 const paragraphs = [
@@ -64,17 +65,17 @@ export default function BioIsland() {
     <>
       <style dangerouslySetInnerHTML={{ __html: dropCapCSS }} />
       <section id="bio" style={{
-        maxWidth: 1440, margin: '0 auto', padding: '120px 56px',
+        maxWidth: 'var(--page-max)', margin: '0 auto', padding: `${px(120)} var(--page-pad)`,
         borderTop: '1px solid var(--rule)',
-        display: 'grid', gridTemplateColumns: '240px minmax(0, 1fr)', gap: 56,
+        display: 'grid', gridTemplateColumns: railGrid, gap: 'var(--rail-gap)',
       }}>
         <div style={{ paddingTop: 6 }}>
           <span style={{
-            fontFamily: "'JetBrains Mono Variable', monospace", fontSize: 10,
+            fontFamily: "'JetBrains Mono Variable', monospace", fontSize: px(10),
             color: 'var(--ink-mute)', letterSpacing: '0.08em', textTransform: 'uppercase',
           }}>{'\u00A7'}05 {'\u00B7'} About</span>
         </div>
-        <div ref={bodyRef} style={{ maxWidth: 640 }}>
+        <div ref={bodyRef} style={{ maxWidth: px(640) }}>
           {paragraphs.map((para, i) => (
             <p
               key={i}
@@ -82,7 +83,7 @@ export default function BioIsland() {
               className={para.dropcap ? 'bio-dropcap' : undefined}
               style={{
                 fontFamily: "'Inter Variable', sans-serif",
-                fontSize: 15, fontWeight: 400, color: 'var(--ink-2)',
+                fontSize: px(15), fontWeight: 400, color: 'var(--ink-2)',
                 lineHeight: 1.7, letterSpacing: '-0.003em',
                 marginBottom: i < paragraphs.length - 1 ? 24 : 0,
               }}

@@ -1,10 +1,15 @@
 import { useEffect, useRef } from 'react';
 import { registerGSAP, gsap, ScrollTrigger } from '../lib/gsap-setup';
+import { px } from '../lib/scale';
 
 const scrollIndicatorKeyframes = `
 @keyframes scrollBounce {
   0%, 100% { transform: translateY(0); opacity: 1; }
   50% { transform: translateY(6px); opacity: 0.5; }
+}
+@media (min-width: 769px) and (max-width: 1300px) {
+  #top > div:nth-child(3) { grid-template-columns: 180px minmax(0, 1fr) !important; gap: 32px !important; }
+  #top aside { grid-column: 2; max-width: 32ch !important; }
 }
 @media (max-width: 768px) {
   #top { padding: 0 20px !important; padding-top: 100px !important; padding-bottom: 40px !important; min-height: auto !important; }
@@ -89,12 +94,12 @@ export default function HeroIsland() {
         ref={sectionRef}
         id="top"
         style={{
-          maxWidth: 1440,
+          maxWidth: 'var(--page-max)',
           margin: '0 auto',
-          padding: '0 56px',
+          padding: '0 var(--page-pad)',
           minHeight: '100vh',
-          paddingTop: 140,
-          paddingBottom: 80,
+          paddingTop: px(140),
+          paddingBottom: px(80),
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -124,26 +129,25 @@ export default function HeroIsland() {
             position: 'relative',
             zIndex: 2,
             display: 'grid',
-            gridTemplateColumns: '240px minmax(0, 1fr) 320px',
-            gap: 56,
+            gridTemplateColumns: `var(--rail) minmax(0, 1fr) ${px(320)}`,
+            gap: 'var(--rail-gap)',
             alignItems: 'start',
           }}
         >
           <div ref={metaRef} style={{ paddingTop: 24 }}>
             {[
               { label: 'Instrument', value: 'The Sovereignty Plane\n836 indicators \u00b7 19 countries' },
-              { label: 'Working paper', value: 'Negotiating Intelligence\nsubmitted to Data & Policy, 2026' },
               { label: 'Author', value: 'Akwasi Appiah Obeng' },
             ].map((item) => (
               <div key={item.label} style={{ marginBottom: 24 }}>
                 <span style={{
                   display: 'block', fontFamily: "'JetBrains Mono Variable', monospace",
-                  fontSize: 10, color: 'var(--ink-mute)', letterSpacing: '0.08em',
+                  fontSize: px(10), color: 'var(--ink-mute)', letterSpacing: '0.08em',
                   textTransform: 'uppercase', marginBottom: 6,
                 }}>{item.label}</span>
                 <span style={{
                   display: 'block', fontFamily: "'Inter Variable', sans-serif",
-                  fontSize: 13, color: 'var(--ink-2)', lineHeight: 1.5, whiteSpace: 'pre-line',
+                  fontSize: px(13), color: 'var(--ink-2)', lineHeight: 1.5, whiteSpace: 'pre-line',
                 }}>{item.value}</span>
               </div>
             ))}
@@ -155,7 +159,7 @@ export default function HeroIsland() {
               style={{
                 fontFamily: "'Instrument Serif', Georgia, serif",
                 fontWeight: 400,
-                fontSize: 'clamp(56px, 7.4vw, 118px)',
+                fontSize: `clamp(56px, 5.4vw, ${px(96)})`,
                 lineHeight: 0.94,
                 letterSpacing: '-0.02em',
                 color: 'var(--ink)',
@@ -172,8 +176,8 @@ export default function HeroIsland() {
               ref={subRef}
               style={{
                 fontFamily: "'Inter Variable', sans-serif",
-                fontSize: 14, fontWeight: 400, color: 'var(--ink-2)',
-                lineHeight: 1.6, maxWidth: 520, letterSpacing: '-0.003em',
+                fontSize: px(14), fontWeight: 400, color: 'var(--ink-2)',
+                lineHeight: 1.6, maxWidth: px(520), letterSpacing: '-0.003em',
               }}
             >
               A diagnostic for AI sovereignty and readiness across nineteen countries. Two dimensions, eleven sub-dimensions, forty-four indicators, 836 data points. From the working paper <em>Negotiating Intelligence: African Agency in the Global AI Value Chain.</em>
@@ -184,7 +188,7 @@ export default function HeroIsland() {
                 display: 'inline-block',
                 marginTop: 24,
                 fontFamily: "'JetBrains Mono Variable', monospace",
-                fontSize: 10.5,
+                fontSize: px(10.5),
                 fontWeight: 500,
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
@@ -205,8 +209,8 @@ export default function HeroIsland() {
               style={{
                 marginTop: 32,
                 fontFamily: "'Inter Variable', sans-serif",
-                fontSize: 13, fontWeight: 400, color: 'var(--ink-2)',
-                lineHeight: 1.6, maxWidth: 520, letterSpacing: '-0.003em',
+                fontSize: px(13), fontWeight: 400, color: 'var(--ink-2)',
+                lineHeight: 1.6, maxWidth: px(520), letterSpacing: '-0.003em',
               }}
             >
               The global AI economy is shaped by two trends moving in opposite directions. Frontier AI training is concentrating in a small number of US and Chinese firms, with single training runs projected to cost between 10 and 100 billion dollars by 2030. At the same time, the cost of running an existing capability is falling by roughly three to five times each year. The strategic question for African states is not whether they can match frontier compute spending. It is whether they will be ready to govern, procure, and deliver the capability that diffuses from that frontier. The Sovereignty Plane measures that readiness as a substantive matter, not a formal one.
@@ -218,8 +222,8 @@ export default function HeroIsland() {
             style={{
               paddingTop: 42,
               fontFamily: "'Instrument Serif', serif",
-              fontSize: 20, fontStyle: 'italic', lineHeight: 1.45,
-              color: 'var(--ink-2)', maxWidth: 320, letterSpacing: '-0.005em',
+              fontSize: px(20), fontStyle: 'italic', lineHeight: 1.45,
+              color: 'var(--ink-2)', maxWidth: px(320), letterSpacing: '-0.005em',
               borderTop: '1px solid var(--ink)',
             }}
           >
@@ -230,9 +234,9 @@ export default function HeroIsland() {
         <div
           ref={scrollRef}
           style={{
-            position: 'absolute', bottom: 40, left: 56, zIndex: 2,
+            position: 'absolute', bottom: 40, left: 'var(--page-pad)', zIndex: 2,
             fontFamily: "'JetBrains Mono Variable', monospace",
-            fontSize: 10, color: 'var(--ink-mute)', letterSpacing: '0.1em',
+            fontSize: px(10), color: 'var(--ink-mute)', letterSpacing: '0.1em',
             textTransform: 'uppercase',
             display: 'flex', alignItems: 'center', gap: 12,
           }}
