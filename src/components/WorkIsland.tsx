@@ -11,7 +11,7 @@ const floatKeyframes = `
 
 const workItems = [
   { dates: '2025 \u2014 now', org: 'Tony Blair Institute for Global Change', logo: '/logos/tbi.svg', logoHasText: false, url: 'https://institute.global', role: 'Manager, Technology and Innovation' },
-  { dates: 'Aug \u2014 Dec 2025', org: 'Sand Technologies', logo: '/logos/sand-technologies.png', logoHasText: false, url: 'https://www.sandtech.com', role: 'Consultant \u2014 National Health Information Hub' },
+  { dates: 'Aug \u2014 Dec 2024', org: 'Sand Technologies', logo: '/logos/sand-technologies.png', logoHasText: false, url: 'https://www.sandtech.com', role: 'Consultant \u2014 National Health Information Hub' },
   { dates: '2023 \u2014 2025', org: 'Medtronic Labs', logo: '/logos/medtronic-labs.svg', logoHasText: true, url: 'https://www.medtroniclabs.org', role: 'Senior Programmes Lead' },
   { dates: '2021 \u2014 2022', org: 'GIZ', logo: '/logos/giz.svg', logoHasText: true, url: 'https://www.giz.de', role: 'Senior Technical Advisor \u2014 Digital Transformation & PPP' },
   { dates: '2016 \u2014 2021', org: 'Delft Imaging', logo: '/logos/delft-imaging.svg', logoHasText: true, url: 'https://delftimaging.com', role: 'Project Manager \u2014 Africa' },
